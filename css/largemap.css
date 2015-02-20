@@ -1,0 +1,94 @@
+html {height: 100%; overflow:hidden;}
+body {height: 100%; margin: 0px; padding: 0px;font: 76%/170% Open Sans, Verdana, sans-serif;color: #404040;}
+#waiting{background:url(../img/loading.gif) no-repeat scroll;width:20px;height:20px;margin:0 auto;}
+#map_canvas {width: 100%; height: 100%; min-height: 555px; min-width: 500px; position: relative;} /* Fills the entire page */
+
+/* Legend */
+#topbar, #bottombar {background: url("../img/b40.png") repeat scroll 0 0 transparent;padding:5px}
+#topbar {left: 355px;position: absolute;/*bottom: 48px;*/z-index: 999;width:325px;}
+#legend {float:left;background:url(../img/w75b.png) repeat scroll;padding:3px; border:1px solid #ffffff;width:317px;text-align:left;}
+#legendtext {margin:0 0 4px;}
+#legendtext span {}
+#legend_gradient, #nationalaveragediv {height:19px;border:1px solid #ffffff;display:none;/*Only visible if indicator is selected*/}
+
+#legend_gradient {clear:left;float:left;background:url(../img/whiteredgradient120.png) repeat-y;width:120px;}
+#percentleft, #percentright, #nationalaveragelabel, #nationalaverageimg {line-height:14px;font-weight:bold;}
+#percentleft, #nationalaveragelabel {float:left;margin:3px 0 0 2px;height:13px;text-shadow:0 0 2px #fff;color:#000000;}
+#percentright, #nationalaverageimg {text-align:right;float:right;margin:3px 2px 0 0;height:13px;color:#fff;text-shadow:0 0 2px #000;}
+
+#nationalaveragediv {width:167px;float:right;}
+#nationalaveragelabelxx {}
+#nationalaverageimg {text-shadow:0 0 2px #fff;color:#000}
+#sourcetext {clear:both;margin:0 0 10px;float:left;width:315px;font-size:11px;}
+
+#nationalIndicatorChart {float:left;}
+#legend div.infowindow {padding:0;margin:9px 0 0;}
+#legend div.infowindow p {margin:4px 0;border:none}
+
+#twitterbutton {float:left;margin:4px 0 0 0;clear:both;}
+
+#poweredby {float:left;font-size:9px;}
+#poweredby a, #poweredby a:visited  {font-weight:bold;color:#555566;}
+#poweredby a:hover {font-weight:bold;color:#007EB8;text-decoration:underline;}
+
+
+/* resizing stuff*/
+/* Apply the element you want to drag/resize */
+.drsElement {
+ position: absolute;
+}
+
+/*
+ The main mouse handle that moves the whole element.
+ You can apply to the same tag as drsElement if you want.
+*/
+.drsMoveHandle {
+ cursor: move;
+}
+
+.dragresize {
+ display:none;
+ position: absolute;
+ width: 5px;
+ height: 5px;
+ font-size: 1px;
+ background: #EEE;
+ border: 1px solid #333;
+}
+
+
+
+/* Info div at the bottom */
+#bottombar {position:absolute;bottom:90px;left:355px;z-index:999;}
+#bottombar a {display:inline;}
+
+/* Div holding the indicator list */
+div#maplinks {top:0;left:0;height:100%;width:350px;overflow-y:auto;overflow-x:hidden;position:absolute;z-index:1001;background:url(../img/w75b.png) repeat scroll;text-align:left;padding-top:114px;}
+div#maplinks h3 {margin: 50px 5px 0;font-family: Helvetica,Arial,sans-serif;}
+div#maplinks p {padding:10px 5px 10px;margin:0px;font-size:10px;line-height:14px;font-weight:bold;border-bottom:1px solid white;}
+div#maplinks p#loadingtext {border: medium none;font-size: 1em;line-height: 2em;padding:15px 5px;margin:25% 10px 0;border:1px solid #777777;color:#777777;text-align:center;background:url(../img/loading.gif) no-repeat scroll 50% 39px #ffffff;}
+#maplinks a, a:link, #maplinks a:visited  {text-decoration:none;color:#000;}
+#maplinks  a:hover, #maplinks  a:active, #maplinks  a.active, #maplinks  li.active a {text-decoration:none;background-color:#E59595;color:#fff}
+
+/* Styling the indicator list */
+span.level1 {;color: #000;display: block;margin:0.2em 0;padding: 0.4em 0;border-bottom: 1px solid #bbb;font-size:1.1em;}
+span.level1.active, span.hover {border-bottom: 1px solid #E59595;}
+ul.questionsindicators {font:normal 1em/1.4 Open Sans, Verdana, sans-serif;margin:0.5em 0 0;padding:0;}
+li.level1 {margin: 0.15em 0 0.15em 0.5em;padding: 0;font:bold 1em/1 Open Sans, Verdana,sans-serif;color:#919191;list-style:none;cursor:pointer;}
+ul.level1 {margin: 0.3em 0 1em;padding: 0;cursor:default;} /* hidden by default using the js file */
+li.level2 {margin: 0.15em 0 0.8em 1.2em;list-style: none outside none;color:#000000;font-weight:bold;text-transform:none}
+ul.level2 {margin: 0.5em 0 0.3em;padding: 0;list-style:none;}
+li.level3 {margin:0 0 0 2em; padding:0;font: 0.9em/1.4 Open Sans, Verdana,sans-serif;text-transform:none;}
+
+/* Pop up bubbles created through Gmaps */
+.bubbleheader {font-weight:bold;}
+div.infowindow {border:1px solid #a1a1a1;padding:10px 0 0 5px}
+div.chartHolder {height:300px; width:400px; overflow:auto;}
+
+
+
+
+/*Map labels*/
+.countylabel, .areaVal{text-align:center;position:relative;z-index:999;white-space:nowrap;color:#FFF;font-weight:bold;text-shadow:0 0 2px #000;}
+.countylabel {left:-50%;font-size:10px;}
+.areaVal {font-size:14px;display:block;height:13px;font-family:Tahoma,sans-serif;}
