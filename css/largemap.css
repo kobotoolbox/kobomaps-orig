@@ -93,7 +93,28 @@ div.chartHolder {height:300px; width:400px; overflow:auto;}
 .countylabel {left:-50%;font-size:10px;}
 .areaVal {font-size:14px;display:block;height:13px;font-family:Tahoma,sans-serif;}
 
-.survey_link {
+#maplinks .survey-link {
     font-size: large;
-    padding: 10px;
+    padding: 0 10px;
+    margin: 0 5px -1px 5px;
+    background-color: #d24646;
+    border: 1px solid black;
+    border-bottom: 1px solid #d24646;
+    border-radius: 10px 10px 0 0;
+    color: white;
+}
+
+#maplinks .survey-link.active {
+    border: 1px solid #a42828;
+    background-color: white;
+    border-bottom: 1px solid white;
+    color: black;
+}
+
+.survey-link:hover {
+    border-bottom: 1px solid #E59595;
+}
+
+#tabs {
+    border-bottom: 1px solid #a42828;
 }

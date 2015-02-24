@@ -333,10 +333,24 @@
             parseData('unique');
         });
     } else {
+        function changeSeries(name, $link) {
+            $link.parent().children().removeClass('active');
+            $link.addClass('active');
+            parseData(name);
+            $.address.parameter('series', name);
+        }
         $.address.externalChange(function () {
             var series = $.address.parameter('series');
             if (currentSeries !== series) {
-                parseData(series);
+                var $link;
+                $('#tabs').children().each(function (index, element) {
+                    if (element.innerText === series) {
+                        $link = $(element);
+                        return false;
+                    }
+                });
+
+                changeSeries(series, $link);
             }
         });
         var csvUrlLength = csvUrl.length;
@@ -348,16 +362,15 @@
                 return function (response) {
                     var currentName = current.name;
                     csvs[currentName] = response;
-                    $link = $('<a>', { href: '#', className: 'survey_link' })
+                    var $link = $('<a>', { href: '#', className: 'survey-link' })
                     $link.click(function (event) {
                         event.preventDefault();
-                        parseData(currentName);
-                        $.address.parameter('series', currentName);
+                        changeSeries(currentName, $link);
                     });
                     $link.text(currentName);
                     $('#tabs').append($link);
                     if (i === 0 || series && series === currentName) {
-                        parseData(currentName);
+                        changeSeries(currentName, $link);
                     }
                 }
             }(i, current));
