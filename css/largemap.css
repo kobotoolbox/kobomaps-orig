@@ -92,3 +92,8 @@ div.chartHolder {height:300px; width:400px; overflow:auto;}
 .countylabel, .areaVal{text-align:center;position:relative;z-index:999;white-space:nowrap;color:#FFF;font-weight:bold;text-shadow:0 0 2px #000;}
 .countylabel {left:-50%;font-size:10px;}
 .areaVal {font-size:14px;display:block;height:13px;font-family:Tahoma,sans-serif;}
+
+.survey_link {
+    font-size: large;
+    padding: 10px;
+}

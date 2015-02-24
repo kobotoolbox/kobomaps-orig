@@ -14,7 +14,8 @@
 
 
 <div id="maplinks"	>
-<?php/*	<h3 id="kmapTitle">&nbsp;</h3> */ ?>
+<h2> Surveys </h2>
+<div id="tabs"></div>
 	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
 		<ul id="questionsindicators" class="questionsindicators" >	</ul>
 	<p id="loadingtext">

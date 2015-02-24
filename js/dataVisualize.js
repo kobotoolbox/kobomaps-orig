@@ -114,7 +114,7 @@
 
 	
 	//Calling the boundaries and data files. The variables need to be defined in the container file as they are country-specific
-	parseJsonToGmap('/'+kmapsubFolder+'/'+kmapBoundaries, '/'+kmapsubFolder+'/'+kmapData);
+	parseJsonToGmap('/'+kmapsubFolder+'/'+kmapBoundaries, kmapsubFolder, kmapData);
 
 
 	
@@ -122,203 +122,229 @@
   
   
   
-  function parseCSV(csvUrl)
+  function parseCSV(csvUrl, rootFolder)
   {
-	//initiates a HTTP get request for the json file
-	$.get(csvUrl, function(data) {
+      function parseData(data) {
+          indicatorsToUpdateParams = [];
 		
-		var csvData = CSVToArray(data, ",");
-		var headerRow = csvData[0];
-		//figure out the mapping of rows numbers to county names
-		var i = 0;		
-		var nationalAverageIndex = -1;
-		var sourceIndex = -1;
-		var linkIndex = -1;
-		var unitIndex = -1;
+          var csvData = CSVToArray(data, ",");
+          var headerRow = csvData[0];
+          //figure out the mapping of rows numbers to county names
+          var i = 0;		
+          var nationalAverageIndex = -1;
+          var sourceIndex = -1;
+          var linkIndex = -1;
+          var unitIndex = -1;
 		
-		for(var col in headerRow)
-		{			
-			var headerColValue = stripString((headerRow[col]).toString());
-			if(geographicAreaNames[headerColValue])
-			{
-				areaNamesToNumbers[headerColValue] = i;
-			}
-			else if(headerColValue == "TOTAL")
-			{
-				nationalAverageIndex = i;
-			}
-			else if(headerColValue == "Source")
-			{
-				sourceIndex = i;
-			}
-			else if(headerColValue == "Source Link")
-			{
-				linkIndex = i;
-			}
-			else if(headerColValue == "Unit")
-			{
-				unitIndex = i;
-			}
-			i++;
-		}
+          for(var col in headerRow)
+          {			
+              var headerColValue = stripString((headerRow[col]).toString());
+              if(geographicAreaNames[headerColValue])
+              {
+                  areaNamesToNumbers[headerColValue] = i;
+              }
+              else if(headerColValue == "TOTAL")
+              {
+                  nationalAverageIndex = i;
+              }
+              else if(headerColValue == "Source")
+              {
+                  sourceIndex = i;
+              }
+              else if(headerColValue == "Source Link")
+              {
+                  linkIndex = i;
+              }
+              else if(headerColValue == "Unit")
+              {
+                  unitIndex = i;
+              }
+              i++;
+          }
 
-		//now start tacking on the HTML
-		var currentTopLevelId = "";
-		var currentTopLevelCounter = 0;
-		var currentTopLevelName = "";
+          //now start tacking on the HTML
+          var currentTopLevelId = "";
+          var currentTopLevelCounter = 0;
+          var currentTopLevelName = "";
 		
-		var currentMidLevelId = "";
-		var currentMidLevelCounter = 0;
-		var currentMidLevelName = "";
+          var currentMidLevelId = "";
+          var currentMidLevelCounter = 0;
+          var currentMidLevelName = "";
 		
-		var currentBottomLevelId = "";
-		var currentBottomLevelCounter = 0;
-		var currentBottomLevelName = "";
+          var currentBottomLevelId = "";
+          var currentBottomLevelCounter = 0;
+          var currentBottomLevelName = "";
 		
-		var currentSource = "";
-		var currentSourceLink = "";
-		var currentUnit = "";
-		
-		for(i = 1; i < csvData.length; i++)
-		{
-			var currentRow = csvData[i];
-			//test for top level			
-			if(currentTopLevelName != currentRow[0] && currentRow[0] != "" && currentRow[0] != undefined)
-			{
-				//advance the ID and name
-				currentTopLevelCounter++;				
-				currentTopLevelId = currentTopLevelCounter.toString();
-				currentTopLevelName = currentRow[0];
-				
-				//rest the mid level
-				currentMidLevelCounter = 0;
-				
-				$("#questionsindicators").append('<li class="level1"><span class="level1" >'+currentTopLevelName+'</span><ul id="top_level_'+currentTopLevelId+'" class="level1 "></ul></li>');
-			}
-			//test for mid level
-			if(currentMidLevelName != currentRow[1] && currentRow[1] != "" && currentRow[1] != undefined)
-			{
-				//advance the ID and name
-				currentMidLevelCounter++;
-				currentMidLevelId = currentTopLevelId + "_" + currentMidLevelCounter.toString();
-				currentMidLevelName = currentRow[1];
-				
-				//reset the bottom level
-				currentBottomLevelCounter = 0;
-				
-				$("#top_level_"+currentTopLevelId).append('<li class="level2" ><span class="level2">'+currentMidLevelName+'</span> <ul id="mid_level_'+currentMidLevelId+'" class="level2"></ul></li>');
-				
-			}
-			
-			//and finally handle the bottom level
-			//which means making freaking huge <a> tags
-			
-			//first advance everything
-			currentBottomLevelCounter++;
-			currentBottomLevelName = currentRow[2];
-			currentBottomLevelId =  currentMidLevelId + "_" + currentBottomLevelCounter.toString();
-			
-			if(currentBottomLevelName == "" || currentBottomLevelName == undefined)
-			{
-				break;
-			}
-			var title = "<strong>" + htmlEncode(currentMidLevelName)+'</strong><br />  &quot;'+htmlEncode(currentBottomLevelName)+'&quot;';
-			
-			var bottomLevelList = '<li class="level3" id="bottom_level_'+currentBottomLevelId+'"><a href="#/?indicator='+currentBottomLevelId+'" onclick="showByIndicator(\''+currentBottomLevelId+'\');';
-			bottomLevelList += 'return false;">'+currentBottomLevelName+'</a></li>';
-			//now we need to make up, I mean create, the data portion of this
-			var areaData = new Array();
-			for( areaName in areaNamesToNumbers)
-			{
-				var tempDataValue = currentRow[areaNamesToNumbers[areaName]];
-				tempDataValue = tempDataValue.replace("%", "");
-				areaData[areaName] = parseFloat(tempDataValue);
-			}
-			
-			//if we have a national average use it
-			var tempIndicatorArray = new Array();
-			tempIndicatorArray["title"] = title;
-			tempIndicatorArray["data"] = areaData;
-			if(nationalAverageIndex != -1)
-			{
-				tempIndicatorArray["nationalAverage"] = parseFloat(currentRow[nationalAverageIndex]);
-			}
-			
-			if(sourceIndex != -1 && currentRow[sourceIndex] != "" && currentRow[sourceIndex] != undefined)
-			{
-				currentSource = currentRow[sourceIndex];
-			}
-			tempIndicatorArray["source"] = currentSource;
-			
-			if(linkIndex != -1 && currentRow[linkIndex] != "" && currentRow[linkIndex] != undefined)
-			{
-				currentSourceLink = currentRow[linkIndex];
-			}
-			tempIndicatorArray["link"] = currentSourceLink;
-			
-			if(unitIndex != -1 && currentRow[unitIndex] != "" && currentRow[unitIndex] != undefined)
-			{
-				currentUnit = currentRow[unitIndex];
-			}
-			else 
-			{
-				currentUnit = " ";
-			}
-			tempIndicatorArray["unit"] = currentUnit;
+          var currentSource = "";
+          var currentSourceLink = "";
+          var currentUnit = "";
 
-			indicatorsToUpdateParams[currentBottomLevelId] = tempIndicatorArray;
+          var $questionsIndicators = $("#questionsindicators");
+          $questionsIndicators.empty();
+          for(i = 1; i < csvData.length; i++)
+          {
+              
+              var currentRow = csvData[i];
+              //test for top level			
+              if(currentTopLevelName != currentRow[0] && currentRow[0] != "" && currentRow[0] != undefined)
+              {
+                  //advance the ID and name
+                  currentTopLevelCounter++;				
+                  currentTopLevelId = currentTopLevelCounter.toString();
+                  currentTopLevelName = currentRow[0];
+				
+                  //rest the mid level
+                  currentMidLevelCounter = 0;
+				
+                  $questionsIndicators.append('<li class="level1"><span class="level1" >'+currentTopLevelName+'</span><ul id="top_level_'+currentTopLevelId+'" class="level1 "></ul></li>');
+              }
+              //test for mid level
+              if(currentMidLevelName != currentRow[1] && currentRow[1] != "" && currentRow[1] != undefined)
+              {
+                  //advance the ID and name
+                  currentMidLevelCounter++;
+                  currentMidLevelId = currentTopLevelId + "_" + currentMidLevelCounter.toString();
+                  currentMidLevelName = currentRow[1];
+				
+                  //reset the bottom level
+                  currentBottomLevelCounter = 0;
+				
+                  $("#top_level_"+currentTopLevelId).append('<li class="level2" ><span class="level2">'+currentMidLevelName+'</span> <ul id="mid_level_'+currentMidLevelId+'" class="level2"></ul></li>');
+				
+              }
+			
+              //and finally handle the bottom level
+              //which means making freaking huge <a> tags
+			
+              //first advance everything
+              currentBottomLevelCounter++;
+              currentBottomLevelName = currentRow[2];
+              currentBottomLevelId =  currentMidLevelId + "_" + currentBottomLevelCounter.toString();
+			
+              if(currentBottomLevelName == "" || currentBottomLevelName == undefined)
+              {
+                  break;
+              }
+              var title = "<strong>" + htmlEncode(currentMidLevelName)+'</strong><br />  &quot;'+htmlEncode(currentBottomLevelName)+'&quot;';
+			
+              var bottomLevelList = '<li class="level3" id="bottom_level_'+currentBottomLevelId+'"><a href="#/?indicator='+currentBottomLevelId+'" onclick="showByIndicator(\''+currentBottomLevelId+'\');';
+              bottomLevelList += 'return false;">'+currentBottomLevelName+'</a></li>';
+              //now we need to make up, I mean create, the data portion of this
+              var areaData = new Array();
+              for( areaName in areaNamesToNumbers)
+              {
+                  var tempDataValue = currentRow[areaNamesToNumbers[areaName]];
+                  tempDataValue = tempDataValue.replace("%", "");
+                  areaData[areaName] = parseFloat(tempDataValue);
+              }
+			
+              //if we have a national average use it
+              var tempIndicatorArray = new Array();
+              tempIndicatorArray["title"] = title;
+              tempIndicatorArray["data"] = areaData;
+              if(nationalAverageIndex != -1)
+              {
+                  tempIndicatorArray["nationalAverage"] = parseFloat(currentRow[nationalAverageIndex]);
+              }
+			
+              if(sourceIndex != -1 && currentRow[sourceIndex] != "" && currentRow[sourceIndex] != undefined)
+              {
+                  currentSource = currentRow[sourceIndex];
+              }
+              tempIndicatorArray["source"] = currentSource;
+			
+              if(linkIndex != -1 && currentRow[linkIndex] != "" && currentRow[linkIndex] != undefined)
+              {
+                  currentSourceLink = currentRow[linkIndex];
+              }
+              tempIndicatorArray["link"] = currentSourceLink;
+			
+              if(unitIndex != -1 && currentRow[unitIndex] != "" && currentRow[unitIndex] != undefined)
+              {
+                  currentUnit = currentRow[unitIndex];
+              }
+              else 
+              {
+                  currentUnit = " ";
+              }
+              tempIndicatorArray["unit"] = currentUnit;
 
-			$("#mid_level_"+currentMidLevelId).append(bottomLevelList);
+              indicatorsToUpdateParams[currentBottomLevelId] = tempIndicatorArray;
+
+              $("#mid_level_"+currentMidLevelId).append(bottomLevelList);
 			
 			
-		}
+          }
 		
 		
 		
-		// Controling the click behavior of the indicator list
+          // Controling the click behavior of the indicator list
 		
-		$('span.level1').click(function (){
-			level1Click($(this));
-		});
+          $('span.level1').click(function (){
+              level1Click($(this));
+          });
 		
-		$('ul.level1').hide(); //This hides all ul level1 by default until they are toggled. Can also be defined in css.
+          $('ul.level1').hide(); //This hides all ul level1 by default until they are toggled. Can also be defined in css.
 		
-		$('span.level2').click(function (){
-			level2Click($(this));
-		});
-		$('ul.level2').hide(); //This hides all ul level1 by default until they are toggled. Can also be defined in css.		
-		
-		
-		$("li span").hover(function () {
-			$(this).addClass("hover");
-		}, function () {
-			$(this).removeClass("hover");
-		});
+          $('span.level2').click(function (){
+              level2Click($(this));
+          });
+          $('ul.level2').hide(); //This hides all ul level1 by default until they are toggled. Can also be defined in css.		
 		
 		
-		$('li.level3').click(function (){
-			level3Click($(this));
-			$('ul.level1').hide(); //This hides all ul level1 elements that are currently visible 
-			$('ul.level2').hide(); //This hides all ul level2 elements that are currently visible
-			$('span.level1').removeClass("active"); //This hides all ul level1 elements that are currently visible 
-			$('span.level2').removeClass("active"); //This hides all ul level2 elements that are currently visible
-			$(this).parent().siblings("span.level2").addClass("active"); //This shows the current parent ul level2 element
-			$(this).parent().parent().parent().siblings("span.level1").addClass("active"); //This shows the current parent ul level2 element
-			$(this).parent().show(); //This shows the current parent ul level2 element
-			$(this).parent().parent().parent().show(); //This shows the current parent ul level1 element
-		});
+          $("li span").hover(function () {
+              $(this).addClass("hover");
+          }, function () {
+              $(this).removeClass("hover");
+          });
+		
+		
+          $('li.level3').click(function (){
+              level3Click($(this));
+              $('ul.level1').hide(); //This hides all ul level1 elements that are currently visible 
+              $('ul.level2').hide(); //This hides all ul level2 elements that are currently visible
+              $('span.level1').removeClass("active"); //This hides all ul level1 elements that are currently visible 
+              $('span.level2').removeClass("active"); //This hides all ul level2 elements that are currently visible
+              $(this).parent().siblings("span.level2").addClass("active"); //This shows the current parent ul level2 element
+              $(this).parent().parent().parent().siblings("span.level1").addClass("active"); //This shows the current parent ul level2 element
+              $(this).parent().show(); //This shows the current parent ul level2 element
+              $(this).parent().parent().parent().show(); //This shows the current parent ul level1 element
+          });
 		
 		
 		
-		//check if we're supposed to auto load the data for a particular indicator?
-		var autoLoadIndicator = $.address.parameter("indicator");
-		if( autoLoadIndicator != "")
-		{
-			showByIndicator(autoLoadIndicator);
-		}
-		//hide the temporary loading text once the indicators are visible
-		$('#loadingtext').remove();
-	});		
+          //check if we're supposed to auto load the data for a particular indicator?
+          var autoLoadIndicator = $.address.parameter("indicator");
+          if( autoLoadIndicator != "")
+          {
+              showByIndicator(autoLoadIndicator);
+          }
+          //hide the temporary loading text once the indicators are visible
+          $('#loadingtext').remove();
+      }
+    //initiates a HTTP get request for the json file
+    if (typeof csvUrl === 'string') {
+        $.get('/' + rootFolder + '/' + csvUrl, parseData);
+    } else {
+        var csvUrlLength = csvUrl.length;
+        for (var i = 0; i < csvUrlLength; i++) {
+            var current = csvUrl[i];
+            $.get('/' + rootFolder + '/' + current.url, function (i, current) {
+                return function (response) {
+                    $link = $('<a>', { href: '#', className: 'survey_link' })
+                    $link.click(function (event) {
+                        event.preventDefault();
+                        parseData(response);
+                    });
+                    $link.text(current.name);
+                    $('#tabs').append($link);
+                    if (i === 0) {
+                        parseData(response);
+                    }
+                }
+            }(i, current));
+        }
+    }
   }//end parseCSV function
   
 	function level1Click(level1Item, forceOn)
@@ -415,7 +441,7 @@
 
   
     
-function parseJsonToGmap(jsonUrl, csvUrl)
+function parseJsonToGmap(jsonUrl, rootFolder, csvUrl)
  {	
 	//initalizes our global county point array
 	areaPoints = new Array(); 
@@ -489,7 +515,7 @@ function parseJsonToGmap(jsonUrl, csvUrl)
 		}	
 
 
-		parseCSV(csvUrl);		
+		parseCSV(csvUrl, rootFolder);		
 		
 		
 		

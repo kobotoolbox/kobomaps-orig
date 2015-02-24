@@ -3,7 +3,7 @@
 var kmapTitle = "Indicator map USA";
 var kmapsubFolder = "<?php echo kmapsubFolder; ?>"; //defining the subfolder - this is defined once in the container file
 var kmapBoundaries = "boundaries/json_boundaries_usa.txt";    //relative to kmapsubFolder
-var kmapData = "data/data_usa.csv";     //relative to kmapsubFolder
+var kmapData = [{name: 'real', url: "data/data_usa.csv"}, {name: 'fake', url: 'data/data_usa_2.csv'}];     //relative to kmapsubFolder
 var kmapY = "40.4";
 var kmapX = "-99.3";
 var kmapZoom = 4; //zoom level as integer (no parentheses)
