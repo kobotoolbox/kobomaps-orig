@@ -3,7 +3,7 @@
 <head> 
 <?php
 //defining the subfolder - relative to the document root (where the contents of the domain/subdomain point to, e.g. home/user/www)
-define("kmapsubFolder", "maps", true);
+define("kmapsubFolder", "kobomaps-orig", true);
 //defining the name (and location, if not in the root of kmapsubFolder) of the config file for this map
 define("kmapconfigFile", "config_usa.php", true);
 
