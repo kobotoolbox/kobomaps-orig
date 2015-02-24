@@ -63,7 +63,7 @@ body {height: 100%; margin: 0px; padding: 0px;font: 76%/170% Open Sans, Verdana,
 #bottombar a {display:inline;}
 
 /* Div holding the indicator list */
-div#maplinks {top:0;left:0;height:100%;width:350px;overflow-y:auto;overflow-x:hidden;position:absolute;z-index:1001;background:url(../img/w75b.png) repeat scroll;text-align:left;padding-top:114px;}
+div#maplinks {top:134px;left:0;height:calc(100% - 134px);width:350px;overflow-y:auto;overflow-x:hidden;position:absolute;z-index:1001;background:url(../img/w75b.png) repeat scroll;text-align:left;}
 div#maplinks h3 {margin: 50px 5px 0;font-family: Helvetica,Arial,sans-serif;}
 div#maplinks p {padding:10px 5px 10px;margin:0px;font-size:10px;line-height:14px;font-weight:bold;border-bottom:1px solid white;}
 div#maplinks p#loadingtext {border: medium none;font-size: 1em;line-height: 2em;padding:15px 5px;margin:25% 10px 0;border:1px solid #777777;color:#777777;text-align:center;background:url(../img/loading.gif) no-repeat scroll 50% 39px #ffffff;}
