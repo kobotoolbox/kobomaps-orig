@@ -630,11 +630,10 @@ function UpdateAreaPercentageMessage(name, percentage, min, spread, message, uni
 	google.maps.event.clearListeners(areaGPolygons[name], 'click');
 	// Add a listener for the click event
 	google.maps.event.addListener(areaGPolygons[name], 'click', function(event) {
-		//close all other info windows if they are open
-		for(var windowName in infoWindows)
-		{
-			infoWindows[windowName].close();
-		}
+	    //close all other info windows if they are open
+        for (var windowName in infoWindows) {
+	        infoWindows[windowName].close();
+	    }
 		//set up the new info window and open it.
 		infoWindow.setPosition(event.latLng);
 		infoWindow.open(map);		
@@ -912,7 +911,11 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
 	var minSpread = calculateMinSpread(data);
 	var min = minSpread["min"];
 	var spread = minSpread["spread"];
-	
+	google.maps.event.addListener(map, 'click', function () {
+	    for (var windowName in infoWindows) {
+	        infoWindows[windowName].close();
+	    }
+	});
 	//loop over all our data
 	for(areaName in data)
 	{
