@@ -124,7 +124,11 @@
   
   function parseCSV(csvUrl, rootFolder)
   {
-      function parseData(data) {
+      var csvs = {};
+      var currentSeries;
+      function parseData(name) {
+          currentSeries = name;
+          var data = csvs[name];
           indicatorsToUpdateParams = [];
 		
           var csvData = CSVToArray(data, ",");
@@ -324,22 +328,36 @@
       }
     //initiates a HTTP get request for the json file
     if (typeof csvUrl === 'string') {
-        $.get('/' + rootFolder + '/' + csvUrl, parseData);
+        $.get('/' + rootFolder + '/' + csvUrl, function (response) {
+            csvs.unique = response;
+            parseData('unique');
+        });
     } else {
+        $.address.externalChange(function () {
+            var series = $.address.parameter('series');
+            if (currentSeries !== series) {
+                parseData(series);
+            }
+        });
         var csvUrlLength = csvUrl.length;
+        var series = $.address.parameter('series') || false;
+        
         for (var i = 0; i < csvUrlLength; i++) {
             var current = csvUrl[i];
             $.get('/' + rootFolder + '/' + current.url, function (i, current) {
                 return function (response) {
+                    var currentName = current.name;
+                    csvs[currentName] = response;
                     $link = $('<a>', { href: '#', className: 'survey_link' })
                     $link.click(function (event) {
                         event.preventDefault();
-                        parseData(response);
+                        parseData(currentName);
+                        $.address.parameter('series', currentName);
                     });
-                    $link.text(current.name);
+                    $link.text(currentName);
                     $('#tabs').append($link);
-                    if (i === 0) {
-                        parseData(response);
+                    if (i === 0 || series && series === currentName) {
+                        parseData(currentName);
                     }
                 }
             }(i, current));
@@ -1028,16 +1046,18 @@ function htmlDecode(value){
 
 
 (function(j) { 
-		j(function() {
-			$.address.externalChange(function(event) {  
-				var indicator = $.address.parameter("indicator");
-				if(indicator != undefined)
-				{
-					showByIndicator(indicator);
-				}
+    j(function() {
+        var indicator;
+		$.address.externalChange(function(event) {  
+		    var newindicator = $.address.parameter("indicator");
+			if(indicator !== newindicator)
+			{
+			    indicator = newindicator;
+				showByIndicator(indicator);
+			}
 
-			});  
-		});
+		});  
+	});
 })(jQuery);
 
 
