@@ -362,7 +362,7 @@
                 return function (response) {
                     var currentName = current.name;
                     csvs[currentName] = response;
-                    var $link = $('<a>', { href: '#', className: 'survey-link' })
+                    var $link = $('<a>', { href: '#', 'class': 'survey-link' })
                     $link.click(function (event) {
                         event.preventDefault();
                         changeSeries(currentName, $link);

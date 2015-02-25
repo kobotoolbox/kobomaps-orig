@@ -13,7 +13,7 @@
 <link href="/<?php echo kmapsubFolder ?>/css/largemap.css" type="text/css" rel="stylesheet"> 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">google.load('visualization', '1', {packages: ['corechart']});</script>
-<script type="text/javascript" src="/<?php echo kmapsubFolder ?>/js/jquery-1.5.1.min.js"></script> 
+<script type="text/javascript" src="/<?php echo kmapsubFolder ?>/js/jquery.js"></script> 
 <script type="text/javascript" src="/<?php echo kmapsubFolder ?>/js/dataVisualize.js"> </script> 
 <script type="text/javascript" src="/<?php echo kmapsubFolder ?>/js/jquery.address-1.4.min.js"></script> 
 <script type="text/javascript" src="/<?php echo kmapsubFolder ?>/js/csvToArray.js"> </script>
