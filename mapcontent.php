@@ -12,10 +12,9 @@
 //Creating the navigation column containing all the links. The actual ul and li nested elements are all created by the JS code
 ?>
 
-
-<div id="maplinks"	>
-<h2> Surveys </h2>
 <div id="tabs"></div>
+<div id="maplinks"	>
+
 	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
 		<ul id="questionsindicators" class="questionsindicators" >	</ul>
 	<p id="loadingtext">
