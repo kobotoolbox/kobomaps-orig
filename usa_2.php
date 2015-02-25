@@ -3,9 +3,9 @@
 <head> 
 <?php
 //defining the subfolder - relative to the document root (where the contents of the domain/subdomain point to, e.g. home/user/www)
-define("kmapsubFolder", "kobomaps-orig", true);
+define("kmapsubFolder", "maps", true);
 //defining the name (and location, if not in the root of kmapsubFolder) of the config file for this map
-define("kmapconfigFile", "config_usa.php", true);
+define("kmapconfigFile", "config_usa_2.php", true);
 
 
 //calling the config file with all the js goodness 
