@@ -355,8 +355,7 @@
         });
         var csvUrlLength = csvUrl.length;
         var series = $.address.parameter('series') || false;
-        
-        for (var i = 0; i < csvUrlLength; i++) {
+        getSheets = function (i) {
             var current = csvUrl[i];
             $.get('/' + rootFolder + '/' + current.url, function (i, current) {
                 return function (response) {
@@ -373,8 +372,14 @@
                         changeSeries(currentName, $link);
                     }
                 }
-            }(i, current));
-        }
+            }(i, current)).then(function () {
+                if (++i < csvUrlLength) {
+                    getSheets(i);
+                }
+            });
+        };
+
+        getSheets(0);
     }
   }//end parseCSV function
   
