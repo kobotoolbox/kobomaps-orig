@@ -93,31 +93,44 @@ div.chartHolder {height:300px; width:400px; overflow:auto;}
 .countylabel {left:-50%;font-size:10px;}
 .areaVal {font-size:14px;display:block;height:13px;font-family:Tahoma,sans-serif;}
 
-#tabs .survey-link {
-	font-size: 13px;
-	padding: 1px 7px 3px;
-	margin: 0 2px 0px 0px;
-	background-color: #5F3535;
-	border: 1px solid #5F3535;
-	border-radius: 2px 2px 0 0;
-	color: white;
-}
-
-#tabs .survey-link.active {
-	border: 1px solid #a42828;
-	background-color: white;
-	border-top: 1px solid white;
-	color: black;
-}
-
-#tabs .survey-link:hover {
-    border-top: 1px solid white;
-}
+/*Tabs*/
 
 #tabs {
-	left:350px;
-	padding: 0 0 0 2px;
+	right: 23px;
+	padding: 0px 0 0 0px;
 	position: absolute;
-	top:134px;
+	top: 133px;
 	z-index: 2000;
+}
+#tabs ul {
+	margin:0;
+	padding:0;
+	list-style:none;
+}
+
+#tabs ul li {
+	float:left;
+}
+
+#tabs .survey-link a {
+	padding: 6px 14px 9px;
+	display: block;
+	font-size: 13px;
+	margin: 1px 0px 0px 13px;
+	background-color: #FFFFFF;
+	border: 1px solid #9B9B9B;
+	border-radius: 0 0px 5px 5px;
+	color: #777;
+}
+
+#tabs .survey-link.active a, #tabs .survey-link.active a:hover {
+	color: #f49c14;
+	cursor:default;
+	background-color:white;
+	border: 1px solid #9B9B9B;
+}
+
+#tabs .survey-link a:hover {
+    background-color:#f3f3f3;
+    border:1px solid #e5e5e5;
 }
