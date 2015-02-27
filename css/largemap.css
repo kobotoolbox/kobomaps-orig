@@ -134,3 +134,10 @@ div.chartHolder {height:300px; width:400px; overflow:auto;}
     background-color:#f3f3f3;
     border:1px solid #e5e5e5;
 }
+
+/* patch for pbd submenu bug */
+.headerwrap .header.span12 {
+    width: 1170px;
+    left: 50%;
+    margin-left: -585px;
+}

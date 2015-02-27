@@ -48,11 +48,13 @@
   var round = true;
   
 //add a title to the map
-	$(document).ready(function() {
-     initialize();
-	   $("#kmapTitle").html(kmapTitle);
-	   $("#nationalaveragelabel").html(kmapAllAdminAreas+':');
-	});
+  $(document).ready(function () {
+      //patches issue with top navigation menu
+      $('.pagetitlewrap').css('z-index', 120);
+      initialize();
+	  $("#kmapTitle").html(kmapTitle);
+	  $("#nationalaveragelabel").html(kmapAllAdminAreas + ':');
+  });
 
   
  //itintializes everything, both the mandatory google maps stuff, and our totally awesome json to gPolygon code
@@ -232,8 +234,7 @@
               }
               var title = "<strong>" + htmlEncode(currentMidLevelName)+'</strong><br />  &quot;'+htmlEncode(currentBottomLevelName)+'&quot;';
 			
-              var bottomLevelList = '<li class="level3" id="bottom_level_'+currentBottomLevelId+'"><a href="#/?indicator='+currentBottomLevelId+'" onclick="showByIndicator(\''+currentBottomLevelId+'\');';
-              bottomLevelList += 'return false;">'+currentBottomLevelName+'</a></li>';
+              var bottomLevelList = '<li class="level3" id="bottom_level_'+currentBottomLevelId+'"><a href="#/?indicator='+currentBottomLevelId + '">'+currentBottomLevelName+'</a></li>';
               //now we need to make up, I mean create, the data portion of this
               var areaData = new Array();
               for( areaName in areaNamesToNumbers)
@@ -276,7 +277,16 @@
 
               indicatorsToUpdateParams[currentBottomLevelId] = tempIndicatorArray;
 
-              $("#mid_level_"+currentMidLevelId).append(bottomLevelList);
+              $bottomLevelList = $(bottomLevelList);
+              $bottomLevelList.find('a').click((function (currentBottomLevelId) { 
+                  return function (event) {
+                      event.preventDefault();
+                      showByIndicator(currentBottomLevelId)
+                  }
+              }(currentBottomLevelId)));
+              
+
+              $("#mid_level_"+currentMidLevelId).append($bottomLevelList);
 			
 			
           }
@@ -344,9 +354,9 @@
             var series = $.address.parameter('series');
             if (currentSeries !== series) {
                 var $link;
-                $('#tabs').children().each(function (index, element) {
+                $('#tabs a').each(function (index, element) {
                     if (element.innerText === series) {
-                        $link = $(' > a', element);
+                        $link = $(element);
                         return false;
                     }
                 });
