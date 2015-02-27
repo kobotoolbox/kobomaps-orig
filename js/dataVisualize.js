@@ -335,8 +335,8 @@
         });
     } else {
         function changeSeries(name, $link) {
-            $link.parent().children().removeClass('active');
-            $link.addClass('active');
+            $link.parent().parent().children().removeClass('active');
+            $link.parent().addClass('active');
             parseData(name);
             $.address.parameter('series', name);
         }
@@ -346,7 +346,7 @@
                 var $link;
                 $('#tabs').children().each(function (index, element) {
                     if (element.innerText === series) {
-                        $link = $(element);
+                        $link = $(' > a', element);
                         return false;
                     }
                 });
@@ -362,13 +362,15 @@
                 return function (response) {
                     var currentName = current.name;
                     csvs[currentName] = response;
-                    var $link = $('<a>', { href: '#', 'class': 'survey-link' })
+                    var $link = $('<a>', { href: '#'});
+                    var $li = $('<li>', { 'class': 'survey-link' });
+                    $li.append($link);
                     $link.click(function (event) {
                         event.preventDefault();
                         changeSeries(currentName, $link);
                     });
                     $link.text(currentName);
-                    $('#tabs ul').append($link);
+                    $('#tabs ul').append($li);
                     if (i === 0 || series && series === currentName) {
                         changeSeries(currentName, $link);
                     }
