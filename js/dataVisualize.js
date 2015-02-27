@@ -1,6 +1,6 @@
  //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
-
+(function ($) {
   /**
    * global variable that holds the map
    */
@@ -49,6 +49,7 @@
   
 //add a title to the map
 	$(document).ready(function() {
+     initialize();
 	   $("#kmapTitle").html(kmapTitle);
 	   $("#nationalaveragelabel").html(kmapAllAdminAreas+':');
 	});
@@ -367,7 +368,7 @@
                         changeSeries(currentName, $link);
                     });
                     $link.text(currentName);
-                    $('#tabs').append($link);
+                    $('#tabs ul').append($link);
                     if (i === 0 || series && series === currentName) {
                         changeSeries(currentName, $link);
                     }
@@ -1106,3 +1107,4 @@ function addCommas(nStr)
 	return x1 + x2;
 }
 
+}(jQuery));
