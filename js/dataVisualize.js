@@ -1,6 +1,6 @@
  //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
-
+(function ($) {
   /**
    * global variable that holds the map
    */
@@ -48,10 +48,13 @@
   var round = true;
   
 //add a title to the map
-	$(document).ready(function() {
-	   $("#kmapTitle").html(kmapTitle);
-	   $("#nationalaveragelabel").html(kmapAllAdminAreas+':');
-	});
+  $(document).ready(function () {
+      //patches issue with top navigation menu
+      $('.pagetitlewrap').css('z-index', 120);
+      initialize();
+	  $("#kmapTitle").html(kmapTitle);
+	  $("#nationalaveragelabel").html(kmapAllAdminAreas + ':');
+  });
 
   
  //itintializes everything, both the mandatory google maps stuff, and our totally awesome json to gPolygon code
@@ -231,8 +234,7 @@
               }
               var title = "<strong>" + htmlEncode(currentMidLevelName)+'</strong><br />  &quot;'+htmlEncode(currentBottomLevelName)+'&quot;';
 			
-              var bottomLevelList = '<li class="level3" id="bottom_level_'+currentBottomLevelId+'"><a href="#/?indicator='+currentBottomLevelId+'" onclick="showByIndicator(\''+currentBottomLevelId+'\');';
-              bottomLevelList += 'return false;">'+currentBottomLevelName+'</a></li>';
+              var bottomLevelList = '<li class="level3" id="bottom_level_'+currentBottomLevelId+'"><a href="#/?indicator='+currentBottomLevelId + '">'+currentBottomLevelName+'</a></li>';
               //now we need to make up, I mean create, the data portion of this
               var areaData = new Array();
               for( areaName in areaNamesToNumbers)
@@ -275,7 +277,16 @@
 
               indicatorsToUpdateParams[currentBottomLevelId] = tempIndicatorArray;
 
-              $("#mid_level_"+currentMidLevelId).append(bottomLevelList);
+              $bottomLevelList = $(bottomLevelList);
+              $bottomLevelList.find('a').click((function (currentBottomLevelId) { 
+                  return function (event) {
+                      event.preventDefault();
+                      showByIndicator(currentBottomLevelId)
+                  }
+              }(currentBottomLevelId)));
+              
+
+              $("#mid_level_"+currentMidLevelId).append($bottomLevelList);
 			
 			
           }
@@ -334,8 +345,8 @@
         });
     } else {
         function changeSeries(name, $link) {
-            $link.parent().children().removeClass('active');
-            $link.addClass('active');
+            $link.parent().parent().children().removeClass('active');
+            $link.parent().addClass('active');
             parseData(name);
             $.address.parameter('series', name);
         }
@@ -343,7 +354,7 @@
             var series = $.address.parameter('series');
             if (currentSeries !== series) {
                 var $link;
-                $('#tabs').children().each(function (index, element) {
+                $('#tabs a').each(function (index, element) {
                     if (element.innerText === series) {
                         $link = $(element);
                         return false;
@@ -361,13 +372,15 @@
                 return function (response) {
                     var currentName = current.name;
                     csvs[currentName] = response;
-                    var $link = $('<a>', { href: '#', 'class': 'survey-link' })
+                    var $link = $('<a>', { href: '#'});
+                    var $li = $('<li>', { 'class': 'survey-link' });
+                    $li.append($link);
                     $link.click(function (event) {
                         event.preventDefault();
                         changeSeries(currentName, $link);
                     });
                     $link.text(currentName);
-                    $('#tabs').append($link);
+                    $('#tabs ul').append($li);
                     if (i === 0 || series && series === currentName) {
                         changeSeries(currentName, $link);
                     }
@@ -1106,3 +1119,4 @@ function addCommas(nStr)
 	return x1 + x2;
 }
 
+}(jQuery));
