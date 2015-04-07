@@ -596,8 +596,8 @@ function formatAreaOpacityColor(name, opacityValue, colorValue)
 function calculateColor(percentage, min, spread)
 {
 	//calculate the color
-	var red = 255;
-	var blue = 255 - ((percentage-min)*(1/spread)*255);
+	var red = 255 - ((percentage-min)*(1/spread)*255);
+	var blue = 255;
 	var green = 255 - ((percentage-min)*(1/spread)*255);
 	var color = "#"+decimalToHex(red,2)+decimalToHex(green,2)+decimalToHex(blue,2);
 	
