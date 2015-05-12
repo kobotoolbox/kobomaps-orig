@@ -51,7 +51,7 @@
 				<span id="sourceNoURL"></span>
 			</span>
         </div>
-		<div id="addthiswrappertop">
+<!---		<div id="addthiswrappertop">
 			<div class="addthis_toolbox addthis_default_style ">
 				<a class="addthis_button_preferred_1"></a>
 				<a class="addthis_button_preferred_2"></a>
@@ -59,13 +59,13 @@
 				<a class="addthis_button_preferred_3"></a>
 				<a class="addthis_button_compact"></a>
 				<a class="addthis_counter addthis_bubble_style"></a>
-			</div>
+			</div> -->
+		<div id="poweredby">
+		<a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
+		</div>
 		</div>
 <?php
 //Powered by KoBoToolbox - Please be kind and leave a reference with a link to our website.
 ?>
-		<div id="poweredby">
-		<a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
-		</div>
 	</div>
 </div>
