@@ -117,7 +117,7 @@
 
 	
 	//Calling the boundaries and data files. The variables need to be defined in the container file as they are country-specific
-	parseJsonToGmap(kmapInstance+'/'+kmapBoundaries, kmapInstance+'/'+kmapData);
+	parseJsonToGmap(kmapInstance+'/'+kmapBoundaries, kmapInstance, kmapData);
 
 
 	
@@ -339,7 +339,7 @@
       }
     //initiates a HTTP get request for the json file
     if (typeof csvUrl === 'string') {
-        $.get('/' + rootFolder + '/' + csvUrl, function (response) {
+        $.get(rootFolder + '/' + csvUrl, function (response) {
             csvs.unique = response;
             parseData('unique');
         });
@@ -368,7 +368,7 @@
         var series = $.address.parameter('series') || false;
         getSheets = function (i) {
             var current = csvUrl[i];
-            $.get('/' + rootFolder + '/' + current.url, function (i, current) {
+            $.get(rootFolder + '/' + current.url, function (i, current) {
                 return function (response) {
                     var currentName = current.name;
                     csvs[currentName] = response;
