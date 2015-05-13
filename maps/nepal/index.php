@@ -36,14 +36,9 @@
 	var kmapX = "<?php echo $kmapX; ?>"; 
 	var kmapZoom = <?php echo $kmapZoom; ?>; 
 </script>
-<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/mapheader.php"; ?>
+<?php include "mapheader.php"; ?>
 </head> 
-<body onload="initialize()">
+<body>
 <?php include "mapcontent.php"; ?>  
 </body> 
 </html> 
-
-
-
-
-

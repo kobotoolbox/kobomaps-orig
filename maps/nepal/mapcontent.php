@@ -9,6 +9,16 @@
 
 //Creating the navigation column containing all the links. The actual ul and li nested elements are all created by the JS code
 ?>
+
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+	    jQuery('#toggleLabels').live('click', function(event) {        
+	         jQuery('.countylabel').toggle('show');
+	    });
+	});
+</script>
+<input type='button' id='toggleLabels' value='Show / hide labels'>
+
 <div id="maplinks"	>
 	<h3 id="kmapTitle">&nbsp;</h3>
 	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
@@ -26,7 +36,7 @@
 <?php
 //The legend
 ?>
-<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; top: 60px;"> 
+<div id="topbar" class="drsElement drsMoveHandle"> 
 	<div id="legend">
 
 		<div id="legendtext">

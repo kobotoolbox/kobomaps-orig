@@ -32,8 +32,8 @@
 	$kmapPageTitle = "Nepal Earthquake Response - Sindhupalchok District Assessment"; 
 	$kmapTitle = "Nepal Earthquake Response - Sindhupalchok District Assessment"; 
 	$kmapAllAdminAreas = "Sindhupalchok"; 
-	$kmapY = "27.9"; 
-	$kmapX = "85.5"; 
+	$kmapY = "27.94"; 
+	$kmapX = "85.7"; 
 	$kmapZoom = 10; 
 /*End primary map-specific variables*/
 	
@@ -68,7 +68,7 @@
 	var kmapData = "data.php";
 	var kmapInfodivHeight = 300; 
 	var kmapInfochartWidth = 315;
-	var kmapInfochartBarHeight = 10; 
+	var kmapInfochartBarHeight = 7; 
 	var kmapInfochartBarHeightMargin = 2;
 	var kmapInfochartchxsFont = 10;
 	var kmapInfochart = 'http://chart.apis.google.com/chart?'
@@ -83,44 +83,47 @@
 	+ '&chxl=1:';
 
 	var mapStyles = 
-	[
-	  {
-		featureType: "administrative.province",
-		elementType: "all",
-		stylers: [
-		  { visibility: "off" }
-		]
-	  },{
-		featureType: "poi",
-		elementType: "all",
-		stylers: [
-		  { visibility: "off" }
-		]
-	  },{
-		featureType: "road",
-		elementType: "all",
-		stylers: [
-		  { visibility: "off" }
-		]
-	  },{
-		featureType: "landscape",
-		elementType: "geometry",
-		stylers: [
-		  { lightness: -60 },
-		  { hue: "#91ff00" },
-		  { visibility: "on" },
-		  { saturation: -60 }
-		]
-	  },{
-		featureType: "administrative.locality",
-		elementType: "all",
-		stylers: [
-		  { saturation: -50 },
-		  { invert_lightness: true },
-		  { lightness: 52 }
-		]
-	  }
-	]; 
+[
+  {
+    "featureType": "poi",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "stylers": [
+      { "color": "#ffffff" },
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "road",
+    "stylers": [
+      { "visibility": "on" }
+    ]
+  },{
+    "featureType": "landscape",
+    "elementType": "geometry",
+    "stylers": [
+      { "lightness": -60 },
+      { "hue": "#2bff00" },
+      { "visibility": "on" },
+      { "saturation": -61 }
+    ]
+  },{
+    "featureType": "administrative.locality"  },{
+    "featureType": "road.arterial",
+    "stylers": [
+      { "color": "#a39f6d" }
+    ]
+  },{
+    "featureType": "administrative.country",
+    "elementType": "geometry",
+    "stylers": [
+      { "weight": 3 }
+    ]
+  },{
+  }
+]
 </script>
 <?php
 /**

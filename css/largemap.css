@@ -5,7 +5,7 @@ body {height: 100%; margin: 0px; padding: 0px;font: 76%/170% Open Sans, Verdana,
 
 /* Legend */
 #topbar, #bottombar {background: url("../img/b40.png") repeat scroll 0 0 transparent;padding:5px}
-#topbar {left: 355px;position: absolute;/*bottom: 48px;*/z-index: 999;width:325px;}
+#topbar {top: 60px;left: 355px;position: absolute;z-index: 999;width:325px;}
 #legend {float:left;background:url(../img/w75b.png) repeat scroll;padding:3px; border:1px solid #ffffff;width:317px;text-align:left;}
 #legendtext {margin:0 0 4px;}
 #legendtext span {}
