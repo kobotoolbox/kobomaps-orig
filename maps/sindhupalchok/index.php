@@ -36,9 +36,9 @@
 	var kmapX = "<?php echo $kmapX; ?>"; 
 	var kmapZoom = <?php echo $kmapZoom; ?>; 
 </script>
-<?php include "mapheader.php"; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/nepalmapheader.php"; ?>
 </head> 
 <body>
-<?php include "mapcontent.php"; ?>  
+<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/nepalmapcontent.php"; ?>  
 </body> 
 </html> 
