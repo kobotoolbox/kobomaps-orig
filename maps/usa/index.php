@@ -38,7 +38,7 @@
 </script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/mapheader.php"; ?>
 </head> 
-<body onload="initialize()">
+<body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/mapcontent.php"; ?>  
 </body> 
 </html> 
