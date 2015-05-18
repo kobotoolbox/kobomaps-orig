@@ -36,10 +36,10 @@
 	var kmapX = "<?php echo $kmapX; ?>"; 
 	var kmapZoom = <?php echo $kmapZoom; ?>; 
 </script>
-<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/mapheader.php"; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/mapheader.php"; ?>
 </head> 
 <body onload="initialize()">
-<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/mapcontent.php"; ?>  
+<?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/mapcontent.php"; ?>  
 </body> 
 </html> 
 
