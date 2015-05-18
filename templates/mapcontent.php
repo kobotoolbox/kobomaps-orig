@@ -1,20 +1,16 @@
 <?php
 /*
-*
-* This file is referenced from within Drupal in html--node--nnn.tpl.php
-* Any changes in this file will be visible in the Drupal across all fullscreen maps. 
-
-* ###The file name and file location should not be modified.###
-
-*
-*/
+ * KoBoMaps --- mapcontent.php
+ * This file is referenced by each KoBoMap instance.
+ * Any changes in this file will be visible across all maps. 
+ * Map-specific content and design should instead be entered into the respective map container file
+ *
+ */
 
 //Creating the navigation column containing all the links. The actual ul and li nested elements are all created by the JS code
 ?>
-
-<div id="tabs"><ul></ul></div>
 <div id="maplinks"	>
-
+	<h3 id="kmapTitle">&nbsp;</h3>
 	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
 		<ul id="questionsindicators" class="questionsindicators" >	</ul>
 	<p id="loadingtext">
@@ -25,14 +21,12 @@
 <?php
 //The background element containing the actual map
 ?>
-<div id="map_canvas">
-</div>
+<div id="map_canvas"></div>
 
 <?php
 //The legend
 ?>
-
-<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; top: 180px;"> 
+<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; top: 60px;"> 
 	<div id="legend">
 
 		<div id="legendtext">
@@ -54,6 +48,7 @@
         <div id="sourcetext">
 			<span id="sourcetextspan" style="display:none;"> Data Source:  
 				<a id="sourceURL" href="" title=""></a>
+				<span id="sourceNoURL"></span>
 			</span>
         </div>
 		<div id="addthiswrappertop">
@@ -66,14 +61,11 @@
 				<a class="addthis_counter addthis_bubble_style"></a>
 			</div>
 		</div>
+<?php
+//Powered by KoBoToolbox - Please be kind and leave a reference with a link to our website.
+?>
 		<div id="poweredby">
 		<a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
 		</div>
 	</div>
 </div>
-<?php
-/*Second legend element, if needed
-<div id="bottombar">
-</div>
-*/
-?> 
