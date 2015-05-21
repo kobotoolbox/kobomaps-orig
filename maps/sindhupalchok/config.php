@@ -80,6 +80,7 @@
 	+ '&chco=3E4E6E,CC0000'
 	+ '&chg=25,0,5,9'
 	+ '&chts=000000,13'
+  + '&chds=a' //This enables autoscaling. See https://developers.google.com/chart/image/docs/data_formats#textformatautoscaling
 	+ '&chxl=1:';
 
 	var mapStyles = 
