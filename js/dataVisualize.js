@@ -241,7 +241,7 @@
               {
                   var tempDataValue = currentRow[areaNamesToNumbers[areaName]];
                   tempDataValue = tempDataValue.replace("%", "");
-                  areaData[areaName] = parseFloat(tempDataValue) || 0;
+                  areaData[areaName] = parseFloat(tempDataValue);
               }
 			
               //if we have a national average use it
@@ -937,7 +937,9 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
 	//loop over all our data
 	for(areaName in data)
 	{
-		UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
+    if (!isNaN(data[areaName])) {
+      UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
+    }
 	}
 	
 	//update the key
