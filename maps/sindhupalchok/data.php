@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 	//Paste here the unique document ID and sheet ID from Google Spreadsheets
 	$googledoc_id 		= "1Pl-C0tJRo3wWBXi8g9EfF85vTBSp8PF9B9z6HlqqwUE";
 	$googledoc_sheet	= "0";

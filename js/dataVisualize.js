@@ -744,27 +744,29 @@ function createChart(title, data, highLightName, id, unit, min, spread)
 	var count = 0;
 	for(areaName in data)
 	{
-		count++;
-		if(count > 1) //if we're doing this more than once
-		{
-			blues += numberDelim;
-			reds += numberDelim;
-		}
-		//handle the special case of the named area being the area who's data we're looping over
-		if(areaName.toUpperCase() == highLightName.toUpperCase())
-		{
-			blues += "0";
-			reds += data[areaName];			
-		}
-		else
-		{			
-			blues += data[areaName];
-			reds += "0";
-		}
-		//for whatever reason the data names and the data values are in reverse order
-		areaName = encodeURIComponent(areaName).replace(/ /g, "+");
-		
-		names = nameDelim + areaName + names;
+    if (!isNaN(data[areaName])) {
+      count++;
+      if(count > 1) //if we're doing this more than once
+      {
+        blues += numberDelim;
+        reds += numberDelim;
+      }
+      //handle the special case of the named area being the area who's data we're looping over
+      if(areaName.toUpperCase() == highLightName.toUpperCase())
+      {
+        blues += "0";
+        reds += data[areaName];			
+      }
+      else
+      {			
+        blues += data[areaName];
+        reds += "0";
+      }
+      //for whatever reason the data names and the data values are in reverse order
+      areaName = encodeURIComponent(areaName).replace(/ /g, "+");
+      
+      names = nameDelim + areaName + names;
+    }
 	}
 	//setup the height
 	var kmapInfochartHeight = (count * (parseInt(kmapInfochartBarHeight) + parseInt(kmapInfochartBarHeightMargin))) + Math.round(parseInt(kmapInfochartchxsFont) * 1.7);
@@ -937,7 +939,9 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
 	//loop over all our data
 	for(areaName in data)
 	{
-		UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
+    if (!isNaN(data[areaName])) {
+      UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
+    }
 	}
 	
 	//update the key
