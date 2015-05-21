@@ -241,7 +241,7 @@
               {
                   var tempDataValue = currentRow[areaNamesToNumbers[areaName]];
                   tempDataValue = tempDataValue.replace("%", "");
-                  areaData[areaName] = parseFloat(tempDataValue);
+                  areaData[areaName] = parseFloat(tempDataValue) || 0;
               }
 			
               //if we have a national average use it
