@@ -17,11 +17,20 @@
 	    });
 	});
 </script>
+
+<div id="tabs">
+	<ul>
+		<li class="survey-link" id="sindhupalchok"><a href="../sindhupalchok">Sindhupalchok</a></li>
+		<li class="survey-link" id="gorkha"><a href="../gorkha">Gorkha</a></li>
+	</ul>
+
+</div>
+
 <input type='button' id='toggleLabels' value='Show / hide labels'>
 
 <div id="maplinks"	>
 	<h3 id="kmapTitle">&nbsp;</h3>
-	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
+	<p>Click on a section name to display the indicator header, then click on the indicator header to show the indicator(s). Click on the indicator to display its data on the map.</p>
 		<ul id="questionsindicators" class="questionsindicators" >	</ul>
 	<p id="loadingtext">
 	Please be patient while the map is loading.  

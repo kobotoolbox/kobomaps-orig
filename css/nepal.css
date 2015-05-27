@@ -12,7 +12,7 @@ div#maplinks h3 {
 
 #toggleLabels {
   position: absolute;
-  top: 30px;
+  top: 70px;
   left: 380px;
   background-color: white;
   border: 1px solid #ccc;
@@ -26,3 +26,9 @@ div#maplinks h3 {
 }
 
 .countylabel {display: none;}
+
+div#tabs {
+  top: -2px;
+  left: 366px;
+  right: initial;
+}
