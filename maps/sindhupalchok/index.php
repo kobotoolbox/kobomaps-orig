@@ -40,5 +40,14 @@
 </head> 
 <body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/nepalmapcontent.php"; ?>  
+
+//Adding CSS class for tabs
+
+<script>
+$(document).ready(function(){
+    $("#sindhupalchok").addClass("active");
+});
+</script>
+
 </body> 
 </html> 
