@@ -25,5 +25,5 @@ if (typeof $ === 'undefined') {
  
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/label.js"> </script> 
 
-<link href="custom.css" type="text/css" rel="stylesheet">
+<link href="<?php echo kmapPath ?>/css/nepal.css" type="text/css" rel="stylesheet">
 <title><?php echo $kmapPageTitle; ?></title>
