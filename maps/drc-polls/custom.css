@@ -5,3 +5,7 @@
 div#nationalIndicatorChart {
   display: none!important;
 }
+
+#kmapTitle {
+	display: none;
+}
