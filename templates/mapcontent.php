@@ -6,7 +6,15 @@
  * Map-specific content and design should instead be entered into the respective map container file
  *
  */
+?>
 
+
+<?php
+//We use tabs case the dataset has more than one sheet to display
+?>
+<div id="tabs"><ul></ul></div>
+
+<?php
 //Creating the navigation column containing all the links. The actual ul and li nested elements are all created by the JS code
 ?>
 <div id="maplinks"	>
