@@ -942,6 +942,10 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
     if (!isNaN(data[areaName])) {
       UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
     }
+    // Remove the previously displayed value if indicator is blank for this area. Only works on the second click. 
+    else if (isNaN(data[areaName])) {
+      data[areaName] = " ";
+    }
 	}
 	
 	//update the key
