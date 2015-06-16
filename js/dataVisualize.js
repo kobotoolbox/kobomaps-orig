@@ -743,8 +743,8 @@ function createChart(title, data, highLightName, id, unit, min, spread)
 	var numberDelim = ",";
 	var count = 0;
 	for(areaName in data)
-	{
-    if (!isNaN(data[areaName])) {
+	{	    
+    if (data[areaName] !== ' ' && !isNaN(data[areaName])) {
       count++;
       if(count > 1) //if we're doing this more than once
       {
@@ -766,6 +766,8 @@ function createChart(title, data, highLightName, id, unit, min, spread)
       areaName = encodeURIComponent(areaName).replace(/ /g, "+");
       
       names = nameDelim + areaName + names;
+    } else {
+    data[areaName] = ' ';
     }
 	}
 	//setup the height
@@ -941,11 +943,9 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
 	{
     if (!isNaN(data[areaName])) {
       UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
-    }
-    // Remove the previously displayed value if indicator is blank for this area. Only works on the second click. 
-    else if (isNaN(data[areaName])) {
-      data[areaName] = " ";
-    }
+    } else {
+      data[areaName] = ' ';
+      }
 	}
 	
 	//update the key
