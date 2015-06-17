@@ -744,7 +744,7 @@ function createChart(title, data, highLightName, id, unit, min, spread)
 	var count = 0;
 	for(areaName in data)
 	{	    
-    if (data[areaName] !== ' ' && !isNaN(data[areaName])) {
+    if (data[areaName] !== ' ' && !isNaN(data[areaName])) { // patches issue where zones with no data kill the overlay
       count++;
       if(count > 1) //if we're doing this more than once
       {
@@ -766,7 +766,7 @@ function createChart(title, data, highLightName, id, unit, min, spread)
       areaName = encodeURIComponent(areaName).replace(/ /g, "+");
       
       names = nameDelim + areaName + names;
-    } else {
+    } else { // patches issue where zones with no data show data from last indicator
     data[areaName] = ' ';
     }
 	}
@@ -942,8 +942,8 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
 	for(areaName in data)
 	{
     if (!isNaN(data[areaName])) {
-      UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, unit);
-    } else {
+      UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, data[areaName] === ' ' ? '' : unit); // patch: hides unit on zones without data
+    } else { // patches issue where zones with no data show data from last indicator
       data[areaName] = ' ';
       }
 	}
