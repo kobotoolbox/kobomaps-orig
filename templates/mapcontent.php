@@ -34,7 +34,7 @@
 <?php
 //The legend
 ?>
-<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; top: 60px;"> 
+<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; bottom: 48px;"> 
 	<div id="legend">
 
 		<div id="legendtext">
