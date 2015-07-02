@@ -833,6 +833,15 @@ function calculateMinSpread(data)
 			max = data[areaName];
 		}
 	}
+	// When all fields are NaN, min and max stay at Infinity, 
+	// which causes an infinite loop in the `calculateMagnitude` function
+	// this patches the issue. todo: investigate why residual data remains on map
+	if (min == Infinity) {
+    min = 0;
+  }
+	if (max == -Infinity) {
+    max = 0;
+  }
 	//figure out the order of magnitude of max
 	var maxMagnitude = calculateMagnitude(max);
 	if (maxMagnitude < 1)
@@ -962,7 +971,7 @@ function calculateMagnitude(num)
 {
 	num = Math.abs(num);
 	//is this number equal to or greater than 1?
-	if(num == 0)
+	if(num == 0 || num == Infinity)
 		return 0;
 	else if(num >= 1)
 	{
