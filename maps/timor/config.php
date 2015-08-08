@@ -32,9 +32,9 @@
 	$kmapPageTitle = "East Timor Interpeace Data"; 
 	$kmapTitle = "East Timor Interpeace Data"; 
 	$kmapAllAdminAreas = "All areas"; 
-	$kmapY = "40.4"; 
-	$kmapX = "-99.3"; 
-	$kmapZoom = 8; 
+	$kmapY = "-8.55"; 
+	$kmapX = "125.18"; 
+	$kmapZoom = 9; 
 /*End primary map-specific variables*/
 	
 	
@@ -65,7 +65,7 @@
 ?>
 <script type="text/javascript" language="javascript">
 	var kmapBoundaries = "boundaries.txt";
-	var kmapData = "data.csv";
+	var kmapData = "data.php";
 	var kmapInfodivHeight = 300; 
 	var kmapInfochartWidth = 315;
 	var kmapInfochartBarHeight = 10; 
