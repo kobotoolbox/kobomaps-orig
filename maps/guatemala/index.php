@@ -37,6 +37,12 @@
 	var kmapZoom = <?php echo $kmapZoom; ?>; 
 </script>
 <?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/guat-mapheader.php"; ?>
+<style type="text/css">
+	#tabs #new a {
+	    background-color: #C5CACA;
+	}
+</style>
+
 </head> 
 <body>
 <?php include $_SERVER['DOCUMENT_ROOT'] . kmapPath . "/templates/guat-mapcontent.php"; ?>  
