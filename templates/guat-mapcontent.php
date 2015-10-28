@@ -19,7 +19,7 @@
 
 <div id="tabs">
 	<ul>
-		<li class="survey-link" id="old"><a href="../guatemala_old">Old regions</a></li>
+		<li class="survey-link" id="old"><a href="../guatemala">Old regions</a></li>
 		<li class="survey-link" id="new"><a href="../guatemala_new">New regions</a></li>
 	</ul>
 
