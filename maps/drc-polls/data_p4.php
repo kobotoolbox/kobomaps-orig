@@ -1,7 +1,7 @@
 ﻿<?php
 	//Paste here the unique document ID and sheet ID from Google Spreadsheets
 	$googledoc_id 		= "1lFXgO4cFxkZ1Cx63qc9rDUVa14Trwrm-GGe0QuE-AsM";
-	$googledoc_sheet	= "397457664";
+	$googledoc_sheet	= "937718009";
 	$googledoc_range	= "A3:AF1000";
 
 

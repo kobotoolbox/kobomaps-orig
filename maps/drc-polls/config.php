@@ -68,7 +68,9 @@
 	var kmapData = [
 		{name: 'Baseline', url: "data_baseline.php"},
 		{name: 'Poll1', url: "data_p1.php"},
-		{name: 'Poll2', url: "data_p2.php"}
+		{name: 'Poll2', url: "data_p2.php"},
+		{name: 'Poll3', url: "data_p3.php"},
+		{name: 'Poll4', url: "data_p4.php"}
 	];
 	var kmapInfodivHeight = 300; 
 	var kmapInfochartWidth = 315;
