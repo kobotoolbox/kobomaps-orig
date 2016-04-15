@@ -25,6 +25,8 @@ body {height: 100%; margin: 0px; padding: 0px;font: 76%/170% Open Sans, Verdana,
 #legend div.infowindow {padding:0;margin:9px 0 0;}
 #legend div.infowindow p {margin:4px 0;border:none}
 
+div#addthiswrappertop {clear:both;}
+
 #twitterbutton {float:left;margin:4px 0 0 0;clear:both;}
 
 #poweredby {float:left;font-size:9px;}
