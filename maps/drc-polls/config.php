@@ -71,6 +71,7 @@
 		{name: 'Poll2', url: "data_p2.php"},
 		{name: 'Poll3', url: "data_p3.php"},
 		{name: 'Poll4', url: "data_p4.php"}
+		{name: 'Poll5', url: "data_p5.php"}
 	];
 	var kmapInfodivHeight = 300; 
 	var kmapInfochartWidth = 315;
