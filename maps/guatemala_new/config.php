@@ -29,8 +29,8 @@
  */
  
 /*Beginning primary map-specific variables*/
-	$kmapPageTitle = "Guatemala Interpeace Study 2015"; 
-	$kmapTitle = "Guatemala Interpeace Study 2015 (new regions)"; 
+	$kmapPageTitle = "Guatemala Study 2015"; 
+	$kmapTitle = "Guatemala Study 2015 (new regions)"; 
 	$kmapAllAdminAreas = "Nationwide"; 
 	$kmapY = "15.95"; 
 	$kmapX = "-91.2"; 
@@ -130,3 +130,9 @@
  *  
  */
 ?>
+
+<style>
+#kmapTitle {
+    display: none;
+}
+</style>
