@@ -1,0 +1,11 @@
+#nationalaveragediv {display
+	:none!important;
+}
+
+div#nationalIndicatorChart {
+  display: none!important;
+}
+
+#kmapTitle {
+	display: none;
+}
