@@ -2,7 +2,7 @@
 	//Paste here the unique document ID and sheet ID from Google Spreadsheets
 	$googledoc_id 		= "19UdKQ5qGk5aYQkmP8hDuGlCncmFOZnvLVX1pgGD1hUY";
 	$googledoc_sheet	= "788273502";
-	$googledoc_range	= "A2:L1000";
+	$googledoc_range	= "A2:L2000";
 
 
 	//Don't change anything below here
