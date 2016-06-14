@@ -345,9 +345,11 @@
         });
     } else {
         function changeSeries(name, $link) {
-            $link.parent().parent().children().removeClass('active');
-            $link.parent().addClass('active');
-            parseData(name);
+            if ($link) {
+                $link.parent().parent().children().removeClass('active');
+                $link.parent().addClass('active');
+                parseData(name);
+            }
             $.address.parameter('series', name);
         }
         $.address.externalChange(function () {
@@ -941,11 +943,9 @@ function UpdateAreaAllData(title, data, nationalAverage, indicator, unit)
 	//loop over all our data
 	for(areaName in data)
 	{
-    if (!isNaN(data[areaName])) {
-      UpdateAreaPercentageTitleData(areaName, data[areaName], min, spread, title, data, indicator, data[areaName] === ' ' ? '' : unit); // patch: hides unit on zones without data
-    } else { // patches issue where zones with no data show data from last indicator
-      data[areaName] = ' ';
-      }
+		var currentData = data[areaName];
+		data[areaName] = currentData = isNaN(currentData) ? ' ' : currentData;
+		UpdateAreaPercentageTitleData(areaName, currentData, min, spread, title, data, indicator, currentData === ' ' ? '' : unit); // patch: hides unit on zones without data
 	}
 	
 	//update the key
@@ -1061,6 +1061,7 @@ function updateKey(min, span, title, unit)
 Used to conver decimal numbers to hex
 */
 function decimalToHex(d, padding) {
+	d = isNaN(d) ? 255 : d;
 	d = Math.round(d);
 	var hex = Number(d).toString(16);
 	padding = typeof (padding) === "undefined" || padding === null ? padding = 2 : padding;
