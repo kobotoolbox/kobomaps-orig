@@ -66,12 +66,15 @@
 <script type="text/javascript" language="javascript">
 	var kmapBoundaries = "boundaries.txt";
 	var kmapData = [
-		{name: 'Baseline', url: "data_baseline.php"},
-		{name: 'Poll1', url: "data_p1.php"},
-		{name: 'Poll2', url: "data_p2.php"},
-		{name: 'Poll3', url: "data_p3.php"},
+		{name: 'Latest', url: "data_latest.php"},
+		{name: 'Poll7', url: "data_p7.php"},
+		{name: 'Poll6', url: "data_p6.php"},
+		{name: 'Poll5', url: "data_p5.php"},
 		{name: 'Poll4', url: "data_p4.php"},
-		{name: 'Poll5', url: "data_p5.php"}
+		{name: 'Poll3', url: "data_p3.php"},
+		{name: 'Poll2', url: "data_p2.php"},
+		{name: 'Poll1', url: "data_p1.php"},
+		{name: 'Baseline', url: "data_baseline.php"}		
 	];
 	var kmapInfodivHeight = 300; 
 	var kmapInfochartWidth = 315;
