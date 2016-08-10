@@ -29,8 +29,8 @@
  */
  
 /*Beginning primary map-specific variables*/
-	$kmapPageTitle = "East Timor Interpeace Data"; 
-	$kmapTitle = "East Timor Interpeace Data"; 
+	$kmapPageTitle = "East Timor Data"; 
+	$kmapTitle = "East Timor Data"; 
 	$kmapAllAdminAreas = "All areas"; 
 	$kmapY = "-8.55"; 
 	$kmapX = "125.18"; 
@@ -130,3 +130,10 @@
  *  
  */
 ?>
+
+
+<style>
+#kmapTitle {
+    display: none;
+}
+</style>
