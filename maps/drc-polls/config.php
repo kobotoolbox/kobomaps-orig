@@ -67,6 +67,7 @@
 	var kmapBoundaries = "boundaries.txt";
 	var kmapData = [
 		{name: 'Latest', url: "data_latest.php"},
+		{name: 'Poll8', url: "data_p8.php"},
 		{name: 'Poll7', url: "data_p7.php"},
 		{name: 'Poll6', url: "data_p6.php"},
 		{name: 'Poll5', url: "data_p5.php"},
