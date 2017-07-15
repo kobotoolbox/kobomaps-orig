@@ -17,11 +17,14 @@ if (typeof $ === 'undefined') {
   document.write('<script type="text/javascript" src="<?php echo kmapPath ?>/js/jquery.js"><\/script>');
 }
 </script>
-<script type="text/javascript" src="<?php echo kmapPath ?>/js/dataVisualize.js"></script> 
+
+<script type="text/javascript" src="<?php echo kmapPath ?>/js/data-parser.js"></script>
+<script type="text/javascript" src="<?php echo kmapPath ?>/js/nav-builder.js"></script><script type="text/javascript" src="<?php echo kmapPath ?>/js/dataVisualize.js"></script> 
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/jquery.address-1.4.min.js"></script> 
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/csvToArray.js"> </script>
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/dragresize.js"> </script> 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
+
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCumzV-izHlMmcyzsJuRkOwY4aWjkW2DPY&sensor=false"> </script>
  
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/label.js"> </script> 
 
