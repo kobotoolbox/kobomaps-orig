@@ -6,91 +6,9 @@
     <script>
 
         // Only calling jquery if it's not already present. This helps with embedding kobomaps into Drupal.
-        if (typeof $ === 'undefined') {
+        if (typeof jQuery === 'undefined') {
             document.write('<script type="text/javascript" src="js/jquery.js"><\/script>');
         }
-    </script>
-    <script type="text/javascript" language="javascript">
-        var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivHeight, kmapInfochartWidth, kmapInfochartBarHeight, kmapInfochartBarHeightMargin, kmapInfochartchxsFont, kmapInfochart, mapStyles;
-
-        var config = {
-            dataFiles: 'data.csv',
-            informationChartHeight: 300,
-            informationChartWidth: 315,
-            informationChartBarHeight: 10,
-            informationChartBarHeightMargin: 2,
-            informationChartAxisLabelStylesFont: 10,
-            mapStyles: [
-                {
-                    featureType: "administrative.province",
-                    elementType: "all",
-                    stylers: [
-                        {visibility: "off"}
-                    ]
-                }, {
-                    featureType: "poi",
-                    elementType: "all",
-                    stylers: [
-                        {visibility: "off"}
-                    ]
-                }, {
-                    featureType: "road",
-                    elementType: "all",
-                    stylers: [
-                        {visibility: "off"}
-                    ]
-                }, {
-                    featureType: "landscape",
-                    elementType: "geometry",
-                    stylers: [
-                        {lightness: -60},
-                        {hue: "#91ff00"},
-                        {visibility: "on"},
-                        {saturation: -60}
-                    ]
-                }, {
-                    featureType: "administrative.locality",
-                    elementType: "all",
-                    stylers: [
-                        {saturation: -50},
-                        {invert_lightness: true},
-                        {lightness: 52}
-                    ]
-                }
-            ],
-            title: "example map",
-            pageTitle: "example map",
-            allAdminAreas: 'USA',
-            initialLatitude: "40.4",
-            initialLongitude: "-99.3",
-            initialZoom: 4
-        };
-
-        kmapData = config.dataFiles;
-        kmapInfodivHeight = config.informationChartHeight;
-        kmapInfochartWidth = config.informationChartWidth;
-        kmapInfochartBarHeight = config.informationChartBarHeight;
-        kmapInfochartBarHeightMargin = config.informationChartBarHeightMargin;
-        kmapInfochartchxsFont = config.informationChartAxisLabelStylesFont;
-        kmapInfochart = 'http://chart.apis.google.com/chart?'
-            + 'chxs=0,676767,' + kmapInfochartchxsFont + ',2,l,676767|1,393939,' + kmapInfochartchxsFont + ',1,l,676767'
-            + '&chxt=x,y'
-            + '&chbh=' + kmapInfochartBarHeight + ',' + kmapInfochartBarHeightMargin + ',0'
-            + '&chs=' + kmapInfochartWidth + 'x<HEIGHT>'
-            + '&cht=bhs'
-            + '&chco=3E4E6E,CC0000'
-            + '&chg=25,0,5,9'
-            + '&chts=000000,13'
-            + '&chxl=1:';
-
-        mapStyles = config.mapStyles;
-
-
-        kmapTitle = config.title;
-        kmapAllAdminAreas = config.allAdminAreas;
-        kmapY = config.initialLatitude;
-        kmapX = config.initialLongitude;
-        kmapZoom = config.initialZoom;
     </script>
 
     <link href="css/largemap.css" type="text/css" rel="stylesheet">

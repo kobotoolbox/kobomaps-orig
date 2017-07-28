@@ -1,6 +1,6 @@
 //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
-var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivHeight, kmapInfochartWidth, kmapInfochartBarHeight, kmapInfochartBarHeightMargin, kmapInfochartchxsFont, kmapInfochart, mapStyles, boundariesFilename;
+var informationChart, kmapAllAdminAreas;
 
 (function ($) {
     /**
@@ -42,42 +42,30 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
         //patches issue with top navigation menu
         $('.pagetitlewrap').css('z-index', 120);
         $.getJSON('config.json', function (config) {
-            kmapData = config.dataFiles;
-            kmapInfodivHeight = config.informationChartHeight;
-            kmapInfochartWidth = config.informationChartWidth;
-            kmapInfochartBarHeight = config.informationChartBarHeight;
-            kmapInfochartBarHeightMargin = config.informationChartBarHeightMargin;
-            kmapInfochartchxsFont = config.informationChartAxisLabelStylesFont;
-            kmapInfochart = 'http://chart.apis.google.com/chart?'
-                + 'chxs=0,676767,' + kmapInfochartchxsFont + ',2,l,676767|1,393939,' + kmapInfochartchxsFont + ',1,l,676767'
+            informationChart = config.informationChart;
+
+            informationChart.url = 'http://chart.apis.google.com/chart?'
+                + 'chxs=0,676767,' + informationChart.axisLabelStylesFont + ',2,l,676767|1,393939,' + informationChart.axisLabelStylesFont + ',1,l,676767'
                 + '&chxt=x,y'
-                + '&chbh=' + kmapInfochartBarHeight + ',' + kmapInfochartBarHeightMargin + ',0'
-                + '&chs=' + kmapInfochartWidth + 'x<HEIGHT>'
+                + '&chbh=' + informationChart.barHeight + ',' + informationChart.barHeightMargin + ',0'
+                + '&chs=' + informationChart.width + 'x<HEIGHT>'
                 + '&cht=bhs'
                 + '&chco=3E4E6E,CC0000'
                 + '&chg=25,0,5,9'
                 + '&chts=000000,13'
                 + '&chxl=1:';
 
-            mapStyles = config.mapStyles;
-
-
-            kmapTitle = config.title;
             kmapAllAdminAreas = config.allAdminAreas;
-            kmapY = config.initialLatitude;
-            kmapX = config.initialLongitude;
-            kmapZoom = config.initialZoom;
-            boundariesFilename = config.boundariesFilename;
-            
-            initialize();
-            $("#kmapTitle").html(kmapTitle);
-            $("#nationalaveragelabel").html(kmapAllAdminAreas + ':');
+
+            initialize(config, config.mapDefaults);
+            $("#kmapTitle").html(config.title);
+            $("#nationalaveragelabel").html(config.allAdminAreas + ':');
         });
     });
 
 
     //initializess everything, both the mandatory google maps stuff, and our totally awesome json to gPolygon code
-    function initialize() {
+    function initialize(config) {
 
 
         //setup drag stuff for the key
@@ -102,8 +90,8 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
 
         //creates the options for defining the zoom level, map type, and center of the google map
         var myOptions = {
-            zoom: kmapZoom, 	//creates the initial zoom level. This is defined in the container file as it is country-specific
-            center: new google.maps.LatLng(kmapY, kmapX), //creates the coordiantes that will center the map. This is defined in the container file as it is country-specific
+            zoom: config.mapDefaults.zoom, 	//creates the initial zoom level. This is defined in the container file as it is country-specific
+            center: new google.maps.LatLng(config.mapDefaults.latitude, config.mapDefaults.longitude), //creates the coordiantes that will center the map. This is defined in the container file as it is country-specific
             streetViewControl: false,
             panControl: false,
             mapTypeControl: true,
@@ -127,16 +115,16 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
             alt: "View the map in Peacebuilding Data Project theme"
         };
         /*Adds new map and sets it to default*/
-        var rimmMapType = new google.maps.StyledMapType(mapStyles, styledMapOptions);
+        var rimmMapType = new google.maps.StyledMapType(config.mapStyles, styledMapOptions);
         map.mapTypes.set('RIMM', rimmMapType);
         map.setMapTypeId('RIMM');
 
 
         //Calling the boundaries and data files. The variables need to be defined in the container file as they are country-specific
-        parseJsonToGmap(boundariesFilename, kmapData);
+        parseJsonToGmap(config.boundariesFilename, config.dataFiles);
 
 
-    };
+    }
 
 
     function parseCSV(csvUrl) {
@@ -431,7 +419,7 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
      * Data: associative array of the percentages keyed by Area names as defined in the JSON that defines areas and their bounds
      */
     function UpdateAreaPercentageTitleData(name, percentage, min, spread, title, data, indicator, unit) {
-        var message = '<div class="chartHolder" style="height:' + kmapInfodivHeight + 'px">' + createChart(title, data, name, indicator + "_by_area_chart", unit, min, spread);
+        var message = '<div class="chartHolder" style="height:' + informationChart.holderHeight + 'px">' + createChart(title, data, name, indicator + "_by_area_chart", unit, min, spread);
 
         //create the chart by for all the indicators of the given question, assuming there's more than one
         message = createChartByIndicators(message, indicator, name, unit);
@@ -530,8 +518,8 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
             }
         }
         //setup the height
-        var kmapInfochartHeight = (count * (parseInt(kmapInfochartBarHeight) + parseInt(kmapInfochartBarHeightMargin))) + Math.round(parseInt(kmapInfochartchxsFont) * 1.7);
-        var kmapInfochart_temp = kmapInfochart.replace("<HEIGHT>", kmapInfochartHeight);
+        var kmapInfochartHeight = (count * (parseInt(informationChart.barHeight) + parseInt(informationChart.barHeightMargin))) + Math.round(parseInt(informationChart.axisLabelStylesFont) * 1.7);
+        var kmapInfochart_temp = informationChart.url.replace("<HEIGHT>", kmapInfochartHeight);
 
 
         //setup the range
@@ -559,7 +547,7 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
             + '</p><img src="' + kmapInfochart_temp; //This is the base of the Google Chart API graph (without the data part). Needs to be defined in the container file.
 
         //now put all of that together
-        chartStr += names + '&chd=t:' + blues + nameDelim + reds + '" height="' + kmapInfochartHeight + '" width="' + kmapInfochartWidth + '" /></div>';
+        chartStr += names + '&chd=t:' + blues + nameDelim + reds + '" height="' + kmapInfochartHeight + '" width="' + informationChart.width + '" /></div>';
         return chartStr;
 
     }
