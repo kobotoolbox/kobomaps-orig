@@ -38,26 +38,28 @@ var informationChart, kmapAllAdminAreas;
      */
     var indicatorsToUpdateParams = [];
 
-    $(document).ready(function () {
+    $(function () {
         //patches issue with top navigation menu
         $('.pagetitlewrap').css('z-index', 120);
         $.getJSON('config.json', function (config) {
             informationChart = config.informationChart;
 
-            informationChart.url = 'http://chart.apis.google.com/chart?'
-                + 'chxs=0,676767,' + informationChart.axisLabelStylesFont + ',2,l,676767|1,393939,' + informationChart.axisLabelStylesFont + ',1,l,676767'
-                + '&chxt=x,y'
-                + '&chbh=' + informationChart.barHeight + ',' + informationChart.barHeightMargin + ',0'
-                + '&chs=' + informationChart.width + 'x<HEIGHT>'
-                + '&cht=bhs'
-                + '&chco=3E4E6E,CC0000'
-                + '&chg=25,0,5,9'
-                + '&chts=000000,13'
-                + '&chxl=1:';
+            informationChart.url = 'http://chart.apis.google.com/chart?' +
+                'chxs=0,676767,' + informationChart.axisLabelStylesFont + ',2,l,676767|1,393939,' + informationChart.axisLabelStylesFont + ',1,l,676767' +
+                '&chxt=x,y' +
+                '&chbh=' + informationChart.barHeight + ',' + informationChart.barHeightMargin + ',0' +
+                '&chs=' + informationChart.width + 'x<HEIGHT>' +
+                '&cht=bhs' +
+                '&chco=3E4E6E,CC0000' +
+                '&chg=25,0,5,9' +
+                '&chts=000000,13' +
+                '&chxl=1:';
 
             kmapAllAdminAreas = config.allAdminAreas;
 
-            initialize(config, config.mapDefaults);
+            initializeDraggables();
+            map = createMap(config);
+            parseJsonToGmap(config.boundariesFilename, config.dataFiles);
             $("#kmapTitle").html(config.title);
             $("#nationalaveragelabel").html(config.allAdminAreas + ':');
         });
@@ -65,33 +67,10 @@ var informationChart, kmapAllAdminAreas;
 
 
     //initializess everything, both the mandatory google maps stuff, and our totally awesome json to gPolygon code
-    function initialize(config) {
-
-
-        //setup drag stuff for the key
-        var dragResize = new DragResize('dragresize', {allow_resize: false, minLeft: 350, minTop: 40});
-
-
-        dragResize.isElement = function (elm) {
-            if (elm.className && elm.className.indexOf('drsElement') > -1) return true;
-        };
-        dragResize.isHandle = function (elm) {
-            if (elm.className && elm.className.indexOf('drsMoveHandle') > -1) return true;
-        };
-
-        dragResize.apply(document);
-        //set the key to be 48 pixels from the bottom like it used to be.
-        //we can't use bottom when dragging. We can only use top
-        var height = $("#topbar").height();
-        var screenHeight = $(window).height();
-        //var top = screenHeight - (height + 40);
-        //$("#topbar").css("top", top+"px");
-
-
-        //creates the options for defining the zoom level, map type, and center of the google map
-        var myOptions = {
-            zoom: config.mapDefaults.zoom, 	//creates the initial zoom level. This is defined in the container file as it is country-specific
-            center: new google.maps.LatLng(config.mapDefaults.latitude, config.mapDefaults.longitude), //creates the coordiantes that will center the map. This is defined in the container file as it is country-specific
+    function createMapOptions(mapDefaults) {
+        return {
+            zoom: mapDefaults.zoom, 	//creates the initial zoom level. This is defined in the container file as it is country-specific
+            center: new google.maps.LatLng(mapDefaults.latitude, mapDefaults.longitude), //creates the coordiantes that will center the map. This is defined in the container file as it is country-specific
             streetViewControl: false,
             panControl: false,
             mapTypeControl: true,
@@ -105,9 +84,10 @@ var informationChart, kmapAllAdminAreas;
             }
 
         };
+    }
 
-        //creates the map by looking for the "map_canvas" item in the HTML below. the map will fill in the "map_canvas" div
-        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    function createMap(config) {
+        var gmap = new google.maps.Map(document.getElementById("map_canvas"), createMapOptions(config.mapDefaults));
 
         /*Creates the options for our custom map type*/
         var styledMapOptions = {
@@ -116,13 +96,26 @@ var informationChart, kmapAllAdminAreas;
         };
         /*Adds new map and sets it to default*/
         var rimmMapType = new google.maps.StyledMapType(config.mapStyles, styledMapOptions);
-        map.mapTypes.set('RIMM', rimmMapType);
-        map.setMapTypeId('RIMM');
+        gmap.mapTypes.set('RIMM', rimmMapType);
+        gmap.setMapTypeId('RIMM');
+        return gmap;
+    }
+
+    function initializeDraggables() {
+        var dragResize = new DragResize('dragresize', {allow_resize: false, minLeft: 350, minTop: 40});
 
 
-        //Calling the boundaries and data files. The variables need to be defined in the container file as they are country-specific
-        parseJsonToGmap(config.boundariesFilename, config.dataFiles);
+        dragResize.isElement = function (elm) {
+            return !!(elm.className && ~elm.className.indexOf('drsElement'));
+        };
+        dragResize.isHandle = function (elm) {
+            return !!(elm.className && ~elm.className.indexOf('drsMoveHandle'));
+        };
 
+        dragResize.apply(document);
+    }
+
+    function initialize(config) {
 
     }
 
@@ -265,7 +258,7 @@ var informationChart, kmapAllAdminAreas;
         $.getJSON('data/' + boundariesFilename + '.txt', function (data) {
 
             //loops over each entry in the json over "areas"
-            for (areaIndex in data["areas"]) {
+            for (var areaIndex in data["areas"]) {
                 var areaData = data["areas"][areaIndex];
 
 
@@ -277,11 +270,11 @@ var informationChart, kmapAllAdminAreas;
                 geographicAreaNames[areaName] = true;
 
                 //now loops over every set of point in the json that defines an area.
-                for (pointsSetIndex in areaData.points) {
+                for (var pointsSetIndex in areaData.points) {
                     var pointsSetValue = areaData.points[pointsSetIndex];
                     areaPoints[areaName][pointsSetIndex] = [];
                     //now loop over every point in a set of points that defines an area
-                    for (pointsIndex in pointsSetValue) {
+                    for (var pointsIndex in pointsSetValue) {
                         var pointsValue = pointsSetValue[pointsIndex];
                         areaPoints[areaName][pointsSetIndex][pointsIndex] = new google.maps.LatLng(pointsValue[0], pointsValue[1]);
                     }
