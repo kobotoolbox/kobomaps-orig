@@ -102,13 +102,13 @@
 
 
         //Calling the boundaries and data files. The variables need to be defined in the container file as they are country-specific
-        parseJsonToGmap(kmapInstance + '/' + kmapBoundaries, kmapInstance, kmapData);
+        parseJsonToGmap('boundaries', kmapData);
 
 
     };
 
 
-    function parseCSV(csvUrl, rootFolder) {
+    function parseCSV(csvUrl) {
         var csvs = {};
         var currentSeries;
 
@@ -131,7 +131,7 @@
 
         //initiates a HTTP get request for the json file
         if (typeof csvUrl === 'string') {
-            $.get(rootFolder + '/' + csvUrl, function (response) {
+            $.get('data/' + csvUrl, function (response) {
                 csvs.unique = response;
                 parseData('unique');
             });
@@ -164,7 +164,7 @@
 
             function getSheets(i) {
                 var current = csvUrl[i];
-                $.get(rootFolder + '/' + current.url, function (i, current) {
+                $.get('data/' + current.url, function (i, current) {
                     return function (response) {
                         var currentName = current.name;
                         csvs[currentName] = response;
@@ -238,12 +238,12 @@
     }
 
 
-    function parseJsonToGmap(jsonUrl, rootFolder, csvUrl) {
+    function parseJsonToGmap(boundariesFilename, csvUrl) {
         //initalizes our global county point array
         areaPoints = [];
 
         //initiates a HTTP get request for the json file
-        $.getJSON(jsonUrl, function (data) {
+        $.getJSON('data/' + boundariesFilename + '.txt', function (data) {
 
             //loops over each entry in the json over "areas"
             for (areaIndex in data["areas"]) {
@@ -304,7 +304,7 @@
             }
 
 
-            parseCSV(csvUrl, rootFolder);
+            parseCSV(csvUrl);
 
 
         });
