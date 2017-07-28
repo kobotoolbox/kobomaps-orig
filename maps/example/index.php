@@ -20,7 +20,8 @@
  *  		define("kmapInstance", "/another/subfolder/mycountry", true);
  * (Remember in this case to comment out the preceding lines)
  */
-	define("kmapPath", dirname(dirname(dirname($_SERVER['PHP_SELF']))), true);
+//	define("kmapPath", dirname(dirname(dirname($_SERVER['PHP_SELF']))), true);
+	define("kmapPath", "", true);
 	define("kmapInstance", dirname($_SERVER['PHP_SELF'] ), true);
 	//define("kmapPath", "/your/own/kobomapsPath", true);
 	//define("kmap", "/your/own/dataAndBoundariesPath", true);

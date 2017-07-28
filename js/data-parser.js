@@ -21,7 +21,7 @@ function parseDataArray(data, areas) {
     };
     labels = labels.filter(excludeMeta);
 
-    for (var i = 1; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         var current = data[i],
             firstLevelName = current.shift() || firstLevelName,
             secondLevelName = current.shift() || secondLevelName,
