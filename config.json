@@ -10,36 +10,46 @@
       "featureType": "administrative.province",
       "elementType": "all",
       "stylers": [
-        {"visibility": "off"}
+        {
+          "visibility": "off"}
       ]
     }, {
       "featureType": "poi",
       "elementType": "all",
       "stylers": [
-        {"visibility": "off"}
+        {
+          "visibility": "off"}
       ]
     }, {
       "featureType": "road",
       "elementType": "all",
       "stylers": [
-        {"visibility": "off"}
+        {
+          "visibility": "off"}
       ]
     }, {
       "featureType": "landscape",
       "elementType": "geometry",
       "stylers": [
-        {"lightness": -60},
-        {"hue": "#91ff00"},
-        {"visibility": "on"},
-        {"saturation": -60}
+        {
+          "lightness": -60},
+        {
+          "hue": "#91ff00"},
+        {
+          "visibility": "on"},
+        {
+          "saturation": -60}
       ]
     }, {
       "featureType": "administrative.locality",
       "elementType": "all",
       "stylers": [
-        {"saturation": -50},
-        {"invert_lightness": true},
-        {"lightness": 52}
+        {
+          "saturation": -50},
+        {
+          "invert_lightness": true},
+        {
+          "lightness": 52}
       ]
     }
   ],
@@ -48,5 +58,6 @@
   "allAdminAreas": "USA",
   "initialLatitude": "40.4",
   "initialLongitude": "-99.3",
-  "initialZoom": 4
+  "initialZoom": 4,
+  "boundariesFilename": "boundaries"
 }

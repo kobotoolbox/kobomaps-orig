@@ -1,6 +1,6 @@
 //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
-var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivHeight, kmapInfochartWidth, kmapInfochartBarHeight, kmapInfochartBarHeightMargin, kmapInfochartchxsFont, kmapInfochart, mapStyles;
+var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivHeight, kmapInfochartWidth, kmapInfochartBarHeight, kmapInfochartBarHeightMargin, kmapInfochartchxsFont, kmapInfochart, mapStyles, boundariesFilename;
 
 (function ($) {
     /**
@@ -67,6 +67,8 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
             kmapY = config.initialLatitude;
             kmapX = config.initialLongitude;
             kmapZoom = config.initialZoom;
+            boundariesFilename = config.boundariesFilename;
+            
             initialize();
             $("#kmapTitle").html(kmapTitle);
             $("#nationalaveragelabel").html(kmapAllAdminAreas + ':');
@@ -131,7 +133,7 @@ var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivH
 
 
         //Calling the boundaries and data files. The variables need to be defined in the container file as they are country-specific
-        parseJsonToGmap('boundaries', kmapData);
+        parseJsonToGmap(boundariesFilename, kmapData);
 
 
     };
