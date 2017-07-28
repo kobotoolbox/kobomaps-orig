@@ -1,0 +1,52 @@
+{
+  "dataFiles": "data.csv",
+  "informationChartHeight": 300,
+  "informationChartWidth": 315,
+  "informationChartBarHeight": 10,
+  "informationChartBarHeightMargin": 2,
+  "informationChartAxisLabelStylesFont": 10,
+  "mapStyles": [
+    {
+      "featureType": "administrative.province",
+      "elementType": "all",
+      "stylers": [
+        {"visibility": "off"}
+      ]
+    }, {
+      "featureType": "poi",
+      "elementType": "all",
+      "stylers": [
+        {"visibility": "off"}
+      ]
+    }, {
+      "featureType": "road",
+      "elementType": "all",
+      "stylers": [
+        {"visibility": "off"}
+      ]
+    }, {
+      "featureType": "landscape",
+      "elementType": "geometry",
+      "stylers": [
+        {"lightness": -60},
+        {"hue": "#91ff00"},
+        {"visibility": "on"},
+        {"saturation": -60}
+      ]
+    }, {
+      "featureType": "administrative.locality",
+      "elementType": "all",
+      "stylers": [
+        {"saturation": -50},
+        {"invert_lightness": true},
+        {"lightness": 52}
+      ]
+    }
+  ],
+  "title": "example map",
+  "pageTitle": "example map",
+  "allAdminAreas": "USA",
+  "initialLatitude": "40.4",
+  "initialLongitude": "-99.3",
+  "initialZoom": 4
+}

@@ -1,5 +1,7 @@
 //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
+var kmapTitle, kmapAllAdminAreas, kmapY, kmapX, kmapZoom, kmapData, kmapInfodivHeight, kmapInfochartWidth, kmapInfochartBarHeight, kmapInfochartBarHeightMargin, kmapInfochartchxsFont, kmapInfochart, mapStyles;
+
 (function ($) {
     /**
      * global variable that holds the map
@@ -39,9 +41,36 @@
     $(document).ready(function () {
         //patches issue with top navigation menu
         $('.pagetitlewrap').css('z-index', 120);
-        initialize();
-        $("#kmapTitle").html(kmapTitle);
-        $("#nationalaveragelabel").html(kmapAllAdminAreas + ':');
+        $.getJSON('config.json', function (config) {
+            kmapData = config.dataFiles;
+            kmapInfodivHeight = config.informationChartHeight;
+            kmapInfochartWidth = config.informationChartWidth;
+            kmapInfochartBarHeight = config.informationChartBarHeight;
+            kmapInfochartBarHeightMargin = config.informationChartBarHeightMargin;
+            kmapInfochartchxsFont = config.informationChartAxisLabelStylesFont;
+            kmapInfochart = 'http://chart.apis.google.com/chart?'
+                + 'chxs=0,676767,' + kmapInfochartchxsFont + ',2,l,676767|1,393939,' + kmapInfochartchxsFont + ',1,l,676767'
+                + '&chxt=x,y'
+                + '&chbh=' + kmapInfochartBarHeight + ',' + kmapInfochartBarHeightMargin + ',0'
+                + '&chs=' + kmapInfochartWidth + 'x<HEIGHT>'
+                + '&cht=bhs'
+                + '&chco=3E4E6E,CC0000'
+                + '&chg=25,0,5,9'
+                + '&chts=000000,13'
+                + '&chxl=1:';
+
+            mapStyles = config.mapStyles;
+
+
+            kmapTitle = config.title;
+            kmapAllAdminAreas = config.allAdminAreas;
+            kmapY = config.initialLatitude;
+            kmapX = config.initialLongitude;
+            kmapZoom = config.initialZoom;
+            initialize();
+            $("#kmapTitle").html(kmapTitle);
+            $("#nationalaveragelabel").html(kmapAllAdminAreas + ':');
+        });
     });
 
 
