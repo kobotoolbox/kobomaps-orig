@@ -21,7 +21,8 @@ if (typeof $ === 'undefined') {
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/jquery.address-1.4.min.js"></script> 
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/csvToArray.js"> </script>
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/dragresize.js"> </script> 
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"> </script>
+//You will need to add a Google Maps API key in the following line
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=YOURAPIKEYHERE&sensor=false"> </script>
  
 <script type="text/javascript" src="<?php echo kmapPath ?>/js/label.js"> </script> 
 
