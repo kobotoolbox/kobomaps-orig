@@ -1,0 +1,239 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+<!--/**
+ * KoBoMaps --- index.php
+ * This is a country-specific container file.  
+ * Anything inside the <body> should be written in the external mapcontent.php file so that it can be included by all maps. 
+ * Anything inside the <head> should be written in the external mapheader.php file so that it can be included by all maps.
+ * Only modify this file if you want this particular map to look different from the others on your server. 
+ */
+
+/* The system expects KoBoMaps to have each specific map files located in their own separate subfolders (e.g. domain.com/kobomaps/maps/liberia and domain.com/kobomaps/maps/argentina, etc.). 
+ * The path to KoBoMaps can be changed (e.g. domain.com/mysurveydata, etc.) and will be recognized automatically based on this file's current path. 
+ * IF you want *this* file (index.php) to be located in a different folder than the one that has your boundaries, data and config files, 
+ *    you will need to specify the path to your KoBoMaps installation and the location of your boundary and data files manually.
+ * In this case, edit it to reflect the full path without a trailing slash, relative to the domain root folder.
+ * For example for domain.com/another/subfolder the line should be 
+ *  		define("kmapPath", "/another/subfolder", true);
+ *  		define("kmapInstance", "/another/subfolder/mycountry", true);
+ * (Remember in this case to comment out the preceding lines)
+ */
+	define("kmapPath", dirname(dirname(dirname($_SERVER['PHP_SELF']))), true);
+	define("kmapInstance", dirname($_SERVER['PHP_SELF'] ), true);
+	//define("kmapPath", "/your/own/kobomapsPath", true);
+	//define("kmap", "/your/own/dataAndBoundariesPath", true);
+
+/**
+ * KoBoMaps --- config.php
+ * This file controls the vital details of each map. 
+ * It specifies the source data and the boundaries of the areas to be displayed,
+ * and handles some required variables that need to be set, and offers a few more handles for the user to modify the map.
+ * It currently specifies php AND JavaScript variables, so be careful not to change or delete the syntax.
+ */
+ 
+/**
+ *   ####  Primary map-specific variables  ####
+ *   These should be changed for every map
+ * 
+ * kmapPageTitle		- set the HTML page title of the map here (to appear on top of the browser window). 
+ * kmapTitle 			- This will appear on top of the indicator box
+ * kmapAllAdminAreas	- write here the text that will appear in the Legend ("Questionname (xxxx)"), e.g. 'all counties' or 'nationwide'
+ * kmapY 				- add the Y coordinate in decimals to center the map (west is negative)
+ * kmapX 				- add the X coordinate in decimals to center the map (south is negative)
+ * kmapZoom  			- enter the initial zoom level as integer between 0 and 20 (no quotation marks) 
+ *
+ * This should look similar to the following:
+ *
+ *      	$kmapPageTitle = "Example Indicator KoBoMap U.S."; 
+ *      	$kmapTitle = "Indicator map USA"; 
+ *      	$kmapAllAdminAreas = "nationwide"; 
+ *      	$kmapY = "40.4"; 
+ *      	$kmapX = "-99.3"; 
+ *      	$kmapZoom = 4; 
+ *   ####  Optional map-specific variables  ####
+ * These variables can be left at their default value
+ * 
+ * kmapBoundaries 				- name of boundaries file (must be inside the same folder as the index.php file)
+ * kmapData 					- name of data file (must be inside the same folder as the index.php file)
+ * kmapInfodivHeight 			- Adjust the height in pixels of the div container inside the interactive bubble
+ *   
+ * To adjust the design of Google Chart bar chart graphics (which are created by a long URL), you can change the next few variable.
+ * (See http://code.google.com/apis/chart/image/docs/chart_wizard.html for documentation and wizardry)
+ * 
+ * kmapInfochartWidth			- if this number is changed, the legend div (which contains the national graph) also needs to be adjusted
+ * kmapInfochartBarHeight		-
+ * kmapInfochartBarHeightMargin	-
+ * kmapInfochartchxsFont		-
+ * kmapInfochart				-
+ * 
+ * To adjust the style of the Google Map underlying your polygons, you can define its styles in JSON format 
+ * 
+ * mapStyles					- Use Google Maps API Styled Map Wizard (http://gmaps-samples-v3.googlecode.com/svn/trunk/styledmaps/wizard/index.html)
+ * 
+ *  
+ */
+-->
+<script type="text/javascript" language="javascript">
+	var kmapPath = "../..";
+	var kmapInstance = "";
+	var kmapTitle = "Central African Republic Poll 3"; 
+	var kmapAllAdminAreas = "nationwide"; 
+	var kmapY = "6.4"; 
+	var kmapX = "19.1"; 
+	var kmapZoom = 7; 
+
+	var kmapBoundaries = "boundaries.txt";
+	var kmapData = "data.csv";
+	var kmapInfodivHeight = 300; 
+	var kmapInfochartWidth = 315;
+	var kmapInfochartBarHeight = 10; 
+	var kmapInfochartBarHeightMargin = 2;
+	var kmapInfochartchxsFont = 10;
+	var kmapInfochart = 'http://chart.apis.google.com/chart?'
+	+ 'chxs=0,676767,'+kmapInfochartchxsFont+',2,l,676767|1,393939,'+kmapInfochartchxsFont+',1,l,676767'
+	+ '&chxt=x,y'
+	+ '&chbh='+kmapInfochartBarHeight+','+kmapInfochartBarHeightMargin+',0'
+	+ '&chs='+kmapInfochartWidth+'x<HEIGHT>'
+	+ '&cht=bhs'
+	+ '&chco=3E4E6E,CC0000'
+	+ '&chg=25,0,5,9'
+	+ '&chts=000000,13'
+	+ '&chxl=1:';
+
+	var mapStyles = 
+	[
+	  {
+		featureType: "administrative.province",
+		elementType: "all",
+		stylers: [
+		  { visibility: "off" }
+		]
+	  },{
+		featureType: "poi",
+		elementType: "all",
+		stylers: [
+		  { visibility: "off" }
+		]
+	  },{
+		featureType: "road",
+		elementType: "all",
+		stylers: [
+		  { visibility: "off" }
+		]
+	  },{
+		featureType: "landscape",
+		elementType: "geometry",
+		stylers: [
+		  { lightness: -60 },
+		  { hue: "#91ff00" },
+		  { visibility: "on" },
+		  { saturation: -60 }
+		]
+	  },{
+		featureType: "administrative.locality",
+		elementType: "all",
+		stylers: [
+		  { saturation: -50 },
+		  { invert_lightness: true },
+		  { lightness: 52 }
+		]
+	  }
+	]; 
+</script>
+
+
+<!-- <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid=ra-4e2cb8e90252e50b"> </script> 
+<script type="text/javascript" src="../../js/addthisbutton.js"> </script> -->
+<link href="custom.css" type="text/css" rel="stylesheet">
+
+
+<link href="../../css/largemap.css" type="text/css" rel="stylesheet"> 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load('visualization', '1', {packages: ['corechart']});</script>
+<script>
+
+// Only calling jquery if it's not already present. This helps with embedding kobomaps into Drupal. 
+if (typeof $ === 'undefined') {
+  document.write('<script type="text/javascript" src="../../js/jquery.js"><\/script>');
+}
+</script>
+<script type="text/javascript" src="../../js/dataVisualize_new.js"></script> 
+<script type="text/javascript" src="../../js/jquery.address-1.4.min.js"></script> 
+<script type="text/javascript" src="../../js/csvToArray.js"> </script>
+<script type="text/javascript" src="../../js/dragresize.js"> </script> 
+<!--You will need to add a Google Maps API key in the following line-->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCO0JFyBM5XfJZqw-3-CZ7F_p_4jbEZJ7Q&sensor=false"> </script> 
+<script type="text/javascript" src="../../js/label.js"> </script> 
+
+<title>Central African Republic Poll 3</title>
+</head> 
+<body>
+
+<!--//We use tabs case the dataset has more than one sheet to display-->
+<div id="tabs"><ul></ul></div>
+
+<!--//Creating the navigation column containing all the links. The actual ul and li nested elements are all created by the JS code-->
+<div id="maplinks"	>
+	<h3 id="kmapTitle">&nbsp;</h3>
+	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
+		<ul id="questionsindicators" class="questionsindicators" >	</ul>
+	<p id="loadingtext">
+	Please be patient while the map is loading.  
+	</p>
+</div>
+
+<!--The background element containing the actual map-->
+
+<div id="map_canvas"></div>
+
+
+<!--The legend-->
+
+<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; bottom: 48px;"> 
+	<div id="legend">
+
+		<div id="legendtext">
+			<span id="spanLegendText">Please select an indicator to display its data.</span>
+		</div>
+		<div id="legend_gradient">
+			<div id="percentleft">
+				
+			</div>
+			<div id="percentright">
+				
+			</div>
+		</div>
+		<div id="nationalaveragediv">
+			<span id="nationalaveragelabel"></span>
+			<span id="nationalaverageimg" ></span>
+		</div>
+        <div id="nationalIndicatorChart"></div>		
+        <div id="sourcetext">
+			<span id="sourcetextspan" style="display:none;"> Data Source:  
+				<a id="sourceURL" href="" title=""></a>
+				<span id="sourceNoURL"></span>
+			</span>
+        </div>
+<!-- 		<div id="addthiswrappertop">
+			<div class="addthis_toolbox addthis_default_style ">
+				<a class="addthis_button_preferred_1"></a>
+				<a class="addthis_button_preferred_2"></a>
+				<a class="addthis_button_google_plusone" g:plusone:count="false"></a>
+				<a class="addthis_button_preferred_3"></a>
+				<a class="addthis_button_compact"></a>
+				<a class="addthis_counter addthis_bubble_style"></a>
+			</div>
+		</div> -->
+		<div id="poweredby">
+		<a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
+		</div>
+	</div>
+</div>
+</body> 
+</html> 
+
+
+
+
+
