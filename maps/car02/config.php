@@ -31,7 +31,7 @@
 /*Beginning primary map-specific variables*/
 	$kmapPageTitle = "Central African Republic Poll 2"; 
 	$kmapTitle = "Central African Republic Poll 2"; 
-	$kmapAllAdminAreas = "nationwide"; 
+	$kmapAllAdminAreas = "All areas"; 
 	$kmapY = "6.4"; 
 	$kmapX = "19.1"; 
 	$kmapZoom = 7; 
