@@ -5,7 +5,6 @@ import './jquery.address-1.5';
 import parseDataArray from './data-parser';
 import buildNav from './nav-builder';
 import CSVToArray from './csvToArray';
-// import {google} from 'googleapis';
 
 let informationChart, kmapAllAdminAreas;
 
