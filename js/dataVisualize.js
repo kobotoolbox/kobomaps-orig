@@ -1,7 +1,11 @@
 //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
-import jQuery from 'jquery';
-import {google} from 'googleapis';
+import jQuery from './jquery';
+import './jquery.address-1.5';
+import parseDataArray from './data-parser';
+import buildNav from './nav-builder';
+import CSVToArray from './csvToArray';
+// import {google} from 'googleapis';
 
 let informationChart, kmapAllAdminAreas;
 
@@ -105,6 +109,8 @@ let informationChart, kmapAllAdminAreas;
     }
 
     function initializeDraggables() {
+        // plugin uses with() construct
+        // TODO replace with https://www.npmjs.com/package/draggable
         const dragResize = new DragResize('dragresize', {allow_resize: false, minLeft: 350, minTop: 40});
 
 
@@ -146,14 +152,14 @@ let informationChart, kmapAllAdminAreas;
                 parseData('unique');
             });
         } else {
-            function changeSeries(name, $link) {
+            const changeSeries = function (name, $link) {
                 if ($link) {
                     $link.parent().parent().children().removeClass('active');
                     $link.parent().addClass('active');
                     parseData(name);
                 }
                 $.address.parameter('series', name);
-            }
+            };
 
             $.address.externalChange(function () {
                 const series = $.address.parameter('series');
@@ -172,7 +178,7 @@ let informationChart, kmapAllAdminAreas;
             const csvUrlLength = csvUrl.length;
             var series = $.address.parameter('series') || false;
 
-            function getSheets(i) {
+            const getSheets = function (i) {
                 const current = csvUrl[i];
                 $.get('data/' + current.url, function (i, current) {
                     return function (response) {
@@ -196,7 +202,7 @@ let informationChart, kmapAllAdminAreas;
                         getSheets(i);
                     }
                 });
-            }
+            };
 
             getSheets(0);
         }
@@ -261,7 +267,7 @@ let informationChart, kmapAllAdminAreas;
 
 
                 //create an array entry for this county
-                areaName = areaData.area;
+                let areaName = areaData.area;
                 areaPoints[areaName] = [];
 
                 //creates a list of the place names we've encountered
@@ -289,7 +295,7 @@ let informationChart, kmapAllAdminAreas;
             }
 
             //now loops over the array of points and creates polygons
-            for (var areaName in areaPoints) {
+            for (let areaName in areaPoints) {
                 const points = areaPoints[areaName];
                 //creates the polygon
                 areaGPolygons[areaName] = new google.maps.Polygon({
@@ -482,7 +488,7 @@ let informationChart, kmapAllAdminAreas;
         const numberDelim = ',';
         let count = 0;
 
-        for (areaName in data) {
+        for (let areaName in data) {
             const areaAmount = data[areaName];
             if (!(areaAmount === ' ' || isNaN(areaAmount))) { // patches issue where zones with no data kill the overlay
                 count++;
@@ -554,7 +560,7 @@ let informationChart, kmapAllAdminAreas;
         //loop over the data to pre process it and figure out the below:
         let min = Infinity; // because we're using percentages we can assume that they'll never be above 100, so 101 is safe
         let max = -Infinity;
-        for (areaName in data) {
+        for (let areaName in data) {
             data[areaName] = data[areaName];
             //check for min
             if (data[areaName] < min) {
@@ -652,7 +658,7 @@ let informationChart, kmapAllAdminAreas;
             }
         });
         //loop over all our data
-        for (areaName in data) {
+        for (let areaName in data) {
             let currentData = data[areaName];
             data[areaName] = currentData = isNaN(currentData) ? ' ' : currentData;
             UpdateAreaPercentageTitleData(areaName, currentData, min, spread, title, data, indicator, currentData === ' ' ? '' : unit); // patch: hides unit on zones without data
@@ -801,9 +807,9 @@ let informationChart, kmapAllAdminAreas;
 
     function addCommas(nStr) {
         nStr += '';
-        x = nStr.split('.');
-        x1 = x[0];
-        x2 = x.length > 1 ? '.' + x[1] : '';
+        let x = nStr.split('.');
+        let x1 = x[0];
+        let x2 = x.length > 1 ? '.' + x[1] : '';
         const rgx = /(\d+)(\d{3})/;
         while (rgx.test(x1)) {
             x1 = x1.replace(rgx, '$1' + ',' + '$2');

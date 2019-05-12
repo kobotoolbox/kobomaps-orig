@@ -1,4 +1,6 @@
-function parseDataArray(data, areas) {
+import $ from './jquery';
+
+export default function parseDataArray(data, areas) {
     "use strict";
     data.pop();
     var labels = data.shift().slice(3);

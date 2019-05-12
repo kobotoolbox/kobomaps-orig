@@ -1,4 +1,6 @@
-function buildNav(data,indicatorsToUpdateParams) {
+import $ from './jquery';
+
+export default function buildNav(data,indicatorsToUpdateParams) {
     "use strict";
     var $navMenuTemplate = $('<li><span></span><ul></ul></li>'),
         $indicatorTemplate = $('<li class="level3"><a></a></li>');

@@ -13,7 +13,7 @@
  *
  * Date: Mon Nov 21 21:11:03 2011 -0500
  */
-(function (window, undefined) {
+export default (function (window, undefined) {
 
     // Use the correct document accordingly with window argument (sandbox)
     var document = window.document,
@@ -4516,7 +4516,7 @@
 
                 text: function (elem) {
                     var attr = elem.getAttribute("type"), type = elem.type;
-                    // IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc) 
+                    // IE6 and 7 will map elem.type to 'text' for new HTML5 types (search, etc)
                     // use getAttribute instead to test this case
                     return elem.nodeName.toLowerCase() === "input" && "text" === type && (attr === type || attr === null);
                 },
@@ -5258,7 +5258,7 @@
 
         Sizzle.isXML = function (elem) {
             // documentElement is verified for cases where it doesn't yet exist
-            // (such as loading iframes in IE - #4833) 
+            // (such as loading iframes in IE - #4833)
             var documentElement = (elem ? elem.ownerDocument || elem : 0).documentElement;
 
             return documentElement ? documentElement.nodeName !== "HTML" : false;
@@ -9244,8 +9244,8 @@
 
 
     // Expose jQuery to the global object
-    window.jQuery = window.$ = jQuery;
-
+    // window.jQuery = window.$ = jQuery;
+    //
     // Expose jQuery as an AMD module, but only for AMD loaders that
     // understand the issues with loading multiple versions of jQuery
     // in a page that all might call define(). The loader will indicate
@@ -9258,10 +9258,10 @@
     // file names, and jQuery is normally delivered in a lowercase file name.
     // Do this after creating the global so that if an AMD module wants to call
     // noConflict to hide this version of jQuery, it will work.
-    if (typeof define === "function" && define.amd && define.amd.jQuery) {
-        define("jquery", [], function () { return jQuery; });
-    }
-
+    // if (typeof define === "function" && define.amd && define.amd.jQuery) {
+    //     define("jquery", [], function () { return jQuery; });
+    // }
+    return jQuery;
 
 
 })(window);

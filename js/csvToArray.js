@@ -1,7 +1,7 @@
 // This will parse a delimited string into an array of
 // arrays. The default delimiter is the comma, but this
 // can be overridden in the second argument.
-function CSVToArray(strData, strDelimiter) {
+export default function CSVToArray(strData, strDelimiter) {
     'use strict';
     // Check to see if the delimiter is defined. If not,
     // then default to comma.
