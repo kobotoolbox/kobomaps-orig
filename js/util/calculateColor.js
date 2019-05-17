@@ -8,9 +8,7 @@ import getHexadecimal from '../util/getHexadecimal';
 export default function calculateColor(percentage, min, spread) {
     //calculate the color
     const red = 255;
-    const blue = 255 - ((percentage - min) * (1 / spread) * 255);
-    const green = 255 - ((percentage - min) * (1 / spread) * 255);
-    const color = '#' + getHexadecimal(red) + getHexadecimal(green) + getHexadecimal(blue);
-
-    return color;
+    const greenBlue = 255 - ((percentage - min) * (1 / spread) * 255);
+    const greenBlueHex = getHexadecimal(greenBlue);
+    return '#' + getHexadecimal(red) + greenBlueHex + greenBlueHex;
 }

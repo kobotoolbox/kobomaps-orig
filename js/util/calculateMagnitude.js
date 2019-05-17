@@ -6,21 +6,17 @@ export default function calculateMagnitude(num) {
         return 0;
 
     if (num >= 1) {
-        magnitude = 0;
-        for (let i = 1; i <= num; i = i * 10) {
-            if (num - i < ((i * 10) - (1 * i))) {
-                magnitude = i;
+        for (magnitude = 1; magnitude <= num; magnitude *= 10) {
+            if (num - magnitude < magnitude * 10 - magnitude) {
                 break;
             }
         }
-        return magnitude;
-    } else { //it's a decimal value
-        magnitude = 0.1;
-        for (magnitude = 0.1; (num - magnitude) < 0; magnitude = magnitude / 10) {
+    } else {
+        for (magnitude = 0.1; num - magnitude < 0; magnitude /= 10) {
             if (magnitude < 0.00000001) {
                 break;
             }
         }
-        return magnitude;
     }
+    return magnitude;
 }
