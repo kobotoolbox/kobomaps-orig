@@ -5,8 +5,9 @@ import './jquery.address-1.5';
 import createMap from './map/createMap';
 import parseJsonToGmap from './map/parseJsonToGmap';
 import showByIndicator from './nav/showByIndicator';
+import {initializeInformationChart} from './chart';
 
-export let informationChart, kmapAllAdminAreas;
+export let kmapAllAdminAreas;
 /**
  * global variable that holds the map
  */
@@ -45,18 +46,9 @@ $(function () {
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
     $.getJSON('config.json', function (config) {
-        informationChart = config.informationChart;
+        let informationChart = initializeInformationChart(config.informationChart);
 
-        informationChart.url = 'http://chart.apis.google.com/chart?' +
-            'chxs=0,676767,' + informationChart.axisLabelStylesFont + ',2,l,676767|1,393939,' + informationChart.axisLabelStylesFont + ',1,l,676767' +
-            '&chxt=x,y' +
-            '&chbh=' + informationChart.barHeight + ',' + informationChart.barHeightMargin + ',0' +
-            '&chs=' + informationChart.width + 'x<HEIGHT>' +
-            '&cht=bhs' +
-            '&chco=3E4E6E,CC0000' +
-            '&chg=25,0,5,9' +
-            '&chts=000000,13' +
-            '&chxl=1:';
+
 
         kmapAllAdminAreas = config.allAdminAreas;
 

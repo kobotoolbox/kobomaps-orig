@@ -1,6 +1,6 @@
 import $ from '../jquery';
 import calculateMinSpread from '../util/calculateMinSpread';
-import createChart from './createChart';
+import {createChart} from '.';
 import {indicatorsToUpdateParams} from '../init';
 
 /**

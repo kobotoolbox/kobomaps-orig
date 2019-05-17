@@ -3,7 +3,7 @@ import addCommas from '../util/addCommas';
 import htmlDecode from '../util/htmlDecode';
 import calculateMinSpread from '../util/calculateMinSpread';
 import {indicatorsToUpdateParams, kmapAllAdminAreas} from '../init';
-import createChart from './createChart';
+import {createChart} from '../chart';
 import $ from '../jquery';
 /**
  * This takes in the min score, the spread between the min and the max, and the national average

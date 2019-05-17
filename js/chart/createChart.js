@@ -1,4 +1,4 @@
-import {informationChart} from '../init';
+import {informationChart} from '.';
 
 export default function createChart(title, data, highLightName, id, unit, min, spread) {
 
