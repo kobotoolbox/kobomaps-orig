@@ -3,7 +3,7 @@ import CSVToArray from './csvToArray';
 import buildNav from '../nav-builder';
 import showByIndicator from '../nav/showByIndicator';
 import $ from '../jquery';
-import {geographicAreaNames} from '../dataVisualize';
+import {geographicAreaNames} from '../init';
 
 export default function parseCSV(csvUrl, resetIndicators) {
     const csvs = {};

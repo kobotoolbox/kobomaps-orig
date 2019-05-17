@@ -2,7 +2,7 @@ import calculateColor from '../util/calculateColor';
 import addCommas from '../util/addCommas';
 import htmlDecode from '../util/htmlDecode';
 import calculateMinSpread from '../util/calculateMinSpread';
-import {indicatorsToUpdateParams, kmapAllAdminAreas} from '../dataVisualize';
+import {indicatorsToUpdateParams, kmapAllAdminAreas} from '../init';
 import createChart from './createChart';
 import $ from '../jquery';
 /**

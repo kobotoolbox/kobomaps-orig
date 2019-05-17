@@ -1,11 +1,10 @@
-import {labels} from '../dataVisualize';
+import {labels, areaGPolygons} from '../init';
 import formatAreaOpacityColor from '../util/formatAreaOpacityColor';
 import calculateColor from '../util/calculateColor';
 import addCommas from '../util/addCommas';
 /**
  Used to update the color of an area given a percentage, min and spread
  */
-import {areaGPolygons} from '../dataVisualize';
 
 export default function UpdateAreaPercentage(name, percentage, min, spread, unit) {
     //calculate the color

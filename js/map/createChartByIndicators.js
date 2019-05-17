@@ -1,7 +1,7 @@
 import $ from '../jquery';
 import calculateMinSpread from '../util/calculateMinSpread';
 import createChart from './createChart';
-import {indicatorsToUpdateParams} from '../dataVisualize';
+import {indicatorsToUpdateParams} from '../init';
 
 /**
  * Creates the URL for the chart that shows the spread over indicator for a given question for

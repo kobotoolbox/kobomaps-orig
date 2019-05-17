@@ -1,1 +1,1 @@
-import './dataVisualize';
+import './init';

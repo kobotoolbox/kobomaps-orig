@@ -9,7 +9,7 @@
 import UpdateAreaPercentageMessage from './UpdateAreaPercentageMessage';
 import createChart from './createChart';
 import createChartByIndicators from './createChartByIndicators';
-import {informationChart} from '../dataVisualize';
+import {informationChart} from '../init';
 
 export default function UpdateAreaPercentageTitleData(name, percentage, min, spread, title, data, indicator, unit) {
     let message = '<div class="chartHolder" style="height:' + informationChart.holderHeight + 'px">' + createChart(title, data, name, indicator + '_by_area_chart', unit, min, spread);

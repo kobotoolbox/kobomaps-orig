@@ -1,4 +1,4 @@
-import {areaGPolygons, infoWindows, map} from '../dataVisualize';
+import {areaGPolygons, infoWindows, map} from '../init';
 import UpdateAreaPercentage from './UpdateAreaPercentage';
 /**
  Used to update the color and info window of an area

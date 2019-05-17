@@ -3,7 +3,7 @@
  * Data: associative array of the percentages keyed by Area names as defined in the JSON that defines areas and their bounds
  * Note: All of this assumes positive numbers.
  */
-import {infoWindows, map} from '../dataVisualize';
+import {infoWindows, map} from '../init';
 import calculateMinSpread from '../util/calculateMinSpread';
 import UpdateAreaPercentageTitleData from './UpdateAreaPercentageTitleData';
 import updateKey from './updateKey';
