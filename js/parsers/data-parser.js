@@ -1,4 +1,4 @@
-import $ from './jquery';
+import $ from '../jquery';
 
 export default function parseDataArray(data, areas) {
     "use strict";
@@ -22,16 +22,16 @@ export default function parseDataArray(data, areas) {
         return !~exclude.indexOf(label);
     };
     labels = labels.filter(excludeMeta);
-
+    let firstLevelName, secondLevelName;
     for (var i = 0; i < data.length; i++) {
-        var current = data[i],
-            firstLevelName = current.shift() || firstLevelName,
-            secondLevelName = current.shift() || secondLevelName,
-            indicatorName = current.shift(),
-
-            currentParsed = {
-                title: "<strong>" + htmlEncode(secondLevelName)+'</strong><br />  &quot;'+htmlEncode(indicatorName)+'&quot;'
-            };
+        var current, indicatorName, currentParsed;
+        current = data[i];
+        firstLevelName = current.shift() || firstLevelName;
+        secondLevelName = current.shift() || secondLevelName;
+        indicatorName = current.shift();
+        currentParsed = {
+            title: "<strong>" + htmlEncode(secondLevelName) + '</strong><br />  &quot;' + htmlEncode(indicatorName) + '&quot;'
+        };
 
         if (~unitIndex) {
             currentParsed.unit = current[unitIndex] || ' ';

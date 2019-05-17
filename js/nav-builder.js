@@ -1,7 +1,7 @@
 import $ from './jquery';
+import toggleActive from './nav/toggleActive';
 
 export default function buildNav(data,indicatorsToUpdateParams) {
-    "use strict";
     var $navMenuTemplate = $('<li><span></span><ul></ul></li>'),
         $indicatorTemplate = $('<li class="level3"><a></a></li>');
 
@@ -63,12 +63,6 @@ export default function buildNav(data,indicatorsToUpdateParams) {
 
         $questionIndicators.append($firstLevel);
     });
-
-    function toggleActive(item) {
-        "use strict";
-        item.toggleClass("active");
-        item.siblings("ul").toggle();
-    }
 
     $spans.click(function () {
         toggleActive($(this));
