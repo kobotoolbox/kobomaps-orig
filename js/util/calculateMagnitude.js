@@ -1,22 +1,6 @@
+/// https://stackoverflow.com/questions/23917074/javascript-flooring-number-to-order-of-magnitude/23917134#23917134
 export default function calculateMagnitude(num) {
-    let magnitude;
-    num = Math.abs(num);
-
-    if (num === 0 || num === Infinity)
-        return 0;
-
-    if (num >= 1) {
-        for (magnitude = 1; magnitude <= num; magnitude *= 10) {
-            if (num - magnitude < magnitude * 10 - magnitude) {
-                break;
-            }
-        }
-    } else {
-        for (magnitude = 0.1; num - magnitude < 0; magnitude /= 10) {
-            if (magnitude < 0.00000001) {
-                break;
-            }
-        }
-    }
-    return magnitude;
+    const order = Math.floor(Math.log(num) / Math.LN10
+        + 0.000000001); // because float math sucks like that
+    return Math.pow(10, order);
 }
