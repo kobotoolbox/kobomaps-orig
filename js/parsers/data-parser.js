@@ -1,30 +1,30 @@
 import $ from '../jquery';
+import { geographicAreaNames } from '../init';
 
-export default function parseDataArray(data, areas) {
-    "use strict";
+export default function parseDataArray(data) {
     data.pop();
-    var labels = data.shift().slice(3);
+    let labels = data.shift().slice(3);
 
     function htmlEncode(value){
         // the .text() method escapes everything nice and neet for us.
         return $('<div/>').text(value).html();
     }
 
-    var parsed = { };
-    var nationalAverageIndex = labels.indexOf('TOTAL');
-    var sourceIndex = labels.indexOf('Source');
-    var linkIndex = labels.indexOf('Source Link');
-    var unitIndex = labels.indexOf('Unit');
+    const parsed = {};
+    const nationalAverageIndex = labels.indexOf('TOTAL');
+    const sourceIndex = labels.indexOf('Source');
+    const linkIndex = labels.indexOf('Source Link');
+    const unitIndex = labels.indexOf('Unit');
 
-    var exclude = ['TOTAL', 'Source', 'Source Link', 'Unit'];
+    const exclude = ['TOTAL', 'Source', 'Source Link', 'Unit'];
 
-    var excludeMeta = function (label) {
+    const excludeMeta = function (label) {
         return !~exclude.indexOf(label);
     };
     labels = labels.filter(excludeMeta);
     let firstLevelName, secondLevelName;
-    for (var i = 0; i < data.length; i++) {
-        var current, indicatorName, currentParsed;
+    for (let i = 0; i < data.length; i++) {
+        let current, indicatorName, currentParsed;
         current = data[i];
         firstLevelName = current.shift() || firstLevelName;
         secondLevelName = current.shift() || secondLevelName;
@@ -48,8 +48,8 @@ export default function parseDataArray(data, areas) {
         }
 
         currentParsed.data = current.filter(excludeMeta).reduce(function (accumulator, current, idx) {
-            var label = labels[idx];
-            if (areas[label]) {
+            const label = labels[idx];
+            if (geographicAreaNames[label]) {
                 accumulator[label] = +current.replace('%', '');
             }
             return accumulator;

@@ -13,7 +13,7 @@ export default function parseCSV(csvUrl) {
         currentSeries = name;
         resetIndicators();
 
-        const parsedData = parseDataArray(CSVToArray(csvs[name], ','), geographicAreaNames);
+        const parsedData = parseDataArray(CSVToArray(csvs[name], ','));
 
         buildNav(parsedData);
 

@@ -46,7 +46,7 @@ $(function () {
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
     $.getJSON('config.json', function (config) {
-        let informationChart = initializeInformationChart(config.informationChart);
+        initializeInformationChart(config.informationChart);
 
 
 
