@@ -1,26 +1,26 @@
 import parseDataArray from './data-parser';
 import CSVToArray from './csvToArray';
-import buildNav from '../nav-builder';
+import buildNav from '../nav/buildNav';
 import showByIndicator from '../nav/showByIndicator';
 import $ from '../jquery';
-import {geographicAreaNames} from '../init';
+import { geographicAreaNames, resetIndicators } from '../init';
 
-export default function parseCSV(csvUrl, resetIndicators) {
+export default function parseCSV(csvUrl) {
     const csvs = {};
     let currentSeries;
 
     function parseData(name) {
         currentSeries = name;
-        const indicatorsToUpdateParams = resetIndicators();
+        resetIndicators();
 
         const parsedData = parseDataArray(CSVToArray(csvs[name], ','), geographicAreaNames);
 
-        buildNav(parsedData, indicatorsToUpdateParams);
+        buildNav(parsedData);
 
         //check if we're supposed to auto load the data for a particular indicator?
         const autoLoadIndicator = $.address.parameter('indicator');
         if (autoLoadIndicator !== '') {
-            showByIndicator(autoLoadIndicator, indicatorsToUpdateParams);
+            showByIndicator(autoLoadIndicator);
         }
         //hide the temporary loading text once the indicators are visible
         $('#loadingtext').remove();

@@ -41,7 +41,7 @@ export const infoWindows = [];
  * use indicators to call the update method to redraw the map
  */
 export let indicatorsToUpdateParams = [];
-const resetIndicators = () => indicatorsToUpdateParams = [];
+export const resetIndicators = () => indicatorsToUpdateParams = [];
 $(function () {
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
@@ -54,7 +54,7 @@ $(function () {
 
         initializeDraggables();
         map = createMap(config);
-        parseJsonToGmap(config.boundariesFilename, config.dataFiles, geographicAreaNames, labels, areaGPolygons, resetIndicators);
+        parseJsonToGmap(config.boundariesFilename, config.dataFiles);
         $('#kmapTitle').html(config.title);
         $('#nationalaveragelabel').html(config.allAdminAreas + ':');
     });

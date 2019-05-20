@@ -5,8 +5,9 @@
 import toggleActive from './toggleActive';
 import UpdateAreaAllData from '../map/UpdateAreaAllData';
 import $ from '../jquery';
+import { indicatorsToUpdateParams } from '../init';
 
-export default function showByIndicator(indicator, indicatorsToUpdateParams) {
+export default function showByIndicator(indicator) {
     const indicatorMetadata = indicatorsToUpdateParams[indicator];
     if (indicatorMetadata) {
         const title = indicatorMetadata['title'];

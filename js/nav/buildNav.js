@@ -1,7 +1,8 @@
-import $ from './jquery';
-import toggleActive from './nav/toggleActive';
+import $ from '../jquery';
+import toggleActive from './toggleActive';
+import { indicatorsToUpdateParams } from '../init';
 
-export default function buildNav(data,indicatorsToUpdateParams) {
+export default function buildNav(data) {
     var $navMenuTemplate = $('<li><span></span><ul></ul></li>'),
         $indicatorTemplate = $('<li class="level3"><a></a></li>');
 

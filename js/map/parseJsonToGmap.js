@@ -1,7 +1,7 @@
 import parseCSV from '../parsers/parseCSV';
 import $ from '../jquery';
-import {map} from '../init';
-export default function parseJsonToGmap(boundariesFilename, csvUrl, geographicAreaNames, labels, areaGPolygons, resetIndicators) {
+import {map, geographicAreaNames, labels, areaGPolygons} from '../init';
+export default function parseJsonToGmap(boundariesFilename, csvUrl) {
     //initializes our global county point array
     let areaPoints = [];
 
@@ -67,7 +67,7 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl, geographicAr
         }
 
 
-        parseCSV(csvUrl, resetIndicators);
+        parseCSV(csvUrl);
 
 
     });
