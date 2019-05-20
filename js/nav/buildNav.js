@@ -3,16 +3,16 @@ import toggleActive from './toggleActive';
 import { indicatorsToUpdateParams } from '../init';
 
 export default function buildNav(data) {
-    var $navMenuTemplate = $('<li><span></span><ul></ul></li>'),
-        $indicatorTemplate = $('<li class="level3"><a></a></li>');
+    const $navMenuTemplate = $('<li><span/><ul/></li>'),
+        $indicatorTemplate = $('<li class="level3"><a/></li>');
 
-    var $uls= $(),
+    let $uls = $(),
         $spans = $(),
-        $indicators = $(),
-        $questionIndicators = $("#questionsindicators");
+        $indicators = $();
+    const $questionIndicators = $("#questionsindicators");
 
     Object.keys(data).forEach(function (firstLevelName, firstLevelIndex){
-        var $firstLevel = $navMenuTemplate.clone(),
+        const $firstLevel = $navMenuTemplate.clone(),
             $firstLevelUl = $firstLevel.find('ul'),
             $firstLevelSpan = $firstLevel.find('span');
 
@@ -23,7 +23,7 @@ export default function buildNav(data) {
         $firstLevelSpan.text(firstLevelName);
 
         Object.keys(data[firstLevelName]).forEach(function (secondLevelName, secondLevelIndex) {
-            var $secondLevel = $navMenuTemplate.clone(),
+            const $secondLevel = $navMenuTemplate.clone(),
                 $secondLevelUl = $secondLevel.find('ul'),
                 $secondLevelSpan = $secondLevel.find('span');
 
@@ -35,8 +35,8 @@ export default function buildNav(data) {
             $secondLevelSpan.text(secondLevelName);
 
             Object.keys(data[firstLevelName][secondLevelName]).forEach(function (indicatorName, indicatorIndex) {
-                var $indicator = $indicatorTemplate.clone(),
-                    key = firstLevelIndex + '_' + secondLevelIndex + '_'  + indicatorIndex;
+                const $indicator = $indicatorTemplate.clone(),
+                    key = firstLevelIndex + '_' + secondLevelIndex + '_' + indicatorIndex;
 
                 indicatorsToUpdateParams[key] = data[firstLevelName][secondLevelName][indicatorName];
                 $indicator.attr('id', 'bottom_level_' + firstLevelIndex + '_' + secondLevelIndex + '_'  + indicatorIndex);

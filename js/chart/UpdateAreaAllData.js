@@ -6,8 +6,8 @@
 import {infoWindows, map} from '../init';
 import calculateMinSpread from '../util/calculateMinSpread';
 import UpdateAreaPercentageTitleData from './UpdateAreaPercentageTitleData';
-import updateKey from './updateKey';
-import updateNationalAverage from './updateNationalAverage';
+import updateKey from '../legend/updateKey';
+import updateNationalAverage from '../legend/updateNationalAverage';
 
 export default function UpdateAreaAllData(title, data, nationalAverage, indicator, unit) {
 

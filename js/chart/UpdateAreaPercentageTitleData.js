@@ -7,7 +7,7 @@
  * Data: associative array of the percentages keyed by Area names as defined in the JSON that defines areas and their bounds
  */
 import UpdateAreaPercentageMessage from './UpdateAreaPercentageMessage';
-import {createChart, createChartByIndicators, informationChart} from '../chart';
+import {createChart, createChartByIndicators, informationChart} from './index';
 
 export default function UpdateAreaPercentageTitleData(name, percentage, min, spread, title, data, indicator, unit) {
     let message = '<div class="chartHolder" style="height:' + informationChart.holderHeight + 'px">' + createChart(title, data, name, indicator + '_by_area_chart', unit, min, spread);

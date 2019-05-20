@@ -50,9 +50,9 @@ export default function updateNationalAverage(min, spread, nationalAverage, unit
 
     //calculate the min and spread for the national graph specific
     const spreadMin = calculateMinSpread(dataForNational);
-    var min = spreadMin['min'];
-    var spread = spreadMin['spread'];
-    const nationalChart = createChart(questionText + ' (' + kmapAllAdminAreas + ')', dataForNational, mainIndicatorText, indicator + '_by_indicator_national_chart', unit, min, spread);
+    var min2 = spreadMin['min'];
+    var spread2 = spreadMin['spread'];
+    const nationalChart = createChart(questionText + ' (' + kmapAllAdminAreas + ')', dataForNational, mainIndicatorText, indicator + '_by_indicator_national_chart', unit, min2, spread2);
     $nationalIndicatorChart.html(nationalChart);
 
 }

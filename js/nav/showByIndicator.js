@@ -3,7 +3,7 @@
  * If the indicator doesn't exist it'll just exit gracefully
  */
 import toggleActive from './toggleActive';
-import UpdateAreaAllData from '../map/UpdateAreaAllData';
+import UpdateAreaAllData from '../chart/UpdateAreaAllData';
 import $ from '../jquery';
 import { indicatorsToUpdateParams } from '../init';
 
