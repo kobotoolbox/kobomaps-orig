@@ -1,8 +1,19 @@
+/*
 import $ from '../jquery';
 import toggleActive from './toggleActive';
 import { indicatorsToUpdateParams } from '../init';
+*/
+import React from 'react';
+import ReactDom from 'react-dom';
+
+import Nav from './Nav';
 
 export default function buildNav(data) {
+    ReactDom.render(
+        <Nav data={data} />,
+        document.getElementById('questionsindicators')
+    )
+    /*
     const $navMenuTemplate = $('<li><span/><ul/></li>'),
         $indicatorTemplate = $('<li class="level3"><a/></li>');
 
@@ -76,5 +87,6 @@ export default function buildNav(data) {
         $(this).addClass("hover");
     }, function () {
         $(this).removeClass("hover");
-    });
+    });*/
+
 }
