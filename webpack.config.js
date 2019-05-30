@@ -1,17 +1,9 @@
 module.exports = {
-    watch: true,
-    mode: 'development',
-    entry: {
-        main: './js/index.js'
-    },
-    output: {
-        libraryTarget: 'umd',
-        filename: 'build/bundle.js'
-    },
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader'
             }
         ]
