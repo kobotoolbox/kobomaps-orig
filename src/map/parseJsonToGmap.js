@@ -1,9 +1,11 @@
 import parseCSV from '../parsers/parseCSV';
 import $ from '../jquery';
-import {map, geographicAreaNames, labels, areaGPolygons} from '../init';
+import {map} from '../init';
+import {addArea} from "../globals/geographicAreas";
 export default function parseJsonToGmap(boundariesFilename, csvUrl) {
     //initializes our global county point array
     let areaPoints = [];
+    const labels = [];
 
     //initiates a HTTP get request for the json file
     $.getJSON('data/' + boundariesFilename + '.txt', function (data) {
@@ -17,8 +19,6 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
             let areaName = areaData.area;
             areaPoints[areaName] = [];
 
-            //creates a list of the place names we've encountered
-            geographicAreaNames[areaName] = true;
 
             //now loops over every set of point in the json that defines an area.
             for (let pointsSetIndex in areaData.points) {
@@ -45,7 +45,7 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
         for (let areaName in areaPoints) {
             const points = areaPoints[areaName];
             //creates the polygon
-            areaGPolygons[areaName] = new google.maps.Polygon({
+            let gPolygon = new google.maps.Polygon({
                 paths: points,
                 strokeColor: '#00CC00', //sets the line color to red
                 strokeOpacity: 0.8, //sets the line color opacity to 0.8
@@ -53,17 +53,21 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
                 fillColor: '#aaaaaa', //sets the fill color
                 fillOpacity: 0.75 //sets the opacity of the fill color
             });
-            areaGPolygons[areaName].setMap(map); //places the polygon on the map
+
+            gPolygon.setMap(map); //places the polygon on the map
 
             //add mouse in
-            google.maps.event.addListener(areaGPolygons[areaName], 'mouseover', function (event) {
+            google.maps.event.addListener(gPolygon, 'mouseover', function (event) {
                 this.setOptions({fillOpacity: 0.95});
             });
 
             //add mouse out
-            google.maps.event.addListener(areaGPolygons[areaName], 'mouseout', function (event) {
+            google.maps.event.addListener(gPolygon, 'mouseout', function (event) {
                 this.setOptions({fillOpacity: 0.75});
             });
+
+            //creates a list of the place names we've encountered
+            addArea(areaName, gPolygon, labels[areaName]);
         }
 
 

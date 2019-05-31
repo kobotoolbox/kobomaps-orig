@@ -18,6 +18,7 @@
   "homepage": "https://github.com/kobotoolbox/kobomaps-orig#readme",
   "devDependencies": {
     "@babel/core": "^7.4.4",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.4.4",
     "@babel/preset-env": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",

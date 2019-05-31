@@ -14,24 +14,6 @@ export let kmapAllAdminAreas;
 export let map;
 
 /**
- *  gives us a list of names for geographicAreas
- */
-export const geographicAreaNames = [];
-/**
- * global variable holding an array of points for each area so areaPoints["bomi"]
- * would return an array of all the points for Bomi
- */
-
-/**
- * global variable holding the polygons for each area. areaGPolygons["bomi"]
- * would return the polygon for Bomi
- */
-export const areaGPolygons = [];
-/**
- * global variable holding all the Labels for each area
- */
-export const labels = [];
-/**
  * global variable that holds all of the info windows
  */
 export const infoWindows = [];

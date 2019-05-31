@@ -1,5 +1,6 @@
-import {areaGPolygons, infoWindows, map} from '../init';
+import {infoWindows, map} from '../init';
 import UpdateAreaPercentage from './UpdateAreaPercentage';
+import {getArea} from "../globals/geographicAreas";
 /**
  Used to update the color and info window of an area
  */
@@ -17,9 +18,9 @@ export default function UpdateAreaPercentageMessage(name, percentage, min, sprea
     infoWindows[name] = infoWindow;
 
     //remove any old listeners
-    google.maps.event.clearListeners(areaGPolygons[name], 'click');
+    google.maps.event.clearListeners(getArea(name), 'click');
     // Add a listener for the click event
-    google.maps.event.addListener(areaGPolygons[name], 'click', function (event) {
+    google.maps.event.addListener(getArea(name), 'click', function (event) {
         //close all other info windows if they are open
         for (let windowName in infoWindows) {
             infoWindows[windowName].close();

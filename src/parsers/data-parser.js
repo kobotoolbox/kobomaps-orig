@@ -1,5 +1,5 @@
 import $ from '../jquery';
-import { geographicAreaNames } from '../init';
+import {areaExists} from "../globals/geographicAreas";
 
 export default function parseDataArray(data) {
     data.pop();
@@ -49,7 +49,7 @@ export default function parseDataArray(data) {
 
         currentParsed.data = current.filter(excludeMeta).reduce(function (accumulator, current, idx) {
             const label = labels[idx];
-            if (geographicAreaNames[label]) {
+            if (areaExists(label)) {
                 accumulator[label] = +current.replace('%', '');
             }
             return accumulator;
