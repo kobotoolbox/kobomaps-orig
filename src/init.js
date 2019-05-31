@@ -45,7 +45,7 @@ export const resetIndicators = () => indicatorsToUpdateParams = [];
 $(function () {
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
-    $.getJSON('config.json', function (config) {
+    $.getJSON('data/config.json', function (config) {
         initializeInformationChart(config.informationChart);
 
 
