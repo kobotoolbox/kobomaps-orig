@@ -1,4 +1,7 @@
 module.exports = {
+    devServer: {
+        publicPath: '/dist',
+    },
     module: {
         rules: [
             {
