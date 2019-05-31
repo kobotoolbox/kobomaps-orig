@@ -5,6 +5,7 @@
 import UpdateAreaAllData from '../chart/UpdateAreaAllData';
 import $ from '../jquery';
 import {getIndicator} from "../globals/indicators";
+import {clearInfoWindows, closeAllInfoWindows} from "../globals/infoWindows";
 
 export default function showByIndicator(indicator) {
     const indicatorMetadata = getIndicator(indicator);
@@ -14,6 +15,8 @@ export default function showByIndicator(indicator) {
         const nationalAverage = indicatorMetadata['nationalAverage'];
         const unit = indicatorMetadata['unit'];
 
+        closeAllInfoWindows();
+        clearInfoWindows();
         UpdateAreaAllData(title, data, nationalAverage, indicator, unit);
 
         //update the source link and the source title

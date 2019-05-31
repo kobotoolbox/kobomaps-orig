@@ -9,11 +9,6 @@ import {createMap} from "./globals/map";
 
 export let kmapAllAdminAreas;
 
-/**
- * global variable that holds all of the info windows
- */
-export const infoWindows = [];
-
 $(function () {
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
