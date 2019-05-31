@@ -6,6 +6,7 @@ import $ from '../jquery';
 import buildData from "./nav-parser";
 import {getCurrentIndicator} from "../util/queries";
 import {rebuildIndicators} from "../globals/indicators";
+import buildLegend from '../legend/Legend';
 
 export default function parseCSV(csvUrl) {
     const csvs = {};
@@ -17,6 +18,7 @@ export default function parseCSV(csvUrl) {
         const parsedData = buildData(parseDataArray(CSVToArray(csvs[name], ',')), getCurrentIndicator());
         rebuildIndicators(parsedData);
         buildNav(parsedData);
+        buildLegend({});
 
         //check if we're supposed to auto load the data for a particular indicator?
         const autoLoadIndicator = $.address.parameter('indicator');

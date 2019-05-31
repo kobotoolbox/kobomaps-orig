@@ -1,15 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import {getDisplay} from "../util/queries";
 
 const getActive = (isActive) => isActive ? 'active' : '';
-const getVisibility = (visible) => visible ? undefined : {display: 'none' };
 
 export default function MenuEntry({level, name, isActive, isVisible, listSubmenus, clickHandler}) {
     let levelName = `level${level}`;
     return (
         <li className={levelName}>
             <span className={`${levelName} ${getActive(isActive)}`} onClick={clickHandler}>{name}</span>
-            <ul className={levelName} style={getVisibility(isVisible)}>
+            <ul className={levelName} style={getDisplay(isVisible)}>
                 {listSubmenus()}
             </ul>
         </li>

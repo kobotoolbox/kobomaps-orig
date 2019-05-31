@@ -17,7 +17,9 @@ export function addInfoWindow(name, infoWindow) {
 
 export function openInfoWindow(name, position) {
     const infoWindow = infoWindows[name];
-
+    if (infoWindow === undefined) {
+        return;
+    }
     infoWindow.setPosition(position);
     infoWindow.open(getMap());
 }

@@ -1,7 +1,6 @@
 import calculateMinSpread from '../util/calculateMinSpread';
 import {createChart} from '.';
 import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
-import {clearNationalIndicatorChart} from "../legend/legend-dom";
 /**
  * Creates the URL for the chart that shows the spread over indicator for a given question for
  * both area and overal average
@@ -15,7 +14,6 @@ export default function createChartByIndicators(message, indicatorCode, name, un
     //first check if there's more than one answer to the given question
     if (siblings.length === 0) {
         //clear out the National Chart
-        clearNationalIndicatorChart();
         return message;
     }
     //there is more than one answer ...as so many questions have.

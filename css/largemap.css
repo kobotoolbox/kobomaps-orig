@@ -9,7 +9,7 @@ body {height: 100%; margin: 0px; padding: 0px;font: 76%/170% Open Sans, Verdana,
 #legend {float:left;background:url(../img/w75b.png) repeat scroll;padding:3px; border:1px solid #ffffff;width:317px;text-align:left;}
 #legendtext {margin:0 0 4px;}
 #legendtext span {}
-#legend_gradient, #nationalaveragediv {height:19px;border:1px solid #ffffff;display:none;/*Only visible if indicator is selected*/}
+#legend_gradient, #nationalaveragediv {height:19px;border:1px solid #ffffff;/*Only visible if indicator is selected*/}
 
 #legend_gradient {clear:left;float:left;background:url(../img/whiteredgradient120.png) repeat-y;width:120px;}
 #percentleft, #percentright, #nationalaveragelabel, #nationalaverageimg {line-height:14px;font-weight:bold;}

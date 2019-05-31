@@ -17,6 +17,9 @@ export function getIndicatorSiblings(code) {
     let indicatorIndex = mapCode(code)[2];
     let siblings = indicatorsGroupedByParent[parentCode];
 
+    if (siblings === undefined) {
+        return [];
+    }
     return [...siblings.slice(0, indicatorIndex), ...siblings.slice(indicatorIndex+1)];
 }
 
