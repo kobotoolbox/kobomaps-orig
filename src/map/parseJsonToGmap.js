@@ -2,6 +2,7 @@ import parseCSV from '../parsers/parseCSV';
 import $ from '../jquery';
 import {addArea} from "../globals/geographicAreas";
 import {getMap} from "../globals/map";
+import {closeAllInfoWindows, openInfoWindow} from "../globals/infoWindows";
 export default function parseJsonToGmap(boundariesFilename, csvUrl) {
     //initializes our global county point array
     let areaPoints = [];
@@ -66,6 +67,12 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
                 this.setOptions({fillOpacity: 0.75});
             });
 
+            google.maps.event.addListener(gPolygon, 'click', function (event) {
+                //close all other info windows if they are open
+                closeAllInfoWindows();
+                //set up the new info window and open it.
+                openInfoWindow(areaName, event.latLng)
+            });
             //creates a list of the place names we've encountered
             addArea(areaName, gPolygon, labels[areaName]);
         }
