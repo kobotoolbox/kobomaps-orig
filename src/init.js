@@ -2,16 +2,12 @@
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
 import $ from './jquery';
 import './jquery.address-1.5';
-import createMap from './map/createMap';
 import parseJsonToGmap from './map/parseJsonToGmap';
 import showByIndicator from './nav/showByIndicator';
 import {initializeInformationChart} from './chart';
+import {createMap} from "./globals/map";
 
 export let kmapAllAdminAreas;
-/**
- * global variable that holds the map
- */
-export let map;
 
 /**
  * global variable that holds all of the info windows
@@ -29,7 +25,7 @@ $(function () {
         kmapAllAdminAreas = config.allAdminAreas;
 
         initializeDraggables();
-        map = createMap(config);
+        createMap(config);
         parseJsonToGmap(config.boundariesFilename, config.dataFiles);
         $('#kmapTitle').html(config.title);
         $('#nationalaveragelabel').html(config.allAdminAreas + ':');

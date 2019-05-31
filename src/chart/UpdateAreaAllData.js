@@ -3,17 +3,18 @@
  * Data: associative array of the percentages keyed by Area names as defined in the JSON that defines areas and their bounds
  * Note: All of this assumes positive numbers.
  */
-import {infoWindows, map} from '../init';
+import {infoWindows} from '../init';
 import calculateMinSpread from '../util/calculateMinSpread';
 import UpdateAreaPercentageTitleData from './UpdateAreaPercentageTitleData';
 import updateKey from '../legend/updateKey';
 import updateNationalAverage from '../legend/updateNationalAverage';
+import {getMap} from "../globals/map";
 
 export default function UpdateAreaAllData(title, data, nationalAverage, indicator, unit) {
 
     const {min, spread} = calculateMinSpread(data);
 
-    google.maps.event.addListener(map, 'click', function () {
+    google.maps.event.addListener(getMap(), 'click', function () {
         for (let windowName in infoWindows) {
             infoWindows[windowName].close();
         }

@@ -1,6 +1,7 @@
-import {infoWindows, map} from '../init';
+import {infoWindows} from '../init';
 import UpdateAreaPercentage from './UpdateAreaPercentage';
 import {getArea} from "../globals/geographicAreas";
+import {getMap} from "../globals/map";
 /**
  Used to update the color and info window of an area
  */
@@ -27,6 +28,6 @@ export default function UpdateAreaPercentageMessage(name, percentage, min, sprea
         }
         //set up the new info window and open it.
         infoWindow.setPosition(event.latLng);
-        infoWindow.open(map);
+        infoWindow.open(getMap());
     });
 }

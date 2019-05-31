@@ -1,7 +1,7 @@
 import parseCSV from '../parsers/parseCSV';
 import $ from '../jquery';
-import {map} from '../init';
 import {addArea} from "../globals/geographicAreas";
+import {getMap} from "../globals/map";
 export default function parseJsonToGmap(boundariesFilename, csvUrl) {
     //initializes our global county point array
     let areaPoints = [];
@@ -33,7 +33,7 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
 
             }
 
-            const tempLabel = new Label({map: map});
+            const tempLabel = new Label({map: getMap()});
             tempLabel.set('position', new google.maps.LatLng(areaData.marker[0], areaData.marker[1]));
             tempLabel.set('areaName', areaName);
             labels[areaName] = tempLabel;
@@ -54,7 +54,7 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
                 fillOpacity: 0.75 //sets the opacity of the fill color
             });
 
-            gPolygon.setMap(map); //places the polygon on the map
+            gPolygon.setMap(getMap()); //places the polygon on the map
 
             //add mouse in
             google.maps.event.addListener(gPolygon, 'mouseover', function (event) {

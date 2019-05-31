@@ -1,6 +1,6 @@
 import createMapOptions from './createMapOptions';
 
-export default function createMap(config) {
+export default function buildMap(config) {
     const gmap = new google.maps.Map(document.getElementById('map_canvas'), createMapOptions(config.mapDefaults));
 
     /*Creates the options for our custom map type*/
