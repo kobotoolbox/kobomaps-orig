@@ -2,13 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Submenu from './Submenu';
+import MenuEntry from './MenuEntry';
 
-const getActive = (active, code) => isActive(active, code) ? 'active' : '';
 const isActive = (active, code) => `${active[0]}` === code;
-const getVisibility = (visible) => visible ? undefined : {display: 'none' };
 
 export default function Menu({code, name, active, submenus, selectEntry, visible, toggleVisibility}) {
-    const mapSubmenu = (submenu, submenuIndex) =>
+    const listSubmenus = () => submenus.map((submenu, submenuIndex) =>
         <Submenu
             key={submenuIndex}
             code={`${code}_${submenuIndex}`}
@@ -18,16 +17,18 @@ export default function Menu({code, name, active, submenus, selectEntry, visible
             active={active}
             visible={submenu.visible}
             toggleVisibility={toggleVisibility}
-        />;
+        />);
 
     const handleClick = () => toggleVisibility(code);
     return (
-        <li className="level1">
-            <span className={`level1 ${getActive(active, code)}`} onClick={handleClick}>{name}</span>
-            <ul className="level1" style={getVisibility(visible, isActive(active, code))}>
-                {submenus.map(mapSubmenu)}
-            </ul>
-        </li>
+        <MenuEntry
+            level={1}
+            name={name}
+            isActive={isActive(active, code)}
+            isVisible={visible}
+            listSubmenus={listSubmenus}
+            clickHandler={handleClick}
+        />
     );
 }
 
