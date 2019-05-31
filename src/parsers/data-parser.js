@@ -44,7 +44,7 @@ export default function parseDataArray(data) {
             currentParsed.source = current[sourceIndex];
         }
         if (~nationalAverageIndex) {
-            currentParsed.nationalAverage = current[nationalAverageIndex];
+            currentParsed.nationalAverage = parseFloat(current[nationalAverageIndex]);
         }
 
         currentParsed.data = current.filter(excludeMeta).reduce(function (accumulator, current, idx) {

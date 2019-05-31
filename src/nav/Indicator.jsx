@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 const getActive = (active, code) => active.join('_') === code ? 'active' : '';
 
-export default function Indicator ({code, name, selectEntry, active, metadata}) {
+export default function Indicator ({code, name, selectEntry, active}) {
     const handleClick = () => {
         selectEntry(code);
     };
 
     return (
-        <li className={`level3 ${getActive(active, code)}`} id={`bottom_level_${code}`}>
+        <li className={`level3 ${getActive(active, code)}`}>
             <a href={`#/?indicator=${code}`} onClick={handleClick}>{name}</a>
         </li>
     );
@@ -23,7 +23,7 @@ Indicator.propTypes = {
     metadata: PropTypes.shape({
         data: PropTypes.objectOf(PropTypes.number),
         link: PropTypes.string,
-        nationalAverage: PropTypes.string,
+        nationalAverage: PropTypes.number,
         source: PropTypes.string,
         title: PropTypes.string,
         unit: PropTypes.string,

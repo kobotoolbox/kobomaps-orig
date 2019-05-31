@@ -4,7 +4,7 @@ export default function buildData(data, activeIndicator) {
         visible: firstLevelIndex === activeIndicator[0],
         submenus: Object.keys(data[firstLevelName]).map((secondLevelName, secondLevelIndex) => ({
             name: secondLevelName,
-            visible: secondLevelIndex === activeIndicator[1],
+            visible: firstLevelIndex === activeIndicator[0] && secondLevelIndex === activeIndicator[1],
             indicators: Object.keys(data[firstLevelName][secondLevelName]).map((indicator) =>
                 ({
                     name: indicator,
