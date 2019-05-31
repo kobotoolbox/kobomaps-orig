@@ -3,7 +3,9 @@ import CSVToArray from './csvToArray';
 import buildNav from '../nav/buildNav';
 import showByIndicator from '../nav/showByIndicator';
 import $ from '../jquery';
-import { geographicAreaNames, resetIndicators } from '../init';
+import { rebuildIndicators } from '../init';
+import buildData from "./nav-parser";
+import {getIndicator} from "../util/queries";
 
 export default function parseCSV(csvUrl) {
     const csvs = {};
@@ -11,10 +13,9 @@ export default function parseCSV(csvUrl) {
 
     function parseData(name) {
         currentSeries = name;
-        resetIndicators();
 
-        const parsedData = parseDataArray(CSVToArray(csvs[name], ','));
-
+        const parsedData = buildData(parseDataArray(CSVToArray(csvs[name], ',')), getIndicator());
+        rebuildIndicators(parsedData);
         buildNav(parsedData);
 
         //check if we're supposed to auto load the data for a particular indicator?

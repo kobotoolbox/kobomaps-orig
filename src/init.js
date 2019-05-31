@@ -41,7 +41,19 @@ export const infoWindows = [];
  * use indicators to call the update method to redraw the map
  */
 export let indicatorsToUpdateParams = [];
-export const resetIndicators = () => indicatorsToUpdateParams = [];
+
+export function rebuildIndicators(newIndicators) {
+    indicatorsToUpdateParams = [];
+    newIndicators.forEach(
+        (firstLevelNode, firstLevelIndex) => firstLevelNode.submenus.forEach(
+            (secondLevelNode, secondLevelIndex) => secondLevelNode.indicators.forEach(
+                (indicator, indicatorIndex) =>
+                    indicatorsToUpdateParams[`${firstLevelIndex}_${secondLevelIndex}_${indicatorIndex}`] = indicator.metadata
+            )
+        )
+    );
+}
+
 $(function () {
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
@@ -58,7 +70,16 @@ $(function () {
         $('#kmapTitle').html(config.title);
         $('#nationalaveragelabel').html(config.allAdminAreas + ':');
     });
+    let indicator = $.address.parameter('indicator');
+    $.address.externalChange(function () {
+        const newIndicator = $.address.parameter('indicator');
+        if (indicator !== newIndicator) {
+            indicator = newIndicator;
+            showByIndicator(indicator);
+        }
+    });
 });
+
 function initializeDraggables() {
     // plugin uses with() construct
     // TODO replace with https://www.npmjs.com/package/draggable
@@ -74,13 +95,3 @@ function initializeDraggables() {
 
     dragResize.apply(document);
 }
-$(function () {
-    let indicator;
-    $.address.externalChange(function (event) {
-        const newindicator = $.address.parameter('indicator');
-        if (indicator !== newindicator) {
-            indicator = newindicator;
-            showByIndicator(indicator, indicatorsToUpdateParams);
-        }
-   });
-});

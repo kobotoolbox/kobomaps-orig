@@ -9,8 +9,6 @@ export default function Indicator ({code, name, selectEntry, active, metadata}) 
         selectEntry(code);
     };
 
-    indicatorsToUpdateParams[code] = metadata;
-
     return (
         <li className={`level3 ${getActive(active, code)}`} id={`bottom_level_${code}`}>
             <a href={`#/?indicator=${code}`} onClick={handleClick}>{name}</a>
