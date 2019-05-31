@@ -1,6 +1,6 @@
 import $ from '../jquery';
 
-export function getIndicator() {
+export function getCurrentIndicator() {
     const indicator = $.address.parameter('indicator');
     return indicator ? mapCode(indicator) : [];
 }

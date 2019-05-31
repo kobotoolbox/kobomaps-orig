@@ -2,13 +2,12 @@
  * Takes in an indicator string and then renders the map according to the data for that indicator
  * If the indicator doesn't exist it'll just exit gracefully
  */
-import toggleActive from './toggleActive';
 import UpdateAreaAllData from '../chart/UpdateAreaAllData';
 import $ from '../jquery';
-import { indicatorsToUpdateParams } from '../init';
+import {getIndicator} from "../globals/indicators";
 
 export default function showByIndicator(indicator) {
-    const indicatorMetadata = indicatorsToUpdateParams[indicator];
+    const indicatorMetadata = getIndicator(indicator);
     if (indicatorMetadata) {
         const title = indicatorMetadata['title'];
         const data = indicatorMetadata['data'];

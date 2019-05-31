@@ -1,7 +1,7 @@
 import $ from '../jquery';
 import calculateMinSpread from '../util/calculateMinSpread';
 import {createChart} from '.';
-import {indicatorsToUpdateParams} from '../init';
+import {getIndicator} from "../globals/indicators";
 
 /**
  * Creates the URL for the chart that shows the spread over indicator for a given question for
@@ -26,7 +26,7 @@ export default function createChartByIndicators(message, indicator, name, unit) 
     const questionText = $('#bottom_level_' + indicator).parents('li.level2').children('span.level2').text();
     //get the data for the indicator we're focused on
 
-    dataForArea[mainIndicatorText] = indicatorsToUpdateParams[indicator]['data'][name];
+    dataForArea[mainIndicatorText] = getIndicator(indicator)['data'][name];
 
 
     //get the rest of the data
@@ -34,7 +34,7 @@ export default function createChartByIndicators(message, indicator, name, unit) 
         const otherIndicator = $(this);
         const otherIndicatorId = otherIndicator.attr('id').substring(13);
         const indicatorText = otherIndicator.text();
-        dataForArea[indicatorText] = indicatorsToUpdateParams[otherIndicatorId]['data'][name];
+        dataForArea[indicatorText] = getIndicator(otherIndicatorId)['data'][name];
     });
 
     //calculate the min and spread for the area specific graph

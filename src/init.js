@@ -35,24 +35,6 @@ export const labels = [];
  * global variable that holds all of the info windows
  */
 export const infoWindows = [];
-/**
- * global array that maps the unqiue string indicator to the parameters that would
- * be fed into UpdateAreaAllData(title, data, nationalAverage). This way we can
- * use indicators to call the update method to redraw the map
- */
-export let indicatorsToUpdateParams = [];
-
-export function rebuildIndicators(newIndicators) {
-    indicatorsToUpdateParams = [];
-    newIndicators.forEach(
-        (firstLevelNode, firstLevelIndex) => firstLevelNode.submenus.forEach(
-            (secondLevelNode, secondLevelIndex) => secondLevelNode.indicators.forEach(
-                (indicator, indicatorIndex) =>
-                    indicatorsToUpdateParams[`${firstLevelIndex}_${secondLevelIndex}_${indicatorIndex}`] = indicator.metadata
-            )
-        )
-    );
-}
 
 $(function () {
     //patches issue with top navigation menu

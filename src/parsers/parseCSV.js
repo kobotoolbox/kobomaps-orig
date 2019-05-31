@@ -3,9 +3,9 @@ import CSVToArray from './csvToArray';
 import buildNav from '../nav/buildNav';
 import showByIndicator from '../nav/showByIndicator';
 import $ from '../jquery';
-import { rebuildIndicators } from '../init';
 import buildData from "./nav-parser";
-import {getIndicator} from "../util/queries";
+import {getCurrentIndicator} from "../util/queries";
+import {rebuildIndicators} from "../globals/indicators";
 
 export default function parseCSV(csvUrl) {
     const csvs = {};
@@ -14,7 +14,7 @@ export default function parseCSV(csvUrl) {
     function parseData(name) {
         currentSeries = name;
 
-        const parsedData = buildData(parseDataArray(CSVToArray(csvs[name], ',')), getIndicator());
+        const parsedData = buildData(parseDataArray(CSVToArray(csvs[name], ',')), getCurrentIndicator());
         rebuildIndicators(parsedData);
         buildNav(parsedData);
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {indicatorsToUpdateParams} from "../init";
 
 const getActive = (active, code) => active.join('_') === code ? 'active' : '';
 
