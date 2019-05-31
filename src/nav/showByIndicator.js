@@ -3,9 +3,9 @@
  * If the indicator doesn't exist it'll just exit gracefully
  */
 import UpdateAreaAllData from '../chart/UpdateAreaAllData';
-import $ from '../jquery';
 import {getIndicator} from "../globals/indicators";
 import {clearInfoWindows, closeAllInfoWindows} from "../globals/infoWindows";
+import {revealNationalAverageAndGradient, updateSourceLink} from "../legend/legend-dom";
 
 export default function showByIndicator(indicator) {
     const indicatorMetadata = getIndicator(indicator);
@@ -20,13 +20,9 @@ export default function showByIndicator(indicator) {
         UpdateAreaAllData(title, data, nationalAverage, indicator, unit);
 
         //update the source link and the source title
-        $('#sourcetextspan').show();
-        const $sourceURL = $('#sourceURL');
-        $sourceURL.text(indicatorMetadata['source']);
-        $sourceURL.attr('title', indicatorMetadata['source']);
-        $sourceURL.attr('href', indicatorMetadata['link']);
+        updateSourceLink(indicatorMetadata.source, indicatorMetadata.link);
 
         //Show the national average and gradient divs
-        $('#legend_gradient, #nationalaveragediv').show();
+        revealNationalAverageAndGradient();
     }
 }
