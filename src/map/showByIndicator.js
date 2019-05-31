@@ -2,7 +2,7 @@
  * Takes in an indicator string and then renders the map according to the data for that indicator
  * If the indicator doesn't exist it'll just exit gracefully
  */
-import UpdateAreaAllData from '../chart/UpdateAreaAllData';
+import UpdateAreaAllData from './UpdateAreaAllData';
 import {getIndicator} from "../globals/indicators";
 import {clearInfoWindows, closeAllInfoWindows} from "../globals/infoWindows";
 import {revealNationalAverageAndGradient, updateSourceLink} from "../legend/legend-dom";

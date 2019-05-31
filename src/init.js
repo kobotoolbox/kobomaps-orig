@@ -3,7 +3,7 @@
 import $ from './jquery';
 import './jquery.address-1.5';
 import parseJsonToGmap from './map/parseJsonToGmap';
-import showByIndicator from './nav/showByIndicator';
+import showByIndicator from './map/showByIndicator';
 import {initializeInformationChart} from './chart';
 import {createMap} from "./globals/map";
 
