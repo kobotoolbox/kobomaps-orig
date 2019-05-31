@@ -7,29 +7,12 @@
  */
 import calculateMagnitude from '../util/calculateMagnitude';
 export default function calculateMinSpread(data) {
+    let dataArr = Object.keys(data).map((key)=>data[key]).filter(value => !isNaN(value));
+    dataArr.push(0);
     //loop over the data to pre process it and figure out the below:
-    let min = Infinity; // because we're using percentages we can assume that they'll never be above 100, so 101 is safe
-    let max = -Infinity;
-    for (let areaName in data) {
-        data[areaName] = data[areaName];
-        //check for min
-        if (data[areaName] < min) {
-            min = data[areaName];
-        }
-        //check for max
-        if (data[areaName] > max) {
-            max = data[areaName];
-        }
-    }
-    // When all fields are NaN, min and max stay at Infinity,
-    // which causes an infinite loop in the `calculateMagnitude` function
-    // this patches the issue. todo: investigate why residual data remains on map
-    if (min === Infinity) {
-        min = 0;
-    }
-    if (max === -Infinity) {
-        max = 0;
-    }
+    let min = Math.min.apply(null, dataArr);
+    let max = Math.max.apply(null, dataArr);
+
     //figure out the order of magnitude of max
     const maxMagnitude = calculateMagnitude(max);
     if (maxMagnitude < 1) {
@@ -47,13 +30,11 @@ export default function calculateMinSpread(data) {
     //figure out the order of magnitude of max
     const minMagnitude = calculateMagnitude(min);
 
-    if (min === 0) {
+    if (min === 0 || minMagnitude === 1) {
         min = 0;
     } else if (minMagnitude < 1) {
         min = Math.floor(min / minMagnitude) * minMagnitude;
         min = parseFloat(min.toFixed(Math.log(10) / Math.log((1.0 / minMagnitude)))); //making up for crappy float rounding errors
-    } else if (minMagnitude === 1) {
-        min = 0;
     } else if (min % minMagnitude !== 0) {
         min = Math.floor(min / minMagnitude) * minMagnitude;
     }
@@ -82,5 +63,5 @@ export default function calculateMinSpread(data) {
     //calculate the spread
     const spread = max - min;
 
-    return {min: min, spread: spread};
+    return {min, spread};
 }
