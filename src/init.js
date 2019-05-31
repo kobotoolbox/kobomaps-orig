@@ -23,7 +23,6 @@ $(function () {
         createMap(config);
         parseJsonToGmap(config.boundariesFilename, config.dataFiles);
         $('#kmapTitle').html(config.title);
-        $('#nationalaveragelabel').html(config.allAdminAreas + ':');
     });
     let indicator = $.address.parameter('indicator');
     $.address.externalChange(function () {

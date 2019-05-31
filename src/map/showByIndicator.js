@@ -5,7 +5,6 @@
 import UpdateAreaAllData from './UpdateAreaAllData';
 import {getIndicator} from "../globals/indicators";
 import {clearInfoWindows, closeAllInfoWindows} from "../globals/infoWindows";
-import buildLegend from '../legend/Legend';
 
 export default function showByIndicator(indicator) {
     const indicatorMetadata = getIndicator(indicator);
@@ -17,7 +16,6 @@ export default function showByIndicator(indicator) {
 
         closeAllInfoWindows();
         clearInfoWindows();
-        buildLegend(indicatorMetadata);
         UpdateAreaAllData(title, data, nationalAverage, indicator, unit);
     }
 }

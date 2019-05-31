@@ -1,21 +1,11 @@
 import React from 'react';
 import Interpolate from "react-interpolate-component";
+import getNationalAverageChart from "./getNationalAverageChart";
 
-export default function NationalAverageChart({chart}) {
-    const nationalAverageProps = {
-        with: {
-            chart: chart
-        },
-        unsafe: true,
-        component:"div",
-        id:"nationalIndicatorChart"
-    };
-
+export default function NationalAverageChart({average, unit, code}) {
     return (
-        <div>
-            <Interpolate {...nationalAverageProps}>
-                %(chart)s
-            </Interpolate>
-        </div>
+        <Interpolate unsafe={true} component="div" id="nationalIndicatorChart">
+            {getNationalAverageChart(average, unit, code)}
+        </Interpolate>
     );
 }

@@ -6,7 +6,7 @@ import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
  * This takes in the min score, the spread between the min and the max, and the national average
  * and then updates the nationalaveragediv element
  */
-export default function updateNationalAverage(nationalAverage, unit, indicatorCode) {
+export default function getNationalAverageChart(nationalAverage, unit, indicatorCode) {
     ////////////////////////////////////////////////////////////////
     //updates the national average chart
     ////////////////////////////////////////////////////////////////
