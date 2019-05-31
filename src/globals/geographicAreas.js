@@ -24,8 +24,6 @@ export function areaExists(areaName) {
 
 export function updateAreaLabel(name, value) {
     labels[name].set('areaValue', value);
-    labels[name].draw();
-
 }
 
 export function updateAreaColor(name, color) {

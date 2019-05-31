@@ -1,66 +1,63 @@
 // Define the overlay, derived from google.maps.OverlayView
-function Label(opt_options) {
- // Initialization
- this.setValues(opt_options);
+function Label(map, position, areaName) {
+    // Initialization
+    this.position_ = position;
+    this.areaName_ = areaName;
+    this.areaValue = null;
 
- // Label specific
- var labeldiv = this.labeldiv_ = document.createElement('div');
- labeldiv.setAttribute("class","countylabel");					  
+    this.figurediv_ = null;
+    this.areaValuediv_ = null;
 
- var div = this.figurediv = document.createElement('div');
- div.appendChild(labeldiv);
- div.style.cssText = 'position: absolute; display: none';
-};
-Label.prototype = new google.maps.OverlayView;
+    this.setMap(map);
+}
+
+Label.prototype = new google.maps.OverlayView();
 
 // Implement onAdd
-Label.prototype.onAdd = function() {
- var pane = this.getPanes().overlayLayer;
- pane.appendChild(this.figurediv);
+Label.prototype.onAdd = function () {
+    const labelDiv = document.createElement('div');
+    labelDiv.setAttribute("class", "countylabel");
 
- // Ensures the label is redrawn if the text or position is changed.
- var me = this;
- this.listeners_ = [
-   google.maps.event.addListener(this, 'position_changed',
-       function() { me.draw(); }),
-   google.maps.event.addListener(this, 'areaName_changed',
-       function() { me.draw(); }),
-   google.maps.event.addListener(this, 'areaValue_changed',
-	   function() { me.draw(); })
-	 ];
+    const div = document.createElement('div');
+    div.appendChild(labelDiv);
+    div.style.position = 'absolute';
+    div.style.display = 'none';
+
+    const areaValueDiv = document.createElement('div');
+    areaValueDiv.setAttribute('class', 'areaVal');
+    labelDiv.appendChild(areaValueDiv);
+
+    const areaNameNode = document.createTextNode(this.areaName_);
+    labelDiv.appendChild(areaNameNode);
+
+    const pane = this.getPanes().overlayLayer;
+    pane.appendChild(div);
+    this.figurediv_ = div;
+    this.areaValuediv_ = areaValueDiv;
+
+    // Ensures the label is redrawn if the text or position is changed.
+    this.areaValue_changed_listener = google.maps.event.addListener(this, 'areavalue_changed',this.draw.bind(this));
 };
 
 // Implement onRemove
-Label.prototype.onRemove = function() {
- this.figurediv.parentNode.removeChild(this.figurediv);
-
- // Label is removed from the map, stop updating its position/text.
- for (var i = 0, I = this.listeners_.length; i < I; ++i) {
-   google.maps.event.removeListener(this.listeners_[i]);
- }
+Label.prototype.onRemove = function () {
+    this.figurediv_.parentNode.removeChild(this.figurediv);
+    this.figurediv_ = null;
+    // Label is removed from the map, stop updating its position/text.
+    this.areaValue_changed_listener.remove()
 };
 
 // Implement draw
-Label.prototype.draw = function() {
- var projection = this.getProjection();
- if(projection == undefined) //not sure why this happens, but for some reason we need to gaurd against it.
- {
-	 return;
- }
- var position = projection.fromLatLngToDivPixel(this.get('position'));
+Label.prototype.draw = function () {
+    const projection = this.getProjection();
 
- var div = this.figurediv;
- div.style.left = position.x + 'px';
- div.style.top = position.y + 'px';
- div.style.display = 'block';
+    const position = projection.fromLatLngToDivPixel(this.position_);
 
- var areaValue = this.get('areaValue');
- var areaValueTxt = "";
- if (areaValue != undefined && areaValue != "" && areaValue != null)
-{
-	 areaValueTxt = '<div class="areaVal">'+areaValue+'</div>';
-}
-	  
- this.labeldiv_.innerHTML = areaValueTxt + this.get('areaName').toString();
+    const div = this.figurediv_;
+    div.style.left = position.x + 'px';
+    div.style.top = position.y + 'px';
+    div.style.display = 'block';
+
+    this.areaValuediv_.innerText = this.areaValue;
 };
 

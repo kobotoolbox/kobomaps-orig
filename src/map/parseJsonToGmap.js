@@ -3,6 +3,7 @@ import $ from '../jquery';
 import {addArea} from "../globals/geographicAreas";
 import {getMap} from "../globals/map";
 import {closeAllInfoWindows, openInfoWindow} from "../globals/infoWindows";
+
 export default function parseJsonToGmap(boundariesFilename, csvUrl) {
     //initializes our global county point array
     let areaPoints = [];
@@ -34,10 +35,7 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
 
             }
 
-            const tempLabel = new Label({map: getMap()});
-            tempLabel.set('position', new google.maps.LatLng(areaData.marker[0], areaData.marker[1]));
-            tempLabel.set('areaName', areaName);
-            labels[areaName] = tempLabel;
+            labels[areaName] = new Label(getMap(), new google.maps.LatLng(areaData.marker[0], areaData.marker[1]), areaName);
 
 
         }
