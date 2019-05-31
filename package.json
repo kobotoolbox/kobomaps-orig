@@ -31,6 +31,8 @@
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-interpolate-component": "^0.12.0"
+    "react-google-maps": "^9.4.5",
+    "react-interpolate-component": "^0.12.0",
+    "recompose": "^0.30.0"
   }
 }

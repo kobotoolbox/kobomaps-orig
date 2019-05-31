@@ -5,7 +5,7 @@ import './jquery.address-1.5';
 import parseJsonToGmap from './map/parseJsonToGmap';
 import showByIndicator from './map/showByIndicator';
 import {initializeInformationChart} from './chart';
-import {createMap} from "./globals/map";
+import {initMap} from "./globals/map";
 
 export let kmapAllAdminAreas;
 
@@ -20,8 +20,8 @@ $(function () {
         kmapAllAdminAreas = config.allAdminAreas;
 
         initializeDraggables();
-        createMap(config);
-        parseJsonToGmap(config.boundariesFilename, config.dataFiles);
+        initMap(config);
+        //parseJsonToGmap(config.boundariesFilename, config.dataFiles);
         $('#kmapTitle').html(config.title);
     });
     let indicator = $.address.parameter('indicator');

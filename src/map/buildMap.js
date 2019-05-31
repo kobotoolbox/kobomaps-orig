@@ -1,16 +1,11 @@
+import React from 'react';
+import ReactDom from 'react-dom';
 import createMapOptions from './createMapOptions';
+import Map from './Map';
 
 export default function buildMap(config) {
-    const gmap = new google.maps.Map(document.getElementById('map_canvas'), createMapOptions(config.mapDefaults));
-
-    /*Creates the options for our custom map type*/
-    const styledMapOptions = {
-        name: 'Default',
-        alt: 'View the map in Peacebuilding Data Project theme'
-    };
-    /*Adds new map and sets it to default*/
-    const rimmMapType = new google.maps.StyledMapType(config.mapStyles, styledMapOptions);
-    gmap.mapTypes.set('RIMM', rimmMapType);
-    gmap.setMapTypeId('RIMM');
-    return gmap;
+    ReactDom.render(
+        <Map options={createMapOptions(config.mapDefaults)}/>,
+        document.getElementById('map_canvas')
+    )
 }

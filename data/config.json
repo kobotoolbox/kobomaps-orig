@@ -73,8 +73,8 @@
   "pageTitle": "example map",
   "allAdminAreas": "USA",
   "mapDefaults": {
-    "latitude": "40.4",
-    "longitude": "-99.3",
+    "latitude": 40.4,
+    "longitude": -99.3,
     "zoom": 4
   },
   "boundariesFilename": "boundaries"
