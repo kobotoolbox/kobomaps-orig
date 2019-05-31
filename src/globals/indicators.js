@@ -4,9 +4,10 @@
  * use indicators to call the update method to redraw the map
  */
 import {mapCode} from "../util/queries";
+import createMap from "../util/createMap";
 
-let indicators = Object.create(null);
-let indicatorsGroupedByParent = Object.create(null);
+let indicators = createMap();
+let indicatorsGroupedByParent = createMap();
 
 export function getIndicator(code) {
     return indicators[code];
@@ -24,7 +25,7 @@ export function getIndicatorSiblings(code) {
 }
 
 export function rebuildIndicators(newIndicators) {
-    indicators = Object.create(null);
+    indicators = createMap();
     newIndicators.forEach(
         (firstLevelNode, firstLevelIndex) => firstLevelNode.submenus.forEach(
             (secondLevelNode, secondLevelIndex) =>

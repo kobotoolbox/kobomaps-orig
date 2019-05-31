@@ -1,9 +1,10 @@
 import {getMap} from "./map";
+import createMap from "../util/createMap";
 
 /**
  * global variable that holds all of the info windows
  */
-let infoWindows = Object.create(null);
+let infoWindows = createMap();
 let infoWindowList = [];
 
 export function closeAllInfoWindows() {
@@ -25,6 +26,6 @@ export function openInfoWindow(name, position) {
 }
 
 export function clearInfoWindows() {
-    infoWindows = Object.create(null);
+    infoWindows = createMap();
     infoWindowList = [];
 }
