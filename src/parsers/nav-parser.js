@@ -8,7 +8,11 @@ export default function buildData(data, activeIndicator) {
             indicators: Object.keys(data[firstLevelName][secondLevelName]).map((indicator) =>
                 ({
                     name: indicator,
-                    metadata: data[firstLevelName][secondLevelName][indicator]
+                    metadata: {
+                        name: indicator,
+                        parentName: secondLevelName,
+                        ...data[firstLevelName][secondLevelName][indicator]
+                    }
                 }))
         }))
     }));

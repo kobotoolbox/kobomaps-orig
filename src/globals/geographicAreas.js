@@ -22,10 +22,15 @@ export function areaExists(areaName) {
     return geographicAreaNames[areaName] ?? false;
 }
 
-export function getArea(areaName) {
-    return areaGPolygons[areaName];
+export function updateAreaLabel(name, value) {
+    labels[name].set('areaValue', value);
+    labels[name].draw();
+
 }
 
-export function getLabel(areaName) {
-    return labels[areaName];
+export function updateAreaColor(name, color) {
+    areaGPolygons[name].setOptions({
+        fillColor: color,
+        fillOpacity: .6
+    });
 }
