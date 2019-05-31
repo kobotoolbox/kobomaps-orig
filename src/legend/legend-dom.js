@@ -1,4 +1,5 @@
 import $ from "../jquery";
+import buildLegend from './Legend';
 
 let $percentLeft;
 let $percentRight;
@@ -10,6 +11,7 @@ let $nationalAverageDiv;
 let $nationalAverageImg;
 
 $(function () {
+    buildLegend();
     $percentLeft = $('#percentleft');
     $percentRight = $('#percentright');
     $legend = $('#spanLegendText');
