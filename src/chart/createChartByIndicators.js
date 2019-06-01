@@ -9,12 +9,12 @@ import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
  * indicator: the indicator we're looking at
  * name: the name of the current geographical area
  */
-export default function createChartByIndicators(message, indicatorCode, name, unit) {
+export default function createChartByIndicators(indicatorCode, name, unit) {
     let siblings = getIndicatorSiblings(indicatorCode);
     //first check if there's more than one answer to the given question
     if (siblings.length === 0) {
         //clear out the National Chart
-        return message;
+        return '';
     }
     //there is more than one answer ...as so many questions have.
 
@@ -40,8 +40,5 @@ export default function createChartByIndicators(message, indicatorCode, name, un
     //build the freaking chart this is not that much fun. I should write a JS library that does this for me.
     //that's a really good idea. I should find someone to pay me to do that. You know it's probably already been done.
     //it's been done in like every language but javasript, so I just made the below function.
-    message += createChart(name + ': ' + questionText, dataForArea, mainIndicatorText, indicatorCode + '_by_indicator_area_chart', unit, min, spread);
-
-
-    return message;
+    return createChart(name + ': ' + questionText, dataForArea, mainIndicatorText, indicatorCode + '_by_indicator_area_chart', unit, min, spread);
 }
