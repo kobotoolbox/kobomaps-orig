@@ -1,7 +1,6 @@
 import React from 'react';
 import {compose, withStateHandlers} from "recompose";
 import {InfoWindow, Polygon} from "react-google-maps";
-import {closeAllInfoWindows, openInfoWindow} from "../globals/infoWindows";
 import Interpolate from "react-interpolate-component";
 import calculateColor from "../util/calculateColor";
 

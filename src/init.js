@@ -3,7 +3,6 @@
 import $ from './jquery';
 import './jquery.address-1.5';
 import {initializeInformationChart} from './chart';
-import {initMap} from './globals/map';
 import {setActiveIndicator} from './redux/actions';
 import {getStore} from './redux/redux-store';
 import buildAreaPointsAndLabelPositions from './map/buildAreaPointsAndLabelPositions';

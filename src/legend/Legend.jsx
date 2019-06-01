@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 import LegendGradient from "./LegendGradient";
 import calculateMinSpread from "../util/calculateMinSpread";
 import NationalAverage from "./NationalAverage";

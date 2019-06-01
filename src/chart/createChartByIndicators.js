@@ -1,6 +1,5 @@
 import calculateMinSpread from '../util/calculateMinSpread';
 import {createChart} from '.';
-import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
 import {getStore} from '../redux/redux-store';
 
 /**

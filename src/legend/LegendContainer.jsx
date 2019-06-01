@@ -1,6 +1,4 @@
-import React, {Component} from 'react';
-import $ from '../jquery';
-import {getIndicator} from "../globals/indicators";
+import React from 'react';
 import ReactDom from "react-dom";
 import Legend from "./Legend";
 import { Provider } from 'react-redux'

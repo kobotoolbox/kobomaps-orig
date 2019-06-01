@@ -1,10 +1,8 @@
 import _map from "lodash/map";
-import createMap from "../util/createMap";
 import {mapCode} from '../util/queries';
 
 export function parseDataTree(data) {
     const flattenedList = [];
-    const byCode = createMap();
 
     const tree = _map(Object.keys(data), function (name, idx) {
         const base = {

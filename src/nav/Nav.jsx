@@ -22,7 +22,7 @@ class Nav extends Component {
                 code={menuEntry.code}
                 submenus={menuEntry.children}
                 name={menuEntry.name}
-                active={mapCode(this.props.activeIndicator ?? '')}
+                active={mapCode(this.props.activeIndicator)}
                 visible={menuEntry.visible ?? false}
             />
         )
