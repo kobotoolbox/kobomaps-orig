@@ -7,5 +7,5 @@ export default function UpdateAreaPercentageMessage(name, percentage, min, sprea
     //first update the polygon and the marker
     UpdateAreaPercentage(name, percentage, min, spread, unit);
 
-    addInfoWindow(name, new google.maps.InfoWindow({content: message}));
+    //addInfoWindow(name, new google.maps.InfoWindow({content: message}));
 }

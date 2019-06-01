@@ -3,6 +3,7 @@ import $ from '../jquery';
 import {getMap} from "../globals/map";
 import createMap from "../util/createMap";
 import {buildPolygons} from "./buildPolygons";
+import {addArea} from "../globals/geographicAreas";
 
 //initializes our global county point array
 export let areaPoints = createMap();
@@ -32,14 +33,11 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
             });
 
             labels[areaName] = {lat:areaData.marker[0], lng:areaData.marker[1]};
+            addArea(areaName);
         });
 
         //now loops over the array of points and creates polygons
         //buildPolygons();
-
-
-        parseCSV(csvUrl);
-
 
     });
 

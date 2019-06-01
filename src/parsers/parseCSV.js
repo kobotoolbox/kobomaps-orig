@@ -31,7 +31,7 @@ export default function parseCSV(csvUrl) {
 
     //initiates a HTTP get request for the json file
     if (typeof csvUrl === 'string') {
-        $.get('data/' + csvUrl, function (response) {
+        return $.get('data/' + csvUrl, function (response) {
             csvs.unique = response;
             parseData('unique');
         });
@@ -64,7 +64,7 @@ export default function parseCSV(csvUrl) {
 
         const getSheets = function (i) {
             const current = csvUrl[i];
-            $.get('data/' + current.url, function (i, current) {
+            return $.get('data/' + current.url, function (i, current) {
                 return function (response) {
                     const currentName = current.name;
                     csvs[currentName] = response;
@@ -88,6 +88,6 @@ export default function parseCSV(csvUrl) {
             });
         };
 
-        getSheets(0);
+        return getSheets(0);
     }
 }//end parseCSV function

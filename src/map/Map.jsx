@@ -1,7 +1,8 @@
 import React from 'react';
 import { compose, withProps } from "recompose";
-import { withScriptjs, withGoogleMap, GoogleMap, Polygon } from "react-google-maps";
+import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import {buildPolygons} from "./buildPolygons";
+import buildLabels from "./buildLabels";
 
 export default compose(
     withProps({
@@ -12,8 +13,11 @@ export default compose(
     }),
     withScriptjs,
     withGoogleMap
-)((props) =>
-    <GoogleMap options={props.options}>
-        {buildPolygons()}
-    </GoogleMap>
+)(function (props) {
+
+        return <GoogleMap options={props.options}>
+            {buildPolygons(props.data)}
+            {buildLabels(props.data)}
+        </GoogleMap>;
+    }
 );

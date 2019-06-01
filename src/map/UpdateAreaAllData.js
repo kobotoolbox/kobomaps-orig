@@ -14,6 +14,6 @@ export default function UpdateAreaAllData(title, data, nationalAverage, indicato
     Object.keys(data).forEach(function (areaName) {
         let currentData = data[areaName];
         data[areaName] = currentData = isNaN(currentData) ? ' ' : currentData;
-        UpdateAreaPercentageTitleData(areaName, currentData, min, spread, title, data, indicator, currentData === ' ' ? '' : unit); // patch: hides unit on zones without data
+        //UpdateAreaPercentageTitleData(areaName, currentData, min, spread, title, data, indicator, currentData === ' ' ? '' : unit); // patch: hides unit on zones without data
     });
 }
