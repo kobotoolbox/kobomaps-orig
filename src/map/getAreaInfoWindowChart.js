@@ -8,6 +8,9 @@
 import {createChart, createChartByIndicators, informationChart} from '../chart';
 
 export default function getAreaInfoWindowChart(name, min, spread, title, data, indicator, unit) {
+    if (indicator === undefined) {
+        return '';
+    }
     let message = '<div class="chartHolder" style="height:' + informationChart.holderHeight + 'px">' + createChart(title, data, name, indicator + '_by_area_chart', unit, min, spread);
 
     //create the chart by for all the indicators of the given question, assuming there's more than one

@@ -43,6 +43,6 @@ export default compose(withStateHandlers(
             onMouseOver={setOptionsHandler({fillOpacity: 0.95})}
             onMouseOut={setOptionsHandler({fillOpacity: 0.6})}
         />
-        {showInfoWindow && <InfoWindow position={position}><Interpolate unsafe={true} component="div">{infoWindowContent}</Interpolate></InfoWindow>}
+        {value !== undefined && showInfoWindow && <InfoWindow position={position}><Interpolate unsafe={true} component="div">{infoWindowContent}</Interpolate></InfoWindow>}
     </div>
 ))
