@@ -1,9 +1,16 @@
 import parseDataArray from './data-parser';
 import CSVToArray from './csvToArray';
 import $ from '../jquery';
-import {setIndicators} from '../redux/actions';
 import {getStore} from '../redux/redux-store';
 import {parseDataTree} from "./parseDataTree";
+import {
+    setIndicators,
+    toggleIndicatorBranchVisibility,
+    toggleIndicatorLeafVisibility
+} from '../redux/actions/indicator';
+import {appStateTransition} from '../redux/actions/appState';
+import actionTypes from '../redux/actions/actionTypes';
+import {mapCode} from '../util/queries';
 
 export default function parseCSV(csvUrl) {
     const csvs = {};
@@ -15,7 +22,15 @@ export default function parseCSV(csvUrl) {
 
         let data = parseDataArray(CSVToArray(csvs[name], ','));
         let dataTree = parseDataTree(data);
+
         store.dispatch(setIndicators(dataTree));
+        let activeIndicator = store.getState().activeIndicator;
+        if (activeIndicator) {
+            const code = mapCode(activeIndicator);
+            store.dispatch(toggleIndicatorBranchVisibility(`${code[0]}`));
+            store.dispatch(toggleIndicatorLeafVisibility(`${code[0]}_${code[1]}`));
+        }
+        store.dispatch(appStateTransition(store.getState().appState, actionTypes.SET_INDICATORS));
     }
 
     //initiates a HTTP get request for the json file

@@ -10,9 +10,6 @@ export default function getNationalAverageChart(nationalAverage, unit, indicator
     ////////////////////////////////////////////////////////////////
     //updates the national average chart
     ////////////////////////////////////////////////////////////////
-    if (indicatorCode === undefined) {
-        return '';
-    }
     //clear out the National Chart
     //first check if there's more than one answer to the given question
     const siblings = indicator.siblings;

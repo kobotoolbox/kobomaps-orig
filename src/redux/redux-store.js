@@ -1,7 +1,7 @@
 import {createStore} from "redux";
-import {commonState} from './reducers';
+import main from './reducers/main';
 
-let store = createStore(commonState);
+let store = createStore(main);
 
 export function getStore() {
     return store;

@@ -3,13 +3,15 @@
 import $ from './jquery';
 import './jquery.address-1.5';
 import {initializeInformationChart} from './chart';
-import {setActiveIndicator} from './redux/actions';
+import {setActiveIndicator} from './redux/actions/metadata';
 import {getStore} from './redux/redux-store';
 import buildAreaPointsAndLabelPositions from './map/buildAreaPointsAndLabelPositions';
 import parseCSV from './parsers/parseCSV';
 import buildNav from './nav/buildNav';
-import buildLegendContainer from './legend/LegendContainer';
+import buildLegendContainer from './legend/buildLegend';
 import buildMap from './map/buildMap';
+import {appStateTransition} from './redux/actions/appState';
+import actionTypes from './redux/actions/actionTypes';
 
 export let kmapAllAdminAreas;
 
@@ -32,14 +34,19 @@ $(function () {
                         buildMap(config);
                         buildNav();
                         buildLegendContainer();
+                        store.dispatch(appStateTransition(store.getState().appState))
                     });
             });
         $('#kmapTitle').html(config.title);
     });
-    store.dispatch(setActiveIndicator($.address.parameter('indicator')));
 
     $.address.externalChange(function () {
-        store.dispatch(setActiveIndicator($.address.parameter('indicator')))
+        let indicatorCode = $.address.parameter('indicator');
+
+        if (indicatorCode !== undefined) {
+            store.dispatch(setActiveIndicator(indicatorCode));
+            store.dispatch(appStateTransition(store.getState().appState, actionTypes.SET_ACTIVE_INDICATOR));
+        }
     });
 });
 

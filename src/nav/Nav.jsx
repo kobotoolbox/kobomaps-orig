@@ -1,37 +1,31 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 
 import Menu from './Menu';
 import {mapCode} from "../util/queries";
+import AppState from '../redux/AppState';
 
-class Nav extends Component {
-    constructor(props) {
-        super(props);
-    }
+function Nav ({indicators, activeIndicator, appState}){
+    const mapMenu = (menuEntry, menuIndex) => (
+        <Menu
+            key={menuIndex}
+            code={menuEntry.code}
+            submenus={menuEntry.children}
+            name={menuEntry.name}
+            active={appState === AppState.ONLINE ? mapCode(activeIndicator) : []}
+            visible={menuEntry.visible ?? false}
+        />
+    );
 
-    render() {
-        return (
-            <ul className="questionsindicators">{this.props.indicators.map(this.mapMenu.bind(this))}</ul>
-        )
-    }
-
-    mapMenu(menuEntry, menuIndex) {
-        return (
-            <Menu
-                key={menuIndex}
-                code={menuEntry.code}
-                submenus={menuEntry.children}
-                name={menuEntry.name}
-                active={mapCode(this.props.activeIndicator)}
-                visible={menuEntry.visible ?? false}
-            />
-        )
-    }
+    return (
+        <ul className="questionsindicators">{indicators.map(mapMenu)}</ul>
+    );
 }
 
 const mapStateToProps = (state) => ({
     indicators: state.indicators,
-    activeIndicator: state.activeIndicator
+    activeIndicator: state.activeIndicator,
+    appState: state.appState
 });
 
 export default connect(mapStateToProps)(Nav);

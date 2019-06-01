@@ -1,12 +1,5 @@
 import actionTypes from './actionTypes';
 
-export function setIndicators(payload) {
-    return {
-        type: actionTypes.SET_INDICATORS,
-        payload
-    }
-}
-
 export function setAreas(payload) {
     return {
         type: actionTypes.SET_AREAS,
@@ -21,16 +14,16 @@ export function setActiveIndicator(payload) {
     }
 }
 
-export function toggleIndicatorBranchVisibility(payload) {
+export function setInfoWindowVisibilityFlags(payload) {
     return {
-        type: actionTypes.TOGGLE_INDICATOR_BRANCH_VISIBILITY,
+        type: actionTypes.SET_INFO_WINDOW_VISIBILITY_FLAGS,
         payload
     }
 }
 
-export function toggleIndicatorLeafVisibility(payload) {
+export function toggleInfoWindowVisibility(payload) {
     return {
-        type: actionTypes.TOGGLE_INDICATOR_LEAF_VISIBILITY,
+        type: actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY,
         payload
     }
 }

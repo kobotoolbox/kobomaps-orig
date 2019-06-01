@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Submenu from './Submenu';
 import MenuEntry from './MenuEntry';
-import {toggleIndicatorBranchVisibility} from '../redux/actions';
+import {toggleIndicatorBranchVisibility} from '../redux/actions/indicator';
 import {connect} from 'react-redux';
 
 const isActive = (active, code) => `${active[0]}` === code;

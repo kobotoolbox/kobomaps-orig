@@ -9,7 +9,7 @@ const store = getStore();
 export default function () {
     ReactDom.render(
         <Provider store={store}>
-            <Legend title={'Please select an indicator to display its data.'} />
+            <Legend/>
         </Provider>,
         document.getElementById('topbar')
     );

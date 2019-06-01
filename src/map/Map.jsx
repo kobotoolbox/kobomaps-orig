@@ -4,6 +4,7 @@ import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import {buildPolygons} from "./buildPolygons";
 import buildLabels from "./buildLabels";
+import AppState from '../redux/AppState';
 
 const Map = compose(
     withProps({
@@ -24,7 +25,7 @@ const Map = compose(
 );
 
 const mapStateToProps = (state) => ({
-    indicator: state.indicators.byCode(state.activeIndicator) ?? {}
+    indicator: state.appState === AppState.ONLINE ? state.indicators.byCode(state.activeIndicator) : {}
 });
 
 export default connect(mapStateToProps)(Map);
