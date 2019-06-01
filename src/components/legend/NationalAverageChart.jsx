@@ -1,13 +1,13 @@
 import React from 'react';
 import Interpolate from "react-interpolate-component";
-import getNationalAverageChart from "./getNationalAverageChart";
+import getNationalAverageChart from "../../chart/getNationalAverageChart";
 import AppState from '../../redux/AppState';
 import {connect} from 'react-redux';
 
-function NationalAverageChart({average, unit, code, indicator, isOnline}) {
+function NationalAverageChart({indicator, isOnline}) {
     return (
         <Interpolate unsafe={true} component="div" id="nationalIndicatorChart">
-            {isOnline ? getNationalAverageChart(average, unit, code, indicator) : ''}
+            {isOnline ? getNationalAverageChart(indicator) : ''}
         </Interpolate>
     );
 }

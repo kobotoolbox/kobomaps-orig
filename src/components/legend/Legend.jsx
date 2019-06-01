@@ -3,7 +3,6 @@ import LegendGradient from "./LegendGradient";
 import calculateMinSpread from "../../util/calculateMinSpread";
 import NationalAverage from "./NationalAverage";
 import addCommas from "../../util/addCommas";
-import htmlDecode from "../../util/htmlDecode";
 import IndicatorSource from "./IndicatorSource";
 import NationalAverageChart from "./NationalAverageChart";
 import {connect} from 'react-redux';
@@ -19,7 +18,7 @@ function Legend({title, indicator, isOnline}) {
     if (isOnline) {
         ({min, spread} = calculateMinSpread(indicator.data));
         max = min + spread;
-        unit = htmlDecode(indicator.unit ?? '');
+        unit = indicator.unit;
         nationalAverage = addCommas(indicator.nationalAverage) + ' ' + unit;
     }
 
@@ -31,7 +30,7 @@ function Legend({title, indicator, isOnline}) {
                 </div>
                 <LegendGradient min={min} max={max} unit={unit}/>
                 <NationalAverage min={min} spread={spread} average={indicator.nationalAverage} text={nationalAverage}/>
-                <NationalAverageChart average={indicator.nationalAverage} unit={unit} code={indicator.code}/>
+                <NationalAverageChart/>
                 <IndicatorSource title={indicator.source} href={indicator.link} />
                 <div id="poweredby">
                     <a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
