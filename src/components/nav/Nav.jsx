@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 
 import Menu from './Menu';
-import {mapCode} from "../util/queries";
-import AppState from '../redux/AppState';
+import {mapCode} from "../../util/queries";
+import AppState from '../../redux/AppState';
 
 function Nav ({indicators, activeIndicator, appState}){
     const mapMenu = (menuEntry, menuIndex) => (
@@ -18,7 +18,15 @@ function Nav ({indicators, activeIndicator, appState}){
     );
 
     return (
-        <ul className="questionsindicators">{indicators.map(mapMenu)}</ul>
+        <div id="maplinks">
+            <h3 id="kmapTitle">&nbsp;</h3>
+            <p>Click on a section name to display the questions, then click on the questions to show the indicator(s).
+                Click on the indicator to display its data on the map.</p>
+            <div id="questionsindicators" className="questionsindicators">
+                <ul className="questionsindicators">{indicators.map(mapMenu)}</ul>
+            </div>
+        </div>
+
     );
 }
 

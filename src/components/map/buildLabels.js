@@ -1,7 +1,7 @@
 import React from 'react';
 import {OverlayView} from "react-google-maps";
-import {getStore} from '../redux/redux-store';
-import addCommas from "../util/addCommas";
+import {getStore} from '../../redux/redux-store';
+import addCommas from "../../util/addCommas";
 
 function getAreaValue(value, unit) {
     if (value === undefined) {

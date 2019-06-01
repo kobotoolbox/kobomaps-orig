@@ -1,13 +1,13 @@
 import React from 'react';
 import LegendGradient from "./LegendGradient";
-import calculateMinSpread from "../util/calculateMinSpread";
+import calculateMinSpread from "../../util/calculateMinSpread";
 import NationalAverage from "./NationalAverage";
-import addCommas from "../util/addCommas";
-import htmlDecode from "../util/htmlDecode";
+import addCommas from "../../util/addCommas";
+import htmlDecode from "../../util/htmlDecode";
 import IndicatorSource from "./IndicatorSource";
 import NationalAverageChart from "./NationalAverageChart";
 import {connect} from 'react-redux';
-import AppState from '../redux/AppState';
+import AppState from '../../redux/AppState';
 
 function Legend({title, indicator, isOnline}) {
     let min, spread, max;
@@ -24,16 +24,18 @@ function Legend({title, indicator, isOnline}) {
     }
 
     return(
-        <div id="legend">
-            <div id="legendtext">
-                <span id="spanLegendText">{title}</span>
-            </div>
-            <LegendGradient min={min} max={max} unit={unit}/>
-            <NationalAverage min={min} spread={spread} average={indicator.nationalAverage} text={nationalAverage}/>
-            <NationalAverageChart average={indicator.nationalAverage} unit={unit} code={indicator.code}/>
-            <IndicatorSource title={indicator.source} href={indicator.link} />
-            <div id="poweredby">
-                <a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
+        <div id="topbar" className="drsElement drsMoveHandle" style={{left:'355px', bottom: '48px'}}>
+            <div id="legend">
+                <div id="legendtext">
+                    <span id="spanLegendText">{title}</span>
+                </div>
+                <LegendGradient min={min} max={max} unit={unit}/>
+                <NationalAverage min={min} spread={spread} average={indicator.nationalAverage} text={nationalAverage}/>
+                <NationalAverageChart average={indicator.nationalAverage} unit={unit} code={indicator.code}/>
+                <IndicatorSource title={indicator.source} href={indicator.link} />
+                <div id="poweredby">
+                    <a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
+                </div>
             </div>
         </div>
     )

@@ -1,6 +1,6 @@
 import React from 'react';
-import {getDisplay} from "../util/queries";
-import AppState from '../redux/AppState';
+import {getDisplay} from "../../util/queries";
+import AppState from '../../redux/AppState';
 import {connect} from 'react-redux';
 
 function LegendGradient({min, max, unit, isOnline}) {

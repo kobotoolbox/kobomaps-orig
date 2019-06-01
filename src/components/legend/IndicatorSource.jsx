@@ -1,6 +1,6 @@
 import React from 'react';
-import {getVisibility} from "../util/queries";
-import AppState from '../redux/AppState';
+import {getVisibility} from "../../util/queries";
+import AppState from '../../redux/AppState';
 import {connect} from 'react-redux';
 
 const isVisible = (title, link) => !!title || !!link;

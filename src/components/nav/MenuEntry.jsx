@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from 'prop-types';
-import {getDisplay} from "../util/queries";
+import {getDisplay} from "../../util/queries";
 
 const getActive = (isActive) => isActive ? 'active' : '';
 

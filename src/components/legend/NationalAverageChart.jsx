@@ -1,7 +1,7 @@
 import React from 'react';
 import Interpolate from "react-interpolate-component";
 import getNationalAverageChart from "./getNationalAverageChart";
-import AppState from '../redux/AppState';
+import AppState from '../../redux/AppState';
 import {connect} from 'react-redux';
 
 function NationalAverageChart({average, unit, code, indicator, isOnline}) {

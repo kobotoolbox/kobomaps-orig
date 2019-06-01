@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Indicator from './Indicator';
 import MenuEntry from './MenuEntry';
-import {toggleIndicatorLeafVisibility} from '../redux/actions/indicator';
+import {toggleIndicatorLeafVisibility} from '../../redux/actions/indicator';
 import {connect} from 'react-redux';
 
 const isActive = (active, code) => `${active[0]}_${active[1]}` === code;

@@ -1,6 +1,6 @@
-import calculateMinSpread from '../util/calculateMinSpread';
-import {kmapAllAdminAreas} from '../init';
-import {createChart} from '../chart';
+import calculateMinSpread from '../../util/calculateMinSpread';
+import {kmapAllAdminAreas} from '../../init';
+import {createChart} from '../../chart';
 
 /**
  * This takes in the min score, the spread between the min and the max, and the national average

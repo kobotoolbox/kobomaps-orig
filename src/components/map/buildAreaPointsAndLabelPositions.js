@@ -1,18 +1,15 @@
-import $ from '../jquery';
-import createMap from '../util/createMap';
-import {getStore} from '../redux/redux-store';
-import {setAreas, setInfoWindowVisibilityFlags} from '../redux/actions/metadata';
+import $ from '../../jquery';
+import createMap from '../../util/createMap';
+import {getStore} from '../../redux/redux-store';
+import {setAreas, setInfoWindowVisibilityFlags} from '../../redux/actions/metadata';
 
 //initializes our global county point array
 const areas = createMap();
 const infoWindowVisibilityFlags = createMap();
 export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
-
-
     const store = getStore();
     //initiates a HTTP get request for the json file
     return $.getJSON('data/' + boundariesFilename + '.txt', function (data) {
-
         //loops over each entry in the json over "areas"
         data['areas'].forEach(function (areaData) {
             //create an array entry for this county
@@ -37,7 +34,6 @@ export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
         });
         store.dispatch(setAreas(areas));
         store.dispatch(setInfoWindowVisibilityFlags(infoWindowVisibilityFlags));
-
     });
 
 

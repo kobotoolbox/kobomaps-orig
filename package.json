@@ -38,6 +38,7 @@
     "react-redux": "^7.0.3",
     "recompose": "^0.30.0",
     "redux": "^4.0.1",
+    "redux-fetcher": "^2.1.0",
     "redux-saga": "^1.0.2"
   }
 }

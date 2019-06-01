@@ -2,7 +2,7 @@ html {height: 100%; overflow:hidden;}
 body {height: 100%; margin: 0px; padding: 0px;font: 76%/170% Open Sans, Verdana, sans-serif;color: #404040;}
 #waiting{background:url(../img/loading.gif) no-repeat scroll;width:20px;height:20px;margin:0 auto;}
 #map_canvas {width: 100%; height: 100%; min-height: 555px; min-width: 500px; position: relative;} /* Fills the entire page */
-
+#main {height: 100%;}
 /* Legend */
 #topbar, #bottombar {background: url("../img/b40.png") repeat scroll 0 0 transparent;padding:5px}
 #topbar {left: 355px;position: absolute;/*bottom: 48px;*/z-index: 999;width:325px;}

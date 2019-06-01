@@ -1,8 +1,8 @@
 import React from 'react';
 import {InfoWindow, Polygon} from "react-google-maps";
 import Interpolate from "react-interpolate-component";
-import calculateColor from "../util/calculateColor";
-import AppState from '../redux/AppState';
+import calculateColor from "../../util/calculateColor";
+import AppState from '../../redux/AppState';
 import {connect} from 'react-redux';
 
 function getFillColor(appState, value, min, spread) {

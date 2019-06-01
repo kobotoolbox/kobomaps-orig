@@ -2,14 +2,15 @@
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
 import $ from './jquery';
 import './jquery.address-1.5';
+import ReactDOM from 'react-dom';
 import {initializeInformationChart} from './chart';
 import {setActiveIndicator} from './redux/actions/metadata';
 import {getStore} from './redux/redux-store';
-import buildAreaPointsAndLabelPositions from './map/buildAreaPointsAndLabelPositions';
+import buildAreaPointsAndLabelPositions from './components/map/buildAreaPointsAndLabelPositions';
 import parseCSV from './parsers/parseCSV';
-import buildNav from './nav/buildNav';
-import buildLegendContainer from './legend/buildLegend';
-import buildMap from './map/buildMap';
+import Index from './components';
+import {Provider} from 'react-redux';
+import React from 'react';
 
 export let kmapAllAdminAreas;
 
@@ -29,9 +30,12 @@ $(function () {
             .then(function () {
                 return parseCSV(config.dataFiles)
                     .then(function () {
-                        buildMap(config);
-                        buildNav();
-                        buildLegendContainer();
+                        ReactDOM.render(
+                            <Provider store={store}>
+                                <Index config={config}/>
+                            </Provider>,
+                            document.getElementById('main')
+                        )
                     });
             });
         $('#kmapTitle').html(config.title);
