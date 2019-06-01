@@ -1,7 +1,9 @@
 import AppState from '../AppState';
 import actionTypes from './actionTypes';
+import { put, takeEvery, select } from 'redux-saga/effects'
+import createMap from '../../util/createMap';
 
-let actions = [];
+let actions = createMap();
 
 function setAppState(payload) {
     return {
@@ -10,31 +12,33 @@ function setAppState(payload) {
     };
 }
 
-export function appStateTransition(currentAppState, action) {
-    if (action !== undefined) {
-        actions[action] = true;
-    }
-    switch (currentAppState) {
+function* changeAppState(action) {
+    actions[action.type] = true;
+    let state = yield select((state) => state.appState);
+    switch (state) {
         case AppState.CREATED:
-            return setAppState(AppState.LOADING_METADATA);
+            yield put(setAppState(AppState.LOADING_METADATA));
+            break;
         case AppState.LOADING_METADATA:
             if(actions[actionTypes.SET_INFO_WINDOW_VISIBILITY_FLAGS] && actions[actionTypes.SET_AREAS]) {
-                return setAppState(AppState.LOADING_INDICATORS);
+                yield put( setAppState(AppState.LOADING_INDICATORS));
             }
             break;
         case AppState.LOADING_INDICATORS:
             if(actions[actionTypes.SET_INDICATORS]) {
-                return setAppState(AppState.LOADED)
+                yield put( setAppState(AppState.LOADED))
             }
-            break;
         case AppState.LOADED:
         case AppState.NO_INDICATOR:
             if(actions[actionTypes.SET_ACTIVE_INDICATOR]) {
-                return setAppState(AppState.ONLINE);
+                yield put( setAppState(AppState.ONLINE));
+            } else {
+                yield put(setAppState(AppState.NO_INDICATOR));
             }
-            return setAppState(AppState.NO_INDICATOR);
+            break;
     }
-    return {
-        type: actionTypes.DO_NOTHING
-    };
+}
+
+export function* stateTransitions() {
+    yield takeEvery([actionTypes.SET_INDICATORS,actionTypes.SET_ACTIVE_INDICATOR,actionTypes.SET_INFO_WINDOW_VISIBILITY_FLAGS,actionTypes.SET_AREAS], changeAppState)
 }

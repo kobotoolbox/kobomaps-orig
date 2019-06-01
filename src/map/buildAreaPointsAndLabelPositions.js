@@ -2,8 +2,6 @@ import $ from '../jquery';
 import createMap from '../util/createMap';
 import {getStore} from '../redux/redux-store';
 import {setAreas, setInfoWindowVisibilityFlags} from '../redux/actions/metadata';
-import {appStateTransition} from '../redux/actions/appState';
-import actionTypes from '../redux/actions/actionTypes';
 
 //initializes our global county point array
 const areas = createMap();
@@ -37,11 +35,8 @@ export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
             areas[areaName].labelPosition = {lat:areaData.marker[0], lng:areaData.marker[1]};
             infoWindowVisibilityFlags[areaName] = false;
         });
-        store.dispatch(appStateTransition(store.getState().appState));
         store.dispatch(setAreas(areas));
-        store.dispatch(appStateTransition(store.getState().appState, actionTypes.SET_AREAS));
         store.dispatch(setInfoWindowVisibilityFlags(infoWindowVisibilityFlags));
-        store.dispatch(appStateTransition(store.getState().appState, actionTypes.SET_INFO_WINDOW_VISIBILITY_FLAGS));
 
     });
 

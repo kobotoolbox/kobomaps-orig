@@ -10,8 +10,6 @@ import parseCSV from './parsers/parseCSV';
 import buildNav from './nav/buildNav';
 import buildLegendContainer from './legend/buildLegend';
 import buildMap from './map/buildMap';
-import {appStateTransition} from './redux/actions/appState';
-import actionTypes from './redux/actions/actionTypes';
 
 export let kmapAllAdminAreas;
 
@@ -34,7 +32,6 @@ $(function () {
                         buildMap(config);
                         buildNav();
                         buildLegendContainer();
-                        store.dispatch(appStateTransition(store.getState().appState))
                     });
             });
         $('#kmapTitle').html(config.title);
@@ -45,7 +42,6 @@ $(function () {
 
         if (indicatorCode !== undefined) {
             store.dispatch(setActiveIndicator(indicatorCode));
-            store.dispatch(appStateTransition(store.getState().appState, actionTypes.SET_ACTIVE_INDICATOR));
         }
     });
 });

@@ -8,8 +8,6 @@ import {
     toggleIndicatorBranchVisibility,
     toggleIndicatorLeafVisibility
 } from '../redux/actions/indicator';
-import {appStateTransition} from '../redux/actions/appState';
-import actionTypes from '../redux/actions/actionTypes';
 import {mapCode} from '../util/queries';
 
 export default function parseCSV(csvUrl) {
@@ -30,7 +28,6 @@ export default function parseCSV(csvUrl) {
             store.dispatch(toggleIndicatorBranchVisibility(`${code[0]}`));
             store.dispatch(toggleIndicatorLeafVisibility(`${code[0]}_${code[1]}`));
         }
-        store.dispatch(appStateTransition(store.getState().appState, actionTypes.SET_INDICATORS));
     }
 
     //initiates a HTTP get request for the json file
