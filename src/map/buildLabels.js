@@ -1,6 +1,6 @@
 import React from 'react';
 import {OverlayView} from "react-google-maps";
-import {labels} from "./parseJsonToGmap";
+import {areaManager} from "../globals/geographicAreas";
 import addCommas from "../util/addCommas";
 
 function getAreaValue(value, unit) {
@@ -12,8 +12,8 @@ function getAreaValue(value, unit) {
 
 export default function buildLabels(data) {
     const areaVals = data.data ?? {};
-    return Object.keys(labels).map(function (labelName, labelIndex) {
-        const labelPosition = labels[labelName];
+    return Object.keys(areaManager.areas).map(function (labelName, labelIndex) {
+        const labelPosition = areaManager.areas[labelName].labelPosition;
         return <OverlayView
             key={labelIndex}
             position={labelPosition}

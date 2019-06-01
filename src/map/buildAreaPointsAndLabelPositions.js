@@ -1,14 +1,11 @@
-import parseCSV from '../parsers/parseCSV';
 import $ from '../jquery';
-import {getMap} from "../globals/map";
 import createMap from "../util/createMap";
-import {buildPolygons} from "./buildPolygons";
-import {addArea} from "../globals/geographicAreas";
+import {setAreas} from "../globals/geographicAreas";
 
 //initializes our global county point array
-export let areaPoints = createMap();
-export const labels = createMap();
-export default function parseJsonToGmap(boundariesFilename, csvUrl) {
+const areas = createMap();
+
+export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
 
 
     //initiates a HTTP get request for the json file
@@ -18,27 +15,24 @@ export default function parseJsonToGmap(boundariesFilename, csvUrl) {
         data['areas'].forEach(function (areaData) {
             //create an array entry for this county
             let areaName = areaData.area;
-            areaPoints[areaName] = [];
+            areas[areaName] = createMap();
+            areas[areaName].points = [];
 
 
             //now loops over every set of point in the json that defines an area.
             areaData.points.forEach(function (pointsSetValue, pointsSetIndex){
-                areaPoints[areaName][pointsSetIndex] = [];
+                areas[areaName].points[pointsSetIndex] = [];
                 //now loop over every point in a set of points that defines an area
                 pointsSetValue.forEach(function (pointsValue, pointsIndex) {
-                    areaPoints[areaName][pointsSetIndex][pointsIndex] = {lat:pointsValue[0], lng:pointsValue[1]};
+                    areas[areaName].points[pointsSetIndex][pointsIndex] = {lat:pointsValue[0], lng:pointsValue[1]};
                 });
 
 
             });
 
-            labels[areaName] = {lat:areaData.marker[0], lng:areaData.marker[1]};
-            addArea(areaName);
+            areas[areaName].labelPosition = {lat:areaData.marker[0], lng:areaData.marker[1]};
         });
-
-        //now loops over the array of points and creates polygons
-        //buildPolygons();
-
+        setAreas(areas);
     });
 
 

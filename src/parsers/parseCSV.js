@@ -1,12 +1,12 @@
 import parseDataArray from './data-parser';
 import CSVToArray from './csvToArray';
 import buildNav from '../nav/buildNav';
-import showByIndicator from '../map/showByIndicator';
 import $ from '../jquery';
 import buildData from "./nav-parser";
 import {getCurrentIndicator} from "../util/queries";
 import {rebuildIndicators} from "../globals/indicators";
 import buildLegendContainer from '../legend/LegendContainer';
+import {parseDataTree} from "./parseDataTree";
 
 export default function parseCSV(csvUrl) {
     const csvs = {};
@@ -15,16 +15,13 @@ export default function parseCSV(csvUrl) {
     function parseData(name) {
         currentSeries = name;
 
-        const parsedData = buildData(parseDataArray(CSVToArray(csvs[name], ',')), getCurrentIndicator());
+        let data = parseDataArray(CSVToArray(csvs[name], ','));
+        let dataTree = parseDataTree(data);
+        const parsedData = buildData(data, getCurrentIndicator());
         rebuildIndicators(parsedData);
         buildNav(parsedData);
         buildLegendContainer();
 
-        //check if we're supposed to auto load the data for a particular indicator?
-        const autoLoadIndicator = $.address.parameter('indicator');
-        if (autoLoadIndicator !== '') {
-            showByIndicator(autoLoadIndicator);
-        }
         //hide the temporary loading text once the indicators are visible
         $('#loadingtext').remove();
     }

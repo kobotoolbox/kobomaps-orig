@@ -1,12 +1,18 @@
 /**
  *  gives us a list of names for geographicAreas
  */
-const geographicAreaNames = [];
+import createMap from "../util/createMap";
 
-export function addArea(areaName) {
-    geographicAreaNames[areaName] = true;
+export const areaManager = createMap();
+areaManager.areas = [];
+areaManager.exists = function (areaName) {
+    return !!areaManager.areas[areaName]
+};
+
+export function setAreas(areas) {
+    areaManager.areas = areas;
 }
 
 export function areaExists(areaName) {
-    return geographicAreaNames[areaName] ?? false;
+    return areaManager.exists(areaName);
 }

@@ -1,6 +1,5 @@
 import buildMap from "../map/buildMap";
-import {closeAllInfoWindows} from "./infoWindows";
-import parseJsonToGmap from "../map/parseJsonToGmap";
+import buildAreaPointsAndLabelPositions from "../map/buildAreaPointsAndLabelPositions";
 import parseCSV from "../parsers/parseCSV";
 
 /**
@@ -9,7 +8,7 @@ import parseCSV from "../parsers/parseCSV";
 let map;
 
 export function initMap(config) {
-    parseJsonToGmap(config.boundariesFilename, config.dataFiles)
+    buildAreaPointsAndLabelPositions(config.boundariesFilename, config.dataFiles)
         .then(function () {return parseCSV(config.dataFiles)
             .then(function () {buildMap(config);});
         })

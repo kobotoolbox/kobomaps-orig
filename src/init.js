@@ -2,7 +2,6 @@
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
 import $ from './jquery';
 import './jquery.address-1.5';
-import parseJsonToGmap from './map/parseJsonToGmap';
 import showByIndicator from './map/showByIndicator';
 import {initializeInformationChart} from './chart';
 import {initMap} from "./globals/map";
@@ -21,7 +20,6 @@ $(function () {
 
         initializeDraggables();
         initMap(config);
-        //parseJsonToGmap(config.boundariesFilename, config.dataFiles);
         $('#kmapTitle').html(config.title);
     });
     let indicator = $.address.parameter('indicator');
