@@ -1,13 +1,14 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import {buildPolygons} from "./buildPolygons";
 import buildLabels from "./buildLabels";
 
-export default compose(
+const Map = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCumzV-izHlMmcyzsJuRkOwY4aWjkW2DPY&sensor=false",
-        loadingElement: <div style={{ height: `100%` }} />,
+        loadingElement: <p id="loadingtext">Please be patient while the map is loading.</p>,
         containerElement: <div style={{ height: `100%` }}/>,
         mapElement: <div style={{ height: `100%` }} />,
     }),
@@ -16,8 +17,14 @@ export default compose(
 )(function (props) {
 
         return <GoogleMap options={props.options}>
-            {buildPolygons(props.data)}
-            {buildLabels(props.data)}
+            {buildPolygons(props.indicator)}
+            {buildLabels(props.indicator)}
         </GoogleMap>;
     }
 );
+
+const mapStateToProps = (state) => ({
+    indicator: state.indicators.byCode(state.activeIndicator) ?? {}
+});
+
+export default connect(mapStateToProps)(Map);

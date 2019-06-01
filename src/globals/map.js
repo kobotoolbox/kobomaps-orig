@@ -1,6 +1,9 @@
 import buildMap from "../map/buildMap";
 import buildAreaPointsAndLabelPositions from "../map/buildAreaPointsAndLabelPositions";
 import parseCSV from "../parsers/parseCSV";
+import buildNav from "../nav/buildNav";
+import buildLegendContainer from "../legend/LegendContainer";
+import $ from "../jquery";
 
 /**
  * global variable that holds the map
@@ -8,10 +11,7 @@ import parseCSV from "../parsers/parseCSV";
 let map;
 
 export function initMap(config) {
-    buildAreaPointsAndLabelPositions(config.boundariesFilename, config.dataFiles)
-        .then(function () {return parseCSV(config.dataFiles)
-            .then(function () {buildMap(config);});
-        })
+
     //google.maps.event.addListener(map, 'click', closeAllInfoWindows);
 }
 

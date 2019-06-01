@@ -1,5 +1,6 @@
 import _map from "lodash/map";
 import createMap from "../util/createMap";
+import {mapCode} from '../util/queries';
 
 export function parseDataTree(data) {
     const flattenedList = [];
@@ -57,12 +58,15 @@ export function parseDataTree(data) {
         return 0;
     });
 
-    flattenedList.forEach(function (item) {
-        byCode[item.code] = item;
-    });
+    tree.byCode = function (code) {
+        let indices = mapCode(code);
+        let indicator = tree[indices.shift()];
 
-    tree.getByCode = function (code) {
-        return byCode[code];
+        indices.forEach(function (index) {
+            indicator = indicator.children[index];
+        });
+
+        return indicator;
     };
 
     return tree;

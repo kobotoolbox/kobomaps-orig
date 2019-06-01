@@ -1,6 +1,6 @@
 import React from 'react';
 import {OverlayView} from "react-google-maps";
-import {areaManager} from "../globals/geographicAreas";
+import {getStore} from '../redux/redux-store';
 import addCommas from "../util/addCommas";
 
 function getAreaValue(value, unit) {
@@ -11,9 +11,10 @@ function getAreaValue(value, unit) {
 }
 
 export default function buildLabels(data) {
+    const areas = getStore().getState().areas;
     const areaVals = data.data ?? {};
-    return Object.keys(areaManager.areas).map(function (labelName, labelIndex) {
-        const labelPosition = areaManager.areas[labelName].labelPosition;
+    return Object.keys(areas).map(function (labelName, labelIndex) {
+        const labelPosition = areas[labelName].labelPosition;
         return <OverlayView
             key={labelIndex}
             position={labelPosition}

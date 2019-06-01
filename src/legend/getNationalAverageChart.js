@@ -1,32 +1,31 @@
 import calculateMinSpread from '../util/calculateMinSpread';
 import {kmapAllAdminAreas} from '../init';
 import {createChart} from '../chart';
-import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
+
 /**
  * This takes in the min score, the spread between the min and the max, and the national average
  * and then updates the nationalaveragediv element
  */
-export default function getNationalAverageChart(nationalAverage, unit, indicatorCode) {
+export default function getNationalAverageChart(nationalAverage, unit, indicatorCode, indicator) {
     ////////////////////////////////////////////////////////////////
     //updates the national average chart
     ////////////////////////////////////////////////////////////////
     if (indicatorCode === undefined) {
         return '';
     }
+    //clear out the National Chart
     //first check if there's more than one answer to the given question
-    const siblings = getIndicatorSiblings(indicatorCode);
+    const siblings = indicator.siblings;
     if (siblings.length === 0) {
-        //clear out the National Chart
         return '';
     }
-    //there is more than one answer ...as so many questions have.
 
-    let indicator = getIndicator(indicatorCode);
+    //there is more than one answer ...as so many questions have.
 
     //get the data for those questions
     const dataForNational = [];
     const mainIndicatorText = indicator.name;
-    const questionText = indicator.parentName;
+    const questionText = indicator.parent.name;
     //get the data for the indicator we're focused on
 
     dataForNational[mainIndicatorText] = indicator.nationalAverage;

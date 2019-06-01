@@ -3,36 +3,22 @@
  * be fed into UpdateAreaAllData(title, data, nationalAverage). This way we can
  * use indicators to call the update method to redraw the map
  */
-import {mapCode} from "../util/queries";
 import createMap from "../util/createMap";
 
 let indicators = createMap();
-let indicatorsGroupedByParent = createMap();
 
 export function getIndicator(code) {
-    return indicators[code];
+    return indicators.byCode(code);
 }
 
 export function getIndicatorSiblings(code) {
-    let parentCode = mapCode(code).slice(0, 2).join('_');
-    let indicatorIndex = mapCode(code)[2];
-    let siblings = indicatorsGroupedByParent[parentCode];
-
-    if (siblings === undefined) {
-        return [];
-    }
-    return [...siblings.slice(0, indicatorIndex), ...siblings.slice(indicatorIndex+1)];
+    return indicators.byCode(code).siblings ?? [];
 }
 
-export function rebuildIndicators(newIndicators) {
-    indicators = createMap();
-    newIndicators.forEach(
-        (firstLevelNode, firstLevelIndex) => firstLevelNode.submenus.forEach(
-            (secondLevelNode, secondLevelIndex) =>
-                indicatorsGroupedByParent[`${firstLevelIndex}_${secondLevelIndex}`] = secondLevelNode.indicators.map(
-                (indicator, indicatorIndex) =>
-                    indicators[`${firstLevelIndex}_${secondLevelIndex}_${indicatorIndex}`] = indicator.metadata
-            )
-        )
-    );
+export function setIndicators(newIndicators) {
+    indicators = newIndicators;
+}
+
+export function getIndicators() {
+    return indicators;
 }

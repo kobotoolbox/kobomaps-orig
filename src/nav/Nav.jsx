@@ -1,20 +1,17 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import Menu from './Menu';
 import {mapCode} from "../util/queries";
 
-export default class Nav extends Component {
+class Nav extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            data: props.data,
-            active: props.indicator
-        };
     }
 
     render() {
         return (
-            <ul className="questionsindicators">{this.state.data.map(this.mapMenu.bind(this))}</ul>
+            <ul className="questionsindicators">{this.props.indicators.map(this.mapMenu.bind(this))}</ul>
         )
     }
 
@@ -22,32 +19,19 @@ export default class Nav extends Component {
         return (
             <Menu
                 key={menuIndex}
-                code={`${menuIndex}`}
-                submenus={menuEntry.submenus}
-                selectEntry={this.selectIndicator.bind(this)}
+                code={menuEntry.code}
+                submenus={menuEntry.children}
                 name={menuEntry.name}
-                active={this.state.active}
-                visible={menuEntry.visible}
-                toggleVisibility={this.toggleVisibility.bind(this)}
+                active={mapCode(this.props.activeIndicator ?? '')}
+                visible={menuEntry.visible ?? false}
             />
         )
     }
-
-    toggleVisibility(code) {
-        const data = this.state.data.slice();
-        const indices = mapCode(code);
-        let entry = data[indices[0]];
-
-        if (indices[1] !== undefined) {
-            entry = entry.submenus[indices[1]];
-        }
-
-        entry.visible = !entry.visible;
-
-        this.setState(()=> ({data: data}));
-    }
-
-    selectIndicator(code) {
-        this.setState({active: mapCode(code)});
-    }
 }
+
+const mapStateToProps = (state) => ({
+    indicators: state.indicators,
+    activeIndicator: state.activeIndicator
+});
+
+export default connect(mapStateToProps)(Nav);

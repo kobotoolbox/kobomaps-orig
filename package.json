@@ -28,12 +28,15 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
+    "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.11",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-google-maps": "^9.4.5",
     "react-interpolate-component": "^0.12.0",
-    "recompose": "^0.30.0"
+    "react-redux": "^7.0.3",
+    "recompose": "^0.30.0",
+    "redux": "^4.0.1"
   }
 }

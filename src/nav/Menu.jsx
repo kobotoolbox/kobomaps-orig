@@ -3,23 +3,22 @@ import PropTypes from 'prop-types';
 
 import Submenu from './Submenu';
 import MenuEntry from './MenuEntry';
+import {toggleIndicatorBranchVisibility} from '../redux/actions';
+import {connect} from 'react-redux';
 
 const isActive = (active, code) => `${active[0]}` === code;
 
-export default function Menu({code, name, active, submenus, selectEntry, visible, toggleVisibility}) {
+function Menu({code, name, active, submenus, visible, toggleVisibility}) {
     const listSubmenus = () => submenus.map((submenu, submenuIndex) =>
         <Submenu
             key={submenuIndex}
-            code={`${code}_${submenuIndex}`}
-            selectEntry={selectEntry}
-            indicators={submenu.indicators}
+            code={submenu.code}
+            indicators={submenu.children}
             name={submenu.name}
             active={active}
-            visible={submenu.visible}
-            toggleVisibility={toggleVisibility}
+            visible={submenu.visible ?? false}
         />);
 
-    const handleClick = () => toggleVisibility(code);
     return (
         <MenuEntry
             level={1}
@@ -27,7 +26,7 @@ export default function Menu({code, name, active, submenus, selectEntry, visible
             isActive={isActive(active, code)}
             isVisible={visible}
             listSubmenus={listSubmenus}
-            clickHandler={handleClick}
+            clickHandler={() => toggleVisibility(code)}
         />
     );
 }
@@ -40,7 +39,15 @@ Menu.propTypes = {
         name: PropTypes.string,
         indicators: PropTypes.arrayOf(PropTypes.object)
     })).isRequired,
-    selectEntry: PropTypes.func.isRequired,
     visible: PropTypes.bool,
     toggleVisibility: PropTypes.func.isRequired
 };
+
+const mapStateToProps = () => ({});
+const mapDispatchToProps = (dispatch) => ({
+    toggleVisibility: function (code) {
+        dispatch(toggleIndicatorBranchVisibility(code))
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu)

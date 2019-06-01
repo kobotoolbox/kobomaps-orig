@@ -1,6 +1,7 @@
 import $ from '../jquery';
 import createMap from "../util/createMap";
-import {setAreas} from "../globals/geographicAreas";
+import {getStore} from '../redux/redux-store';
+import {setAreas} from '../redux/actions';
 
 //initializes our global county point array
 const areas = createMap();
@@ -8,6 +9,7 @@ const areas = createMap();
 export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
 
 
+    const store = getStore();
     //initiates a HTTP get request for the json file
     return $.getJSON('data/' + boundariesFilename + '.txt', function (data) {
 
@@ -32,7 +34,7 @@ export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
 
             areas[areaName].labelPosition = {lat:areaData.marker[0], lng:areaData.marker[1]};
         });
-        setAreas(areas);
+        store.dispatch(setAreas(areas));
     });
 
 

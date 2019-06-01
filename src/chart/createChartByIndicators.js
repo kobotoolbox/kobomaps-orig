@@ -1,6 +1,8 @@
 import calculateMinSpread from '../util/calculateMinSpread';
 import {createChart} from '.';
 import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
+import {getStore} from '../redux/redux-store';
+
 /**
  * Creates the URL for the chart that shows the spread over indicator for a given question for
  * both area and overal average
@@ -10,19 +12,19 @@ import {getIndicator, getIndicatorSiblings} from "../globals/indicators";
  * name: the name of the current geographical area
  */
 export default function createChartByIndicators(indicatorCode, name, unit) {
-    let siblings = getIndicatorSiblings(indicatorCode);
     //first check if there's more than one answer to the given question
+    let indicator = getStore().getState().indicators.byCode(indicatorCode);
+    let siblings = indicator.siblings;
+    //clear out the National Chart
     if (siblings.length === 0) {
-        //clear out the National Chart
         return '';
     }
-    //there is more than one answer ...as so many questions have.
 
-    let indicator = getIndicator(indicatorCode);
+    //there is more than one answer ...as so many questions have.
     //get the data for those questions
     const dataForArea = [];
     const mainIndicatorText = indicator.name;
-    const questionText = indicator.parentName;
+    const questionText = indicator.parent.name;
     //get the data for the indicator we're focused on
 
     dataForArea[mainIndicatorText] = indicator.data[name];

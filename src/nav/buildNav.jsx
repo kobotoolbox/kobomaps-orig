@@ -1,12 +1,14 @@
 import React from 'react';
 import ReactDom from 'react-dom';
-
+import { Provider } from 'react-redux'
+import {getStore} from '../redux/redux-store';
 import Nav from './Nav';
-import {getCurrentIndicator} from "../util/queries";
 
-export default function buildNav(data) {
+export default function buildNav() {
     ReactDom.render(
-        <Nav data={data} indicator={getCurrentIndicator()} />,
+        <Provider store={getStore()}>
+            <Nav />
+        </Provider> ,
         document.getElementById('questionsindicators')
     )
 }

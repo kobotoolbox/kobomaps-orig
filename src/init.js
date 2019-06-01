@@ -2,13 +2,20 @@
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
 import $ from './jquery';
 import './jquery.address-1.5';
-import showByIndicator from './map/showByIndicator';
 import {initializeInformationChart} from './chart';
-import {initMap} from "./globals/map";
+import {initMap} from './globals/map';
+import {setActiveIndicator} from './redux/actions';
+import {getStore} from './redux/redux-store';
+import buildAreaPointsAndLabelPositions from './map/buildAreaPointsAndLabelPositions';
+import parseCSV from './parsers/parseCSV';
+import buildNav from './nav/buildNav';
+import buildLegendContainer from './legend/LegendContainer';
+import buildMap from './map/buildMap';
 
 export let kmapAllAdminAreas;
 
 $(function () {
+    const store = getStore();
     //patches issue with top navigation menu
     $('.pagetitlewrap').css('z-index', 120);
     $.getJSON('data/config.json', function (config) {
@@ -19,16 +26,21 @@ $(function () {
         kmapAllAdminAreas = config.allAdminAreas;
 
         initializeDraggables();
-        initMap(config);
+        buildAreaPointsAndLabelPositions(config.boundariesFilename, config.dataFiles)
+            .then(function () {
+                return parseCSV(config.dataFiles)
+                    .then(function () {
+                        buildMap(config);
+                        buildNav();
+                        buildLegendContainer();
+                    });
+            });
         $('#kmapTitle').html(config.title);
     });
-    let indicator = $.address.parameter('indicator');
+    store.dispatch(setActiveIndicator($.address.parameter('indicator')));
+
     $.address.externalChange(function () {
-        const newIndicator = $.address.parameter('indicator');
-        if (indicator !== newIndicator) {
-            indicator = newIndicator;
-            showByIndicator(indicator);
-        }
+        store.dispatch(setActiveIndicator($.address.parameter('indicator')))
     });
 });
 

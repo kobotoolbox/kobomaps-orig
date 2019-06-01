@@ -1,29 +1,21 @@
 import parseDataArray from './data-parser';
 import CSVToArray from './csvToArray';
-import buildNav from '../nav/buildNav';
 import $ from '../jquery';
-import buildData from "./nav-parser";
-import {getCurrentIndicator} from "../util/queries";
-import {rebuildIndicators} from "../globals/indicators";
-import buildLegendContainer from '../legend/LegendContainer';
+import {setIndicators} from '../redux/actions';
+import {getStore} from '../redux/redux-store';
 import {parseDataTree} from "./parseDataTree";
 
 export default function parseCSV(csvUrl) {
     const csvs = {};
     let currentSeries;
+    const store = getStore();
 
     function parseData(name) {
         currentSeries = name;
 
         let data = parseDataArray(CSVToArray(csvs[name], ','));
         let dataTree = parseDataTree(data);
-        const parsedData = buildData(data, getCurrentIndicator());
-        rebuildIndicators(parsedData);
-        buildNav(parsedData);
-        buildLegendContainer();
-
-        //hide the temporary loading text once the indicators are visible
-        $('#loadingtext').remove();
+        store.dispatch(setIndicators(dataTree));
     }
 
     //initiates a HTTP get request for the json file

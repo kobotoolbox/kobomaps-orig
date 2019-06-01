@@ -1,5 +1,5 @@
 import $ from '../jquery';
-import {areaManager} from "../globals/geographicAreas";
+import {getStore} from '../redux/redux-store';
 
 export default function parseDataArray(data) {
     data.pop();
@@ -47,9 +47,10 @@ export default function parseDataArray(data) {
             currentParsed.nationalAverage = parseFloat(current[nationalAverageIndex]);
         }
 
+        const areas = getStore().getState().areas;
         currentParsed.data = current.filter(excludeMeta).reduce(function (accumulator, current, idx) {
             const label = labels[idx];
-            if (areaManager.exists(label)) {
+            if (!!areas[label]) {
                 accumulator[label] = +current.replace('%', '');
             }
             return accumulator;

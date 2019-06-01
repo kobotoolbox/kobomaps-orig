@@ -7,18 +7,19 @@ import addCommas from "../util/addCommas";
 import htmlDecode from "../util/htmlDecode";
 import IndicatorSource from "./IndicatorSource";
 import NationalAverageChart from "./NationalAverageChart";
+import {connect} from 'react-redux';
 
-export default function Legend({title, data}) {
+function Legend({title, indicator}) {
     let min, spread, max;
     min = spread = max = 0;
 
-    if (data.data) {
-        ({min, spread} = calculateMinSpread(data.data));
+    if (indicator.data) {
+        ({min, spread} = calculateMinSpread(indicator.data));
         max = min + spread;
     }
 
-    let unit = htmlDecode(data.unit ?? '');
-    let nationalAverage = addCommas(data.nationalAverage) + ' ' + unit;
+    let unit = htmlDecode(indicator.unit ?? '');
+    let nationalAverage = addCommas(indicator.nationalAverage) + ' ' + unit;
     if (nationalAverage === ' ') {
         nationalAverage = '';
     }
@@ -30,12 +31,18 @@ export default function Legend({title, data}) {
                 <span id="spanLegendText">{title}</span>
             </div>
             <LegendGradient min={min} max={max} unit={unit}/>
-            <NationalAverage min={min} spread={spread} average={data.nationalAverage} text={nationalAverage}/>
-            <NationalAverageChart average={data.nationalAverage} unit={unit} code={data.code}/>
-            <IndicatorSource title={data.source} href={data.link} />
+            <NationalAverage min={min} spread={spread} average={indicator.nationalAverage} text={nationalAverage}/>
+            <NationalAverageChart indicator={indicator} average={indicator.nationalAverage} unit={unit} code={indicator.code}/>
+            <IndicatorSource title={indicator.source} href={indicator.link} />
             <div id="poweredby">
                 <a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
             </div>
         </div>
     )
 }
+
+const mapStateToProps = (state) =>({
+    indicator: state.indicators.byCode(state.activeIndicator) ?? {}
+});
+
+export default connect(mapStateToProps)(Legend);

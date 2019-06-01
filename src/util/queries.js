@@ -1,11 +1,7 @@
-import $ from '../jquery';
-
-export function getCurrentIndicator() {
-    const indicator = $.address.parameter('indicator');
-    return indicator ? mapCode(indicator) : [];
-}
-
 export function mapCode(code) {
+    if (code === undefined) {
+        return [];
+    }
     return code.split('_').map((n)=>+n);
 }
 
