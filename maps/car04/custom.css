@@ -1,0 +1,15 @@
+#kmapTitle, #tabs {
+	display:none!important;
+}
+
+#topbar {
+	top:130px;
+	right:30px;
+	bottom:initial!important;
+	left:initial!important;
+}
+
+div#maplinks {
+	top:0!important;
+	height:100%!important;
+}
