@@ -1,6 +1,6 @@
 import React from 'react';
 import calculateMinSpread from "../../util/calculateMinSpread";
-import getAreaInfoWindowChart from "./getAreaInfoWindowChart";
+import getAreaInfoWindowChart from "../../chart/getAreaInfoWindowChart";
 import Area from "./Area";
 import {getStore} from '../../redux/redux-store';
 import AppState from '../../redux/AppState';

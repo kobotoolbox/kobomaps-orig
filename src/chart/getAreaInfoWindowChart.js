@@ -5,7 +5,7 @@
  * Title: Title of the question
  * Data: associative array of the percentages keyed by Area names as defined in the JSON that defines areas and their bounds
  */
-import {createChart, createChartByIndicators, informationChart} from '../../chart';
+import {createChart, createChartByIndicators, informationChart} from './index';
 
 export default function getAreaInfoWindowChart(name, min, spread, title, data, indicator, unit) {
     if (indicator === undefined) {

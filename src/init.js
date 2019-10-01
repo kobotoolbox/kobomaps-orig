@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import {initializeInformationChart} from './chart';
 import {setActiveIndicator} from './redux/actions/metadata';
 import {getStore} from './redux/redux-store';
-import buildAreaPointsAndLabelPositions from './components/map/buildAreaPointsAndLabelPositions';
+import buildAreaPointsAndLabelPositions from './parsers/buildAreaPointsAndLabelPositions';
 import parseCSV from './parsers/parseCSV';
 import Index from './components';
 import {Provider} from 'react-redux';

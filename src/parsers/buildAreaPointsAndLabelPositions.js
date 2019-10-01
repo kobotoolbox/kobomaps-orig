@@ -1,7 +1,7 @@
-import $ from '../../jquery';
-import createMap from '../../util/createMap';
-import {getStore} from '../../redux/redux-store';
-import {setAreas, setInfoWindowVisibilityFlags} from '../../redux/actions/metadata';
+import $ from '../jquery';
+import createMap from '../util/createMap';
+import {getStore} from '../redux/redux-store';
+import {setAreas, setInfoWindowVisibilityFlags} from '../redux/actions/metadata';
 
 //initializes our global county point array
 const areas = createMap();

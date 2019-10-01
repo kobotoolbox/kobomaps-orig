@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import { compose, withProps } from "recompose";
 import { withScriptjs, withGoogleMap, GoogleMap } from "react-google-maps";
 import {buildPolygons} from "./buildPolygons";
-import buildLabels from "./buildLabels";
 import AppState from '../../redux/AppState';
+import Labels from "./Labels";
 
 const Map = compose(
     withProps({
@@ -15,11 +15,11 @@ const Map = compose(
     }),
     withScriptjs,
     withGoogleMap
-)(function (props) {
+)(function ({options, indicator}) {
 
-        return <GoogleMap options={props.options}>
-            {buildPolygons(props.indicator)}
-            {buildLabels(props.indicator)}
+        return <GoogleMap options={options}>
+            {buildPolygons(indicator)}
+            <Labels/>
         </GoogleMap>;
     }
 );
