@@ -1,7 +1,7 @@
 //this code uses jquery (http://jquery.com)
 //and the jquery Address plugin (http://www.asual.com/jquery/address/)
-import $ from './jquery';
-import './jquery.address-1.5';
+import $ from './vendor/jquery';
+import './vendor/jquery.address-1.5';
 import ReactDOM from 'react-dom';
 import {initializeInformationChart} from './chart';
 import {setActiveIndicator, clearInfoWindowVisibility} from './redux/actions/metadata';

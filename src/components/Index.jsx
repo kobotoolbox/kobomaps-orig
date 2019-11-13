@@ -9,7 +9,7 @@ export default function Index({config}) {
         <div style={{height: '100%'}}>
             <Nav/>
             <Map options={createMapOptions(config.mapDefaults)}/>
-            <Legend/>
+            <Legend broaderRegionMapIsIn={config.allAdminAreas}/>
         </div>
-    )
+    );
 }

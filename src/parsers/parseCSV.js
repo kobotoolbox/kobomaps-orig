@@ -1,8 +1,8 @@
 import parseDataArray from './data-parser';
 import CSVToArray from './csvToArray';
-import $ from '../jquery';
+import $ from '../vendor/jquery';
 import {getStore} from '../redux/redux-store';
-import {parseDataTree} from "./parseDataTree";
+import {parseDataTree} from './parseDataTree';
 import {
     setIndicators,
     toggleIndicatorBranchVisibility,

@@ -1,13 +1,13 @@
 import React from 'react';
-import calculateMinSpread from "../../util/calculateMinSpread";
-import getAreaInfoWindowChart from "../../chart/getAreaInfoWindowChart";
-import Area from "./Area";
+import calculateMinSpread from '../../util/calculateMinSpread';
+import getAreaInfoWindowChart from '../../chart/getAreaInfoWindowChart';
+import Area from './Area';
 import {getStore} from '../../redux/redux-store';
 import AppState from '../../redux/AppState';
 
 export function buildPolygons(data) {
     const areaValues = data.data ?? {};
-    const {min, spread} = calculateMinSpread(areaValues);
+    const {min, spread} = calculateMinSpread(Object.keys(areaValues).map(key=> areaValues[key]));
     const areas = getStore().getState().areas;
     return Object.keys(areas).map(function (areaName, idx) {
         const points = areas[areaName].points;
@@ -23,7 +23,7 @@ export function buildPolygons(data) {
             min={min}
             spread={spread}
             infoWindowContent={infoWindowContent}
-        />
+        />;
         //creates a list of the place names we've encountered
 
     });

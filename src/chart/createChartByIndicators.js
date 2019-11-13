@@ -34,7 +34,7 @@ export default function createChartByIndicators(indicatorCode, name, unit) {
     });
 
     //calculate the min and spread for the area specific graph
-    const spreadMin = calculateMinSpread(dataForArea);
+    const spreadMin = calculateMinSpread(Object.keys(dataForArea).map(key=>dataForArea[key]));
     const min = spreadMin['min'];
     const spread = spreadMin['spread'];
 

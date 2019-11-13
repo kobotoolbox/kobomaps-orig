@@ -1,7 +1,4 @@
 export function mapCode(code) {
-    if (code === undefined) {
-        return [];
-    }
     return code.split('_').map((n)=>+n);
 }
 

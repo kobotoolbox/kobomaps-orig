@@ -1,6 +1,7 @@
 import calculateMinSpread from '../util/calculateMinSpread';
 import {kmapAllAdminAreas} from '../init';
 import {createChart} from './index';
+import {getNationalAverages} from './nationalAverages';
 
 /**
  * This takes in the min score, the spread between the min and the max, and the national average
@@ -34,6 +35,6 @@ export default function getNationalAverageChart(indicator) {
 
 
     //calculate the min and spread for the national graph specific
-    const {min, spread} = calculateMinSpread(dataForNational);
+    const {min, spread} = calculateMinSpread(getNationalAverages(indicator).map(indicator=>indicator.average));
     return createChart(questionText + ' (' + kmapAllAdminAreas + ')', dataForNational, mainIndicatorText, indicator.code + '_by_indicator_national_chart', indicator.unit, min, spread);
 }

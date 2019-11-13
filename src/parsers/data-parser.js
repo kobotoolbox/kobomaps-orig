@@ -1,4 +1,4 @@
-import $ from '../jquery';
+import $ from '../vendor/jquery';
 import {getStore} from '../redux/redux-store';
 
 export default function parseDataArray(data) {
@@ -30,7 +30,7 @@ export default function parseDataArray(data) {
         secondLevelName = current.shift() || secondLevelName;
         indicatorName = current.shift();
         currentParsed = {
-            title: "<strong>" + htmlEncode(secondLevelName) + '</strong><br />  &quot;' + htmlEncode(indicatorName) + '&quot;'
+            title: '<strong>' + htmlEncode(secondLevelName) + '</strong><br />  &quot;' + htmlEncode(indicatorName) + '&quot;'
         };
 
         if (~unitIndex) {
@@ -50,7 +50,7 @@ export default function parseDataArray(data) {
         const areas = getStore().getState().areas;
         currentParsed.data = current.filter(excludeMeta).reduce(function (accumulator, current, idx) {
             const label = labels[idx];
-            if (!!areas[label]) {
+            if (areas[label]) {
                 accumulator[label] = +current.replace('%', '');
             }
             return accumulator;

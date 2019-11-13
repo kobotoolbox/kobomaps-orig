@@ -1,4 +1,4 @@
-import $ from '../jquery';
+import $ from '../vendor/jquery';
 import createMap from '../util/createMap';
 import {getStore} from '../redux/redux-store';
 import {setAreas, setInfoWindowVisibilityFlags} from '../redux/actions/metadata';

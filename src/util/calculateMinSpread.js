@@ -7,11 +7,10 @@
  */
 import calculateMagnitude from '../util/calculateMagnitude';
 export default function calculateMinSpread(data) {
-    let dataArr = Object.keys(data).map((key)=>data[key]).filter(value => !isNaN(value));
-    dataArr.push(0);
+    data.push(0);
     //loop over the data to pre process it and figure out the below:
-    let min = Math.min.apply(null, dataArr);
-    let max = Math.max.apply(null, dataArr);
+    let min = Math.min.apply(null, data);
+    let max = Math.max.apply(null, data);
 
     //figure out the order of magnitude of max
     const maxMagnitude = calculateMagnitude(max);

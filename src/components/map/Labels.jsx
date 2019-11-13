@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import _map from 'lodash/map';
-import AppState from "../../redux/AppState";
-import addCommas from "../../util/addCommas";
-import {OverlayView} from "react-google-maps";
+import AppState from '../../redux/AppState';
+import addCommas from '../../util/addCommas';
+import {OverlayView} from 'react-google-maps';
 
 function Labels({labels}) {
     return (
@@ -24,17 +24,17 @@ function Labels({labels}) {
                 </OverlayView>
             )}
         </div>
-    )
+    );
 
 }
 
 const mapStateToProps = function (state) {
-    let indicator = state.indicators.byCode(state.activeIndicator);
+    let indicatorByCode = state.indicators.byCode;
     return {
         labels: _map(state.areas, (area, areaName) => ({
             name: areaName,
             position: area.labelPosition,
-            data: state.appState === AppState.ONLINE ? addCommas(indicator.data[areaName]) + ' ' + indicator.unit : ''
+            data: state.appState === AppState.ONLINE ? addCommas(indicatorByCode(state.activeIndicator).data[areaName]) + ' ' + indicatorByCode(state.activeIndicator).unit : ''
         }))
     };
 };
