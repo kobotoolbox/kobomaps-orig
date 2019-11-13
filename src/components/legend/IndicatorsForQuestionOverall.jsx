@@ -6,10 +6,9 @@ import CanvasJSReact from '../../vendor/canvasjs.react';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
 function IndicatorsForQuestionOverall({indicator, regionMapIsIn}) {
-    getNationalAverages(indicator);
     const options = {
         animationEnabled: true,
-        height: 300,
+        height: 200,
         title: {
             text: `${indicator.parent.name}     (${regionMapIsIn})`
         },
