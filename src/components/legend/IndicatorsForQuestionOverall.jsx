@@ -5,13 +5,13 @@ import {getNationalAverages} from '../../chart/nationalAverages';
 import CanvasJSReact from '../../vendor/canvasjs.react';
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-function NationalAverageChart({indicator, regionMapIsIn}) {
+function IndicatorsForQuestionOverall({indicator, regionMapIsIn}) {
     getNationalAverages(indicator);
     const options = {
-        height: 110,
-        animationEnabled: false,
+        animationEnabled: true,
+        height: 300,
         title: {
-            text: indicator.parent.name + regionMapIsIn
+            text: `${indicator.parent.name}     (${regionMapIsIn})`
         },
         axisX: {
             title: 'indicators',
@@ -21,21 +21,12 @@ function NationalAverageChart({indicator, regionMapIsIn}) {
             title: 'average age'
         },
         data: [{
+            color: '#0000ff',
             indexLabelPlacement: 'inside',
             type: 'bar',
-            dataPoints: getNationalAverages(indicator).map(function (indicator) {
-                return {y: indicator.average, label: indicator.indicator};
-            })
+            dataPoints: getNationalAverages(indicator)
         }]
     };
-    /*return (
-        <div>
-
-            <Interpolate unsafe={true} component="div" id="nationalIndicatorChart">
-                {isOnline ? getNationalAverageChart(indicator) : ''}
-            </Interpolate>
-        </div>
-    );*/
 
     return (
         <div style={{position: 'absolute', top: '60px'}}>
@@ -51,4 +42,4 @@ const mapStateToProps = (state) =>({
     indicator: state.appState === AppState.ONLINE ? state.indicators.byCode(state.activeIndicator) : null
 });
 
-export default connect(mapStateToProps)(NationalAverageChart);
+export default connect(mapStateToProps)(IndicatorsForQuestionOverall);

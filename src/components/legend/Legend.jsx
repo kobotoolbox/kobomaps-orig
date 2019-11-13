@@ -4,7 +4,7 @@ import calculateMinSpread from '../../util/calculateMinSpread';
 import NationalAverage from './NationalAverage';
 import addCommas from '../../util/addCommas';
 import IndicatorSource from './IndicatorSource';
-import NationalAverageChart from './NationalAverageChart';
+import IndicatorsForQuestionOverall from './IndicatorsForQuestionOverall';
 import {connect} from 'react-redux';
 import AppState from '../../redux/AppState';
 
@@ -30,7 +30,7 @@ function Legend({title, indicator, isOnline, broaderRegionMapIsIn: regionMapIsIn
                 </div>
                 <LegendGradient min={min} max={max} unit={unit}/>
                 <NationalAverage regionMapIsIn={regionMapIsIn} min={min} spread={spread} average={indicator.nationalAverage} text={nationalAverage}/>
-                <NationalAverageChart regionMapIsIn={regionMapIsIn} />
+                <IndicatorsForQuestionOverall regionMapIsIn={regionMapIsIn} />
                 <IndicatorSource title={indicator.source} href={indicator.link} />
                 <div id="poweredby">
                     <a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>

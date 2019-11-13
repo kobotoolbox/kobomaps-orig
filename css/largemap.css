@@ -1,3 +1,7 @@
+* {
+	box-sizing: border-box;
+}
+
 html {
     height: 100%;
     overflow: hidden;
@@ -41,15 +45,16 @@ body {
     left: 355px;
     position: absolute; /*bottom: 48px;*/
     z-index: 999;
-    width: 325px;
+    width: 525px;
 }
 
 #legend {
-    height: 204px;
+    position: relative;
+    height: 500px;
     background: url(../img/w75b.png) repeat scroll;
     padding: 3px;
     border: 1px solid #ffffff;
-    width: 317px;
+    width: 515px;
     text-align: left;
 }
 
