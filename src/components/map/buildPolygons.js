@@ -16,6 +16,7 @@ export function buildPolygons(data) {
 
         return <Area
             key={idx}
+            index={idx}
             name={areaName}
             points={points}
             value={value}

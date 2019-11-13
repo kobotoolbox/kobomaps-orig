@@ -5,7 +5,7 @@ import {setAreas, setInfoWindowVisibilityFlags} from '../redux/actions/metadata'
 
 //initializes our global county point array
 const areas = createMap();
-const infoWindowVisibilityFlags = createMap();
+const infoWindowVisibilityFlags = [];
 export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
     const store = getStore();
     //initiates a HTTP get request for the json file
@@ -30,7 +30,7 @@ export default function buildAreaPointsAndLabelPositions(boundariesFilename) {
             });
 
             areas[areaName].labelPosition = {lat:areaData.marker[0], lng:areaData.marker[1]};
-            infoWindowVisibilityFlags[areaName] = false;
+            infoWindowVisibilityFlags.push(false);
         });
         store.dispatch(setAreas(areas));
         store.dispatch(setInfoWindowVisibilityFlags(infoWindowVisibilityFlags));

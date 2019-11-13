@@ -4,13 +4,14 @@ import $ from './jquery';
 import './jquery.address-1.5';
 import ReactDOM from 'react-dom';
 import {initializeInformationChart} from './chart';
-import {setActiveIndicator} from './redux/actions/metadata';
+import {setActiveIndicator, clearInfoWindowVisibility} from './redux/actions/metadata';
 import {getStore} from './redux/redux-store';
 import buildAreaPointsAndLabelPositions from './parsers/buildAreaPointsAndLabelPositions';
 import parseCSV from './parsers/parseCSV';
 import Index from './components';
 import {Provider} from 'react-redux';
 import React from 'react';
+import AppState from "./redux/AppState";
 
 export let kmapAllAdminAreas;
 
@@ -45,6 +46,10 @@ $(function () {
         let indicatorCode = $.address.parameter('indicator');
 
         if (indicatorCode !== undefined) {
+
+            if (store.getState().appState > AppState.LOADING_METADATA) {
+                store.dispatch(clearInfoWindowVisibility(store.getState()));
+            }
             store.dispatch(setActiveIndicator(indicatorCode));
         }
     });

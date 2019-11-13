@@ -25,25 +25,18 @@ export default function main(state = initialState, action) {
         case actionTypes.TOGGLE_INDICATOR_BRANCH_VISIBILITY:
         case actionTypes.TOGGLE_INDICATOR_LEAF_VISIBILITY:
             return {...state, indicators: indicatorTrunks(state.indicators, action)};
-        case actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY:
-            return {...state, infoWindowVisibilityFlags: visibilityFlagsReducer(state.infoWindowVisibilityFlags, action)};
         default:
-            return state;
+            return {...state, infoWindowVisibilityFlags: visibilityFlagsReducer(state.infoWindowVisibilityFlags, action)};
     }
 }
 
 function visibilityFlagsReducer(state, action) {
-    if(action.type === actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY) {
-        if (action.payload.position === false) {
-            return {...state, [action.payload.name]: false};
-        }
-        return Object.keys(state).reduce(function (acc, current) {
-            if (action.payload.name === current) {
-                acc[current] = action.payload.position;
-            } else {
-                acc[current] = false;
+    if(action.type === actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY || action.type === actionTypes.CLEAR_INFO_WINDOW_VISIBILITY) {
+        return state.map(function (current, index) {
+            if (index === action.payload.index) {
+                return action.payload.position;
             }
-            return acc
-        }, {});
+            return false;
+        });
     }
 }

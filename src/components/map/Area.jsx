@@ -17,7 +17,7 @@ const setOptionsHandler = (options) => function () {
     this.setOptions(options);
 };
 
-const Area = ({name, showInfoWindow, points, value, min, spread, infoWindowContent, position, toggleInfoWindowVisibility, closeInfoWindow, appState})=>(
+const Area = ({index, name, showInfoWindow, points, value, min, spread, infoWindowContent, position, toggleInfoWindowVisibility, closeInfoWindow, appState})=>(
     <div>
         <Polygon
             options={{
@@ -29,24 +29,24 @@ const Area = ({name, showInfoWindow, points, value, min, spread, infoWindowConte
                 fillOpacity: 0.6 //sets the opacity of the fill color
             }}
             onClick={function (event) {
-                toggleInfoWindowVisibility(name, event.latLng)
+                toggleInfoWindowVisibility(index, event.latLng)
             }}
             onMouseOver={setOptionsHandler({fillOpacity: 0.95})}
             onMouseOut={setOptionsHandler({fillOpacity: 0.6})}
         />
-        {showInfoWindow(name) && <InfoWindow position={position(name)} onCloseClick={function(){closeInfoWindow(name)}}><Interpolate unsafe={true} component="div">{infoWindowContent}</Interpolate></InfoWindow>}
+        {showInfoWindow(index) && <InfoWindow position={position(index)} onCloseClick={function(){closeInfoWindow(index)}}><Interpolate unsafe={true} component="div">{infoWindowContent}</Interpolate></InfoWindow>}
     </div>
 );
 
 const mapStateToProps = (state) => ({
     appState: state.appState,
-    showInfoWindow: (windowName) => state.appState === AppState.ONLINE && !!state.infoWindowVisibilityFlags[windowName],
-    position: (windowName) => state.infoWindowVisibilityFlags[windowName]
+    showInfoWindow: (areaIndex) => state.appState === AppState.ONLINE && !!state.infoWindowVisibilityFlags[areaIndex],
+    position: (areaIndex) => state.infoWindowVisibilityFlags[areaIndex]
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    toggleInfoWindowVisibility: (name, position) => dispatch(toggleInfoWindowVisibility({name, position})),
-    closeInfoWindow: (name) => dispatch(toggleInfoWindowVisibility({name, position: false}))
+    toggleInfoWindowVisibility: (index, position) => dispatch(toggleInfoWindowVisibility(index, position)),
+    closeInfoWindow: (index) => dispatch(toggleInfoWindowVisibility(index, false))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Area);

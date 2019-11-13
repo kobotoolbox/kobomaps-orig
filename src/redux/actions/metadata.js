@@ -21,9 +21,16 @@ export function setInfoWindowVisibilityFlags(payload) {
     }
 }
 
-export function toggleInfoWindowVisibility(payload) {
+export function toggleInfoWindowVisibility(index, position) {
     return {
         type: actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY,
-        payload
+        payload: { index, position }
+    }
+}
+
+export function clearInfoWindowVisibility() {
+    return {
+        type: actionTypes.CLEAR_INFO_WINDOW_VISIBILITY,
+        payload: {index: null}
     }
 }
