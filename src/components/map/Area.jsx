@@ -4,6 +4,7 @@ import Interpolate from "react-interpolate-component";
 import calculateColor from "../../util/calculateColor";
 import AppState from '../../redux/AppState';
 import {connect} from 'react-redux';
+import {toggleInfoWindowVisibility} from "../../redux/actions/metadata";
 
 function getFillColor(appState, value, min, spread) {
     if (appState !== AppState.ONLINE) {
@@ -16,7 +17,7 @@ const setOptionsHandler = (options) => function () {
     this.setOptions(options);
 };
 
-const Area = ({name, showInfoWindow, points, value, min, spread, infoWindowContent, position, toggleInfoWindowVisibility, appState})=>(
+const Area = ({name, showInfoWindow, points, value, min, spread, infoWindowContent, position, toggleInfoWindowVisibility, closeInfoWindow, appState})=>(
     <div>
         <Polygon
             options={{
@@ -33,7 +34,7 @@ const Area = ({name, showInfoWindow, points, value, min, spread, infoWindowConte
             onMouseOver={setOptionsHandler({fillOpacity: 0.95})}
             onMouseOut={setOptionsHandler({fillOpacity: 0.6})}
         />
-        {showInfoWindow(name) && <InfoWindow position={position(name)}><Interpolate unsafe={true} component="div">{infoWindowContent}</Interpolate></InfoWindow>}
+        {showInfoWindow(name) && <InfoWindow position={position(name)} onCloseClick={function(){closeInfoWindow(name)}}><Interpolate unsafe={true} component="div">{infoWindowContent}</Interpolate></InfoWindow>}
     </div>
 );
 
@@ -44,7 +45,8 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    toggleInfoWindowVisibility: (name, position) => dispatch(toggleInfoWindowVisibility({name, position}))
+    toggleInfoWindowVisibility: (name, position) => dispatch(toggleInfoWindowVisibility({name, position})),
+    closeInfoWindow: (name) => dispatch(toggleInfoWindowVisibility({name, position: false}))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Area);

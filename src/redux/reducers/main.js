@@ -7,7 +7,7 @@ const initialState = {
     infoWindowVisibilityFlags: {},
     indicators: [],
     areas: {},
-    activeIndicator: null
+    activeIndicator: undefined
 };
 
 export default function main(state = initialState, action) {
@@ -25,7 +25,25 @@ export default function main(state = initialState, action) {
         case actionTypes.TOGGLE_INDICATOR_BRANCH_VISIBILITY:
         case actionTypes.TOGGLE_INDICATOR_LEAF_VISIBILITY:
             return {...state, indicators: indicatorTrunks(state.indicators, action)};
+        case actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY:
+            return {...state, infoWindowVisibilityFlags: visibilityFlagsReducer(state.infoWindowVisibilityFlags, action)};
         default:
             return state;
+    }
+}
+
+function visibilityFlagsReducer(state, action) {
+    if(action.type === actionTypes.TOGGLE_INFO_WINDOW_VISIBILITY) {
+        if (action.payload.position === false) {
+            return {...state, [action.payload.name]: false};
+        }
+        return Object.keys(state).reduce(function (acc, current) {
+            if (action.payload.name === current) {
+                acc[current] = action.payload.position;
+            } else {
+                acc[current] = false;
+            }
+            return acc
+        }, {});
     }
 }

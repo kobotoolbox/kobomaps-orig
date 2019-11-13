@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import _map from 'lodash/map';
 import AppState from "../../redux/AppState";
 import addCommas from "../../util/addCommas";
