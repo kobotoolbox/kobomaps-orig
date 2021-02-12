@@ -1,0 +1,155 @@
+<!DOCTYPE html> 
+<html> 
+<head> 
+
+<script type="text/javascript" language="javascript">
+	var kmapPath = "../..";
+	var kmapInstance = "";
+	var kmapTitle = "Central African Republic Poll 5"; 
+	var kmapAllAdminAreas = "All areas"; 
+	var kmapY = "6.4"; 
+	var kmapX = "19.1"; 
+	var kmapZoom = 7; 
+
+	var kmapBoundaries = "boundaries.txt";
+	var kmapData = "data.csv";
+	var kmapInfodivHeight = 300; 
+	var kmapInfochartWidth = 315;
+	var kmapInfochartBarHeight = 10; 
+	var kmapInfochartBarHeightMargin = 2;
+	var kmapInfochartchxsFont = 10;
+	var kmapInfochart = 'http://chart.apis.google.com/chart?'
+	+ 'chxs=0,676767,'+kmapInfochartchxsFont+',2,l,676767|1,393939,'+kmapInfochartchxsFont+',1,l,676767'
+	+ '&chxt=x,y'
+	+ '&chbh='+kmapInfochartBarHeight+','+kmapInfochartBarHeightMargin+',0'
+	+ '&chs='+kmapInfochartWidth+'x<HEIGHT>'
+	+ '&cht=bhs'
+	+ '&chco=3E4E6E,CC0000'
+	+ '&chg=25,0,5,9'
+	+ '&chts=000000,13'
+	+ '&chxl=1:';
+
+	var mapStyles = 
+	[
+	  {
+		featureType: "administrative.province",
+		elementType: "all",
+		stylers: [
+		  { visibility: "off" }
+		]
+	  },{
+		featureType: "poi",
+		elementType: "all",
+		stylers: [
+		  { visibility: "off" }
+		]
+	  },{
+		featureType: "road",
+		elementType: "all",
+		stylers: [
+		  { visibility: "off" }
+		]
+	  },{
+		featureType: "landscape",
+		elementType: "geometry",
+		stylers: [
+		  { lightness: -60 },
+		  { hue: "#91ff00" },
+		  { visibility: "on" },
+		  { saturation: -60 }
+		]
+	  },{
+		featureType: "administrative.locality",
+		elementType: "all",
+		stylers: [
+		  { saturation: -50 },
+		  { invert_lightness: true },
+		  { lightness: 52 }
+		]
+	  }
+	]; 
+</script>
+
+
+<link href="custom.css" type="text/css" rel="stylesheet">
+
+
+<link href="../../css/largemap.css" type="text/css" rel="stylesheet"> 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">google.load('visualization', '1', {packages: ['corechart']});</script>
+<script>
+
+// Only calling jquery if it's not already present. This helps with embedding kobomaps into Drupal. 
+if (typeof $ === 'undefined') {
+  document.write('<script type="text/javascript" src="../../js/jquery.js"><\/script>');
+}
+</script>
+<script type="text/javascript" src="../../js/dataVisualize_new.js"></script> 
+<script type="text/javascript" src="../../js/jquery.address-1.4.min.js"></script> 
+<script type="text/javascript" src="../../js/csvToArray.js"> </script>
+<script type="text/javascript" src="../../js/dragresize.js"> </script> 
+<!--You will need to add a Google Maps API key in the following line-->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCO0JFyBM5XfJZqw-3-CZ7F_p_4jbEZJ7Q&sensor=false"> </script> 
+<script type="text/javascript" src="../../js/label.js"> </script> 
+
+<title>Central African Republic Poll 5</title>
+</head> 
+<body>
+
+<!--//We use tabs case the dataset has more than one sheet to display-->
+<div id="tabs"><ul></ul></div>
+
+<!--//Creating the navigation column containing all the links. The actual ul and li nested elements are all created by the JS code-->
+<div id="maplinks"	>
+	<h3 id="kmapTitle">&nbsp;</h3>
+	<p>Click on a section name to display the questions, then click on the questions to show the indicator(s). Click on the indicator to display its data on the map.</p>
+		<ul id="questionsindicators" class="questionsindicators" >	</ul>
+	<p id="loadingtext">
+	Please be patient while the map is loading.  
+	</p>
+</div>
+
+<!--The background element containing the actual map-->
+
+<div id="map_canvas"></div>
+
+
+<!--The legend-->
+
+<div id="topbar" class="drsElement drsMoveHandle" style="left:355px; bottom: 48px;"> 
+	<div id="legend">
+
+		<div id="legendtext">
+			<span id="spanLegendText">Please select an indicator to display its data.</span>
+		</div>
+		<div id="legend_gradient">
+			<div id="percentleft">
+				
+			</div>
+			<div id="percentright">
+				
+			</div>
+		</div>
+		<div id="nationalaveragediv">
+			<span id="nationalaveragelabel"></span>
+			<span id="nationalaverageimg" ></span>
+		</div>
+        <div id="nationalIndicatorChart"></div>		
+        <div id="sourcetext">
+			<span id="sourcetextspan" style="display:none;"> Data Source:  
+				<a id="sourceURL" href="" title=""></a>
+				<span id="sourceNoURL"></span>
+			</span>
+        </div>
+		<div id="poweredby">
+		<a href="http://www.kobotoolbox.org" title="KoBoToolbox.org">powered by KoboToolbox</a>
+		</div>
+	</div>
+</div>
+</body> 
+</html> 
+
+
+
+
+
